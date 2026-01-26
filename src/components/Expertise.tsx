@@ -1,5 +1,6 @@
 import { HardDrive, Code, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SlideIn } from "@/components/ui/motion-wrapper";
 
 const Expertise = () => {
   return (
@@ -26,7 +27,7 @@ const Expertise = () => {
 
           <div className="hidden md:block md:order-1"></div>
 
-          <div className="relative pr-0 md:pl-16 order-1 md:order-2">
+          <SlideIn direction="right" className="relative pr-0 md:pl-16 order-1 md:order-2">
             <div className="absolute left-0 top-1/2 w-12 h-[3px] bg-white hidden md:block transform -translate-y-1/2" />
             <div className="text-center border-4 border-white rounded-2xl p-6 md:p-8 bg-[#0B132B]"
               style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
@@ -36,14 +37,14 @@ const Expertise = () => {
                 Embedded Linux Development
               </h3>
               <p className="text-white opacity-90 font-typewriter">
-                Since 2008, I've helped companies implement and optimize embedded Linux systems 
-                across various industries, covering everything from bootloaders and kernels to 
+                Since 2008, I've helped companies implement and optimize embedded Linux systems
+                across various industries, covering everything from bootloaders and kernels to
                 middleware layers.
               </p>
             </div>
-          </div>
+          </SlideIn>
 
-          <div className="relative pl-0 md:pr-16 order-2 md:order-3">
+          <SlideIn direction="left" delay={0.1} className="relative pl-0 md:pr-16 order-2 md:order-3">
             <div className="absolute right-0 top-1/2 w-12 h-[3px] bg-white hidden md:block transform -translate-y-1/2" />
             <div className="text-center border-4 border-white rounded-2xl p-6 md:p-8 bg-[#0B132B]"
               style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
@@ -53,17 +54,17 @@ const Expertise = () => {
                 Yocto Project Expertise
               </h3>
               <p className="text-white opacity-90 font-typewriter">
-                The Yocto Project can be daunting, but I've worked extensively with its BSP 
-                and platform layers, gaining deep insights into its quirks across different 
+                The Yocto Project can be daunting, but I've worked extensively with its BSP
+                and platform layers, gaining deep insights into its quirks across different
                 vendor ecosystems.
               </p>
             </div>
-          </div>
+          </SlideIn>
 
           <div className="hidden md:block md:order-4"></div>
           <div className="hidden md:block md:order-5"></div>
 
-          <div className="relative pr-0 md:pl-16 order-3 md:order-6">
+          <SlideIn direction="right" delay={0.2} className="relative pr-0 md:pl-16 order-3 md:order-6">
             <div className="absolute left-0 top-1/2 w-12 h-[3px] bg-white hidden md:block transform -translate-y-1/2" />
             <div className="text-center border-4 border-white rounded-2xl p-6 md:p-8 bg-[#0B132B]"
               style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
@@ -73,11 +74,11 @@ const Expertise = () => {
                 Developer Enablement
               </h3>
               <p className="text-white opacity-90 font-typewriter">
-                I simplify workflows and enhance productivity, allowing your team to focus on 
+                I simplify workflows and enhance productivity, allowing your team to focus on
                 their strengths. I also collaborate with DevOps to optimize build pipelines.
               </p>
             </div>
-          </div>
+          </SlideIn>
         </div>
 
         <div className="relative flex flex-col items-center w-full mt-0 md:mt-8 mb-4">
