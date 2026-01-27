@@ -85,6 +85,7 @@ const VerticalLine: React.FC<VerticalLineProps> = ({
         width: 0,
         borderLeft: `${width}px solid ${color}`,
         transition: 'top 0.25s, height 0.25s',
+        boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)",
       }}
     />
   );

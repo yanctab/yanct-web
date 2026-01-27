@@ -23,12 +23,12 @@ const Expertise = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 gap-8 md:gap-12 relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-[3px] bg-white -translate-x-1/2 hidden md:block" />
+          <div className="absolute left-1/2 top-0 bottom-0 w-[3px] bg-white -translate-x-1/2 hidden md:block" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
 
           <div className="hidden md:block md:order-1"></div>
 
           <SlideIn direction="right" className="relative pr-0 md:pl-16 order-1 md:order-2">
-            <div className="absolute left-0 top-1/2 w-12 h-[3px] bg-white hidden md:block transform -translate-y-1/2" />
+            <div className="absolute left-0 top-1/2 w-12 h-[3px] bg-white hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
             <div className="text-center border-4 border-white rounded-2xl p-6 md:p-8 bg-[#0B132B]"
               style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
             >
@@ -45,7 +45,7 @@ const Expertise = () => {
           </SlideIn>
 
           <SlideIn direction="left" delay={0.1} className="relative pl-0 md:pr-16 order-2 md:order-3">
-            <div className="absolute right-0 top-1/2 w-12 h-[3px] bg-white hidden md:block transform -translate-y-1/2" />
+            <div className="absolute right-0 top-1/2 w-12 h-[3px] bg-white hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
             <div className="text-center border-4 border-white rounded-2xl p-6 md:p-8 bg-[#0B132B]"
               style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
             >
@@ -65,7 +65,7 @@ const Expertise = () => {
           <div className="hidden md:block md:order-5"></div>
 
           <SlideIn direction="right" delay={0.2} className="relative pr-0 md:pl-16 order-3 md:order-6">
-            <div className="absolute left-0 top-1/2 w-12 h-[3px] bg-white hidden md:block transform -translate-y-1/2" />
+            <div className="absolute left-0 top-1/2 w-12 h-[3px] bg-white hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
             <div className="text-center border-4 border-white rounded-2xl p-6 md:p-8 bg-[#0B132B]"
               style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
             >
@@ -82,7 +82,7 @@ const Expertise = () => {
         </div>
 
         <div className="relative flex flex-col items-center w-full mt-0 md:mt-8 mb-4">
-          <div className="p-2 rounded-full border-4 border-white inline-block">
+          <div className="p-2 rounded-full border-4 border-white inline-block" style={{ boxShadow: "0 8px 30px rgba(0, 0, 0, 0.8)" }}>
             <Button
               size="lg"
               id="expertise-continue-btn"

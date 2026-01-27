@@ -67,11 +67,12 @@ const About = () => {
                   width: '0px',
                   borderLeft: '3px solid #fff',
                   pointerEvents: "none",
+                  boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)",
                 }}
               />
 
               {/* Outer white border with p-2 gap */}
-              <div className="p-2 rounded-full border-4 border-white inline-block">
+              <div className="p-2 rounded-full border-4 border-white inline-block" style={{ boxShadow: "0 8px 30px rgba(0, 0, 0, 0.8)" }}>
                 <Button
                   size="lg"
                   className="bg-white text-[#0B132B] hover:bg-gray-200 rounded-full text-xl px-14 py-7 font-typewriter shadow-lg transition-colors duration-300 border-none"

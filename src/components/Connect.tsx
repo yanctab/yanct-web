@@ -19,9 +19,10 @@ const Connect = () => {
         </div>
 
         <div className="relative flex flex-col items-center w-full mt-16 md:mt-24 font-typewriter">
-          <div 
+          <div
             id="contact-box"
             className="bg-transparent border-2 border-white w-full md:w-3/4 p-8 rounded-2xl"
+            style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
           >
             <div className="flex flex-col md:flex-row gap-8 justify-center items-center md:items-start">
               <div className="flex flex-col gap-8 items-center">

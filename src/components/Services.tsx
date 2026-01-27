@@ -42,24 +42,25 @@ const Services = () => {
       <div className="container mx-auto px-4 flex flex-col items-center mt-16 md:mt-32">
         <div className="relative flex flex-col gap-8 md:gap-12 w-full">
           {/* Vertical center line */}
-          <div className="absolute left-1/2 top-0 bottom-[80px] w-[3px] bg-[#F5F7FA] -translate-x-1/2 hidden md:block" />
+          <div className="absolute left-1/2 top-0 bottom-[80px] w-[3px] bg-[#F5F7FA] -translate-x-1/2 hidden md:block" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
 
           {/* Row 1: Image left, Text right */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch w-full">
             <SlideIn direction="left" className="relative md:pr-16">
-              <div className="absolute right-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" />
+              <div className="absolute right-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
               <div
                 className="bg-white flex items-center justify-center border border-[#e5e5e5] h-full w-full aspect-[1.8/1] rounded-2xl bg-cover bg-center grayscale"
                 style={{
                   backgroundImage: "url('/Southtech-38_edited1.jpg')",
+                  boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)",
                 }}
                 aria-label="Black and white photo of building"
                 role="img"
               />
             </SlideIn>
             <SlideIn direction="right" delay={0.1} className="relative md:pl-16">
-              <div className="absolute left-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" />
-              <div className="bg-white p-1 rounded-2xl border-4 border-[#F5F7FA] h-full">
+              <div className="absolute left-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
+              <div className="bg-white p-1 rounded-2xl border-4 border-[#F5F7FA] h-full" style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}>
                 <div className="h-full w-full bg-[#0B132B] p-1 rounded-[calc(1rem-2px)]">
                   <div className="h-full w-full bg-[#F5F7FA] flex flex-col justify-center shadow-md p-4 sm:p-6 md:p-8 rounded-[calc(1rem-4px)]">
                     <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-2 md:mb-4 font-typewriter">
@@ -79,8 +80,8 @@ const Services = () => {
           {/* Row 2: Text left, Image right */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch w-full">
             <SlideIn direction="left" className="relative md:pr-16">
-              <div className="absolute right-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" />
-              <div className="bg-white p-1 rounded-2xl border-4 border-[#F5F7FA] h-full">
+              <div className="absolute right-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
+              <div className="bg-white p-1 rounded-2xl border-4 border-[#F5F7FA] h-full" style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}>
                 <div className="h-full w-full bg-[#0B132B] p-1 rounded-[calc(1rem-2px)]">
                   <div className="h-full w-full bg-[#F5F7FA] flex flex-col justify-center shadow-md p-4 sm:p-6 md:p-8 rounded-[calc(1rem-4px)]">
                     <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-2 md:mb-4 font-typewriter">
@@ -96,11 +97,12 @@ const Services = () => {
               </div>
             </SlideIn>
             <SlideIn direction="right" delay={0.1} className="relative md:pl-16">
-              <div className="absolute left-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" />
+              <div className="absolute left-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
               <div
                 className="bg-white flex items-center justify-center border border-[#e5e5e5] h-full w-full aspect-[1.8/1] rounded-2xl bg-cover bg-center grayscale"
                 style={{
                   backgroundImage: "url('/P_AB3418.jpg')",
+                  boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)",
                 }}
                 aria-label="Black and white photo of gray building"
                 role="img"
@@ -111,19 +113,20 @@ const Services = () => {
           {/* Row 3: Image left, Text right */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch w-full">
             <SlideIn direction="left" className="relative md:pr-16">
-              <div className="absolute right-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" />
+              <div className="absolute right-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
               <div
                 className="bg-white flex items-center justify-center border border-[#e5e5e5] h-full w-full aspect-[1.8/1] rounded-2xl bg-cover bg-center grayscale"
                 style={{
                   backgroundImage: "url('P_AB3378.jpg')",
+                  boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)",
                 }}
                 aria-label="Black and white photo of herd of sheep"
                 role="img"
               />
             </SlideIn>
             <SlideIn direction="right" delay={0.1} className="relative md:pl-16">
-              <div className="absolute left-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" />
-              <div className="bg-white p-1 rounded-2xl border-4 border-[#F5F7FA] h-full">
+              <div className="absolute left-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
+              <div className="bg-white p-1 rounded-2xl border-4 border-[#F5F7FA] h-full" style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}>
                 <div className="h-full w-full bg-[#0B132B] p-1 rounded-[calc(1rem-2px)]">
                   <div className="h-full w-full bg-[#F5F7FA] flex flex-col justify-center shadow-md p-4 sm:p-6 md:p-8 rounded-[calc(1rem-4px)]">
                     <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-2 md:mb-4 font-typewriter">
@@ -142,7 +145,7 @@ const Services = () => {
 
         <div className="relative flex flex-col items-center w-full mt-0 md:mt-8 mb-4">
           {/* Outer white border with p-2 gap */}
-          <div className="p-2 rounded-full border-4 border-white inline-block">
+          <div className="p-2 rounded-full border-4 border-white inline-block" style={{ boxShadow: "0 8px 30px rgba(0, 0, 0, 0.8)" }}>
             <Button
               size="lg"
               id="services-continue-btn"

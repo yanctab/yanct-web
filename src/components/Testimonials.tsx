@@ -88,7 +88,7 @@ const Testimonials = () => {
 
         <div className="relative flex flex-col items-center w-full mt-0 md:mt-8 mb-4">
           {/* Outer white border with p-2 gap */}
-          <div className="p-2 rounded-full border-4 border-white inline-block">
+          <div className="p-2 rounded-full border-4 border-white inline-block" style={{ boxShadow: "0 8px 30px rgba(0, 0, 0, 0.8)" }}>
             <Button
               size="lg"
               id="testimonials-continue-btn"

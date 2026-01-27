@@ -34,7 +34,8 @@ const AboutHighlights = () => (
         height: "calc(100% - 130px)",
         width: "0px",
         borderLeft: "3px solid #F5F7FA",
-        pointerEvents: "none"
+        pointerEvents: "none",
+        boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)"
       }}
     />
     <div className="container mx-auto px-4 flex flex-col items-center">
@@ -44,8 +45,8 @@ const AboutHighlights = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch w-full">
           {/* Image Card */}
           <SlideIn direction="left" className="relative md:pr-16">
-            <div className="absolute right-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" />
-            <div className="bg-[#F5F7FA] flex items-center justify-center border border-[#d1d5db] h-full w-full aspect-[1.8/1] rounded-2xl">
+            <div className="absolute right-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
+            <div className="bg-[#F5F7FA] flex items-center justify-center border border-[#d1d5db] h-full w-full aspect-[1.8/1] rounded-2xl" style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}>
               <img
                 src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=800"
                 alt="People collaborating"
@@ -57,8 +58,8 @@ const AboutHighlights = () => (
 
           {/* Text Card with Double Border */}
           <SlideIn direction="right" delay={0.1} className="relative md:pl-16">
-            <div className="absolute left-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" />
-            <div className="bg-[#F5F7FA] p-1 rounded-2xl border-4 border-[#F5F7FA] h-full">
+            <div className="absolute left-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
+            <div className="bg-[#F5F7FA] p-1 rounded-2xl border-4 border-[#F5F7FA] h-full" style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}>
               <div className="h-full w-full bg-[#0B132B] p-1 rounded-[calc(1rem-2px)]">
                 <div className="h-full w-full bg-[#F5F7FA] flex flex-col justify-center p-4 sm:p-6 md:p-8 rounded-[calc(1rem-4px)]">
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-2 md:mb-4 font-typewriter">
@@ -79,8 +80,8 @@ const AboutHighlights = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch w-full">
           {/* Text Card with Double Border */}
           <SlideIn direction="left" className="relative order-2 md:order-1 md:pr-16">
-            <div className="absolute right-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" />
-            <div className="bg-[#F5F7FA] p-1 rounded-2xl border-4 border-[#F5F7FA] h-full">
+            <div className="absolute right-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
+            <div className="bg-[#F5F7FA] p-1 rounded-2xl border-4 border-[#F5F7FA] h-full" style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}>
               <div className="h-full w-full bg-[#0B132B] p-1 rounded-[calc(1rem-2px)]">
                 <div className="h-full w-full bg-[#F5F7FA] flex flex-col justify-center p-4 sm:p-6 md:p-8 rounded-[calc(1rem-4px)]">
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-2 md:mb-4 font-typewriter">
@@ -98,8 +99,8 @@ const AboutHighlights = () => (
 
           {/* Image Card */}
           <SlideIn direction="right" delay={0.1} className="relative order-1 md:order-2 md:pl-16">
-            <div className="absolute left-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" />
-            <div className="bg-[#F5F7FA] flex items-center justify-center border border-[#d1d5db] h-full w-full aspect-[1.8/1] rounded-2xl">
+            <div className="absolute left-6 top-1/2 w-8 h-[3px] bg-[#F5F7FA] hidden md:block transform -translate-y-1/2" style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.6)" }} />
+            <div className="bg-[#F5F7FA] flex items-center justify-center border border-[#d1d5db] h-full w-full aspect-[1.8/1] rounded-2xl" style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}>
               <img
                 src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800"
                 alt="People in relaxed setting"
@@ -112,7 +113,7 @@ const AboutHighlights = () => (
 
         <div className="relative flex flex-col items-center w-full mt-0 md:mt-8 mb-4">
           {/* Outer white border with p-2 gap */}
-          <div className="p-2 rounded-full border-4 border-white inline-block">
+          <div className="p-2 rounded-full border-4 border-white inline-block" style={{ boxShadow: "0 8px 30px rgba(0, 0, 0, 0.8)" }}>
             <Button
               size="lg"
               id="about-highlights-continue-btn"
