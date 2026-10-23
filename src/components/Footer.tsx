@@ -1,36 +1,15 @@
-
-import React from 'react';
-
-const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
-  return (
-    <footer className="bg-[#0B132B] text-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="text-center">
-          <div className="mb-4 flex justify-center">
-            <button 
-              onClick={scrollToTop}
-              className="cursor-pointer hover:opacity-80 transition-opacity duration-300"
-              aria-label="Scroll to top"
-            >
-              <img
-                id="footer-logo"
-                src="/yanct.svg"
-                alt="Yanct Logo"
-                className="h-20 md:h-28 lg:h-32 w-auto"
-              />
-            </button>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
+const Footer = ({ onReboot }: { onReboot: () => void }) => (
+  <footer className="border-t border-term-line px-4 py-10 text-xs text-term-dim md:px-8">
+    <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
+      <p>© {new Date().getFullYear()} Yanct · Built with coffee and a warm sstate cache.</p>
+      <button
+        onClick={onReboot}
+        className="rounded border border-term-line px-3 py-1.5 transition hover:border-term-red hover:text-term-red"
+      >
+        $ sudo reboot
+      </button>
+    </div>
+  </footer>
+);
 
 export default Footer;

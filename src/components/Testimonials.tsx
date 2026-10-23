@@ -1,121 +1,71 @@
-import { Button } from "@/components/ui/button";
-import { SlideIn } from "@/components/ui/motion-wrapper";
+import { motion } from "framer-motion";
 
-const Testimonials = () => {
-  return (
-    <section
-      id="testimonials"
-      className="py-24 bg-[#477087] relative overflow-visible"
-    >
-      <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.50) 100%)",
-        }}
-      />
-      <div className="container mx-auto px-4 relative z-20">
-        <div className="flex justify-center mb-16">
-          <h2
-            id="testimonials-header-btn"
-            className="text-white text-4xl font-typewriter"
+const TESTIMONIALS = [
+  {
+    ts: "1337.000042",
+    source: "emulate-energy",
+    quote:
+      "Måns was incredibly service-minded, pedagogical, and highly knowledgeable. We will continue to rely on him as our go-to expert for all IoT-related matters.",
+    name: "Daria Madjidian",
+    role: "Co-Founder and Chief Scientist, Emulate Energy",
+  },
+  {
+    ts: "2048.161803",
+    source: "schneider-electric",
+    quote:
+      "Complexity is not a problem. He works proactively and reacts fast on observations made. He has good contacts with other teams and could handle different cultures easily.",
+    name: "Kent Pålsson",
+    role: "Senior Hardware Project Design Lead, Schneider Electric",
+  },
+  {
+    ts: "3141.592653",
+    source: "topbrewer",
+    quote:
+      "Måns is next level embedded linux expert. Not only does he understand the tools surrounding custom embedded linux system like yocto, but he has very good linux knowledge which is important to have this combo in my opinion.",
+    name: "Frederik Vibe-Petersen",
+    role: "Creator of the TopBrewer Experience",
+  },
+  {
+    ts: "4096.000001",
+    source: "dev-team",
+    quote:
+      "Always ready to help improving the development processes, tools etc. and has a high focus on quality. A true asset for the team.",
+    name: "Jeppe Frandsen",
+    role: "Senior Developer | Architect | Manager | DevOps Guy",
+  },
+];
+
+const Testimonials = () => (
+  <section id="testimonials" className="border-t border-term-line px-4 py-24 md:px-8">
+    <div className="mx-auto max-w-6xl">
+      <p className="section-prompt">~$ dmesg | grep -i måns</p>
+      <h2 className="section-title">What the logs say</h2>
+
+      <div className="mt-12 grid gap-6 md:grid-cols-2">
+        {TESTIMONIALS.map((t, i) => (
+          <motion.figure
+            key={t.name}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5, delay: i * 0.08 }}
+            className="term-window flex flex-col p-6"
           >
-            Testimonials
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-2 gap-8 md:gap-12">
-          <SlideIn direction="up">
-            <div className="text-center border-4 border-white rounded-2xl p-6 md:p-8 bg-[#0B132B] h-full"
-              style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
-            >
-              <div className="text-6xl text-white mb-4 leading-none font-typewriter">"</div>
-              <p className="text-white opacity-90 mb-6 font-typewriter">
-                Måns was incredibly service-minded, pedagogical, and highly knowledgeable. We will continue to rely on him as our go-to expert for all IoT-related matters.
-              </p>
-              <p className="text-white font-bold font-typewriter">Daria Madjidian</p>
-              <p className="text-white italic text-sm font-typewriter">
-                Co-Founder and Chief Scientist at Emulate Energy
-              </p>
-            </div>
-          </SlideIn>
-
-          <SlideIn direction="up" delay={0.1}>
-            <div className="text-center border-4 border-white rounded-2xl p-6 md:p-8 bg-[#0B132B] h-full"
-              style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
-            >
-              <div className="text-6xl text-white mb-4 leading-none font-typewriter">"</div>
-              <p className="text-white opacity-90 mb-6 font-typewriter">
-                Complexity is not a problem. He works proactively and reacts fast on observations made. He has good contacts with other teams and could handle different cultures easily.
-              </p>
-              <p className="text-white font-bold font-typewriter">Kent Pålsson</p>
-              <p className="text-white italic text-sm font-typewriter">
-                Senior Hardware Project Design Lead på SCHNEIDER ELECTRIC
-              </p>
-            </div>
-          </SlideIn>
-
-          <SlideIn direction="up" delay={0.2}>
-            <div className="text-center border-4 border-white rounded-2xl p-6 md:p-8 bg-[#0B132B] h-full"
-              style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
-            >
-              <div className="text-6xl text-white mb-4 leading-none font-typewriter">"</div>
-              <p className="text-white opacity-90 mb-6 font-typewriter">
-                Måns is next level embedded linux expert. Not only does he understand the tools surrounding custom embedded linux system like yocto, but he has very good linux knowledge which is important to have this combo in my opinion.
-              </p>
-              <p className="text-white font-bold font-typewriter">Frederik Vibe-Petersen</p>
-              <p className="text-white italic text-sm font-typewriter">
-                Creator of the TopBrewer Experience. Engineering awesome.
-              </p>
-            </div>
-          </SlideIn>
-
-          <SlideIn direction="up" delay={0.3}>
-            <div className="text-center border-4 border-white rounded-2xl p-6 md:p-8 bg-[#0B132B] h-full"
-              style={{ boxShadow: "0 10px 40px rgba(0, 0, 0, 0.9)" }}
-            >
-              <div className="text-6xl text-white mb-4 leading-none font-typewriter">"</div>
-              <p className="text-white opacity-90 mb-6 font-typewriter">
-                Always ready to help improving the development processes, tools etc. and has a high focus on quality. A true asset for the team.
-              </p>
-              <p className="text-white font-bold font-typewriter">Jeppe Frandsen</p>
-              <p className="text-white italic text-sm font-typewriter">
-                Senior Developer | Architect | Manager | DevOps Guy
-              </p>
-            </div>
-          </SlideIn>
-        </div>
-
-        <div className="relative flex flex-col items-center w-full mt-0 md:mt-8 mb-4">
-          {/* Outer white border with p-2 gap */}
-          <div className="p-2 rounded-full border-4 border-white inline-block" style={{ boxShadow: "0 8px 30px rgba(0, 0, 0, 0.8)" }}>
-            <Button
-              size="lg"
-              id="testimonials-continue-btn"
-              className="bg-[#F5F7FA] text-[#0B132B] hover:bg-gray-200 rounded-full text-xl p-6 shadow-xl transition-colors duration-300 border-none"
-              onClick={() => {
-                const highlights = document.getElementById('connect');
-                highlights?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              {/* Downward pointing triangle SVG */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-24 h-24 text-[#0B132B]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="6"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
-            </Button>
-          </div>
-        </div>
-
+            <p className="break-words text-xs text-term-dim">
+              [{t.ts}] <span className="text-term-cyan">{t.source}</span>: feedback received
+            </p>
+            <blockquote className="mt-4 flex-1 leading-relaxed text-term-text">
+              “{t.quote}”
+            </blockquote>
+            <figcaption className="mt-6 text-sm">
+              <span className="font-semibold text-white">{t.name}</span>
+              <span className="block text-term-dim">{t.role}</span>
+            </figcaption>
+          </motion.figure>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Testimonials;
