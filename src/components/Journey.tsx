@@ -156,7 +156,7 @@ const Step = ({
   }, [inView, index, onActive]);
 
   return (
-    <div ref={ref} id={layerElementId(layer.id)} className="flex min-h-[60vh] flex-col justify-center py-8 md:min-h-screen">
+    <div ref={ref} id={layerElementId(layer.id)} className="flex min-h-screen flex-col justify-center py-8">
       <p className="text-xs uppercase tracking-widest text-term-dim">
         Layer {index}
         <span className={`ml-3 inline-block h-2 w-8 rounded-full align-middle md:hidden ${layer.color}`} />
