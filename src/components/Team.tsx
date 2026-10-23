@@ -30,7 +30,7 @@ const Team = () => (
           >
             {/* TODO: swap for a real photo, maybe with a different hat per role */}
             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-brand-blue font-display text-2xl font-bold text-white">
-              MZ
+              ME
             </div>
             <p className="mt-4 font-semibold text-white">Me</p>
             <p className="text-sm text-term-green">{r.role}</p>
