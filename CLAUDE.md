@@ -63,4 +63,3 @@ The trickiest part of the page; check these behaviours after changing it:
 - All content is hardcoded in components as small arrays/constants at the top of each file
 - Mobile-first responsive design using Tailwind breakpoints (`md:` = 768px)
 - Components are self-contained; the only cross-section wiring is `onReboot` from `Index.tsx`
-- `src/hooks/use-mobile.tsx` and `src/lib/utils.ts` are currently unused leftovers
