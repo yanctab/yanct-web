@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 type LogLine = { text: string; ok?: boolean };
@@ -44,8 +44,9 @@ const BootHero = ({ bootKey }: { bootKey: number }) => {
   const [visibleLines, setVisibleLines] = useState(0);
   const [booted, setBooted] = useState(false);
 
-  useEffect(() => {
-    // bootKey > 0 means someone pressed "reboot" in the footer: always replay
+  // Layout effect so a reboot clears the old hero before the next paint
+  useLayoutEffect(() => {
+    // bootKey > 0 means someone pressed "reboot": always replay
     if (bootKey === 0 && (hasBootedBefore() || prefersReducedMotion())) {
       setVisibleLines(BOOT_LOG.length);
       setBooted(true);

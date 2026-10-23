@@ -12,8 +12,10 @@ const Index = () => {
   // Bumping this replays the boot sequence
   const [bootKey, setBootKey] = useState(0);
 
+  // Jump straight to the top so the page doesn't visibly scroll past the
+  // other sections before the boot starts
   const reboot = () => {
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: "instant" });
     setBootKey((k) => k + 1);
   };
 
