@@ -46,7 +46,7 @@ The trickiest part of the page; check these behaviours after changing it:
 - The section opens on its "start view" (what `#journey` lands on): the heading with Layer 0 (Bare metal) top-aligned beneath it, level with the stack, so Bare metal is selected and the cursor sits on Bootloader.
 - Clicking a stack layer or a step's `$ cd ../<next>` button calls `scrollToLayer`. Bare metal scrolls back to the start view. Other layers line the step's centre up with the stack's *stuck* centre (sticky `top` + half its height), not the viewport centre. On mobile it centres the step in the space below the pinned `MobileStack` bar.
 - Each step is `min-h-screen` so neighbouring layers stay off-screen after a jump; Layer 0 is top-aligned, the rest are centred. A desktop-only `30vh` spacer after the last layer keeps the next section out of view on tall screens.
-- The stack's sticky `top` is `min(20vh, 16rem)` so it never sits below the start of the layers on very tall screens.
+- The stack's sticky `top` is `min(30vh, 17rem)`. It must not exceed where the layer/stack row rests in the start view (~17rem down, set by the section's `md:pt-12` and the grid's `md:mt-20`), or the stack would sit lower than Bare metal there. Change those together.
 - A blinking `█` cursor (`layoutId` so it glides) marks the next layer (`nextLayer`), wrapping back to Bare metal once all are built.
 - Desktop (`md:` and up) shows `StackDiagram` in a sticky right column. Phones get `MobileStack` instead: a row of short-labelled chips (`Layer.short`) pinned to the top of the steps column. Both are always mounted, so the two cursors need different `layoutId`s, and DOM queries for `[aria-current=step]` can hit either one.
 

@@ -294,7 +294,7 @@ const Journey = ({ onReboot }: { onReboot: () => void }) => {
   }, []);
 
   return (
-    <section id={JOURNEY_ID} className="border-t border-term-line px-4 py-24 md:px-8">
+    <section id={JOURNEY_ID} className="border-t border-term-line px-4 py-24 md:px-8 md:pt-12">
       <div className="mx-auto max-w-6xl">
         <p className="section-prompt">~$ cat how-it-works</p>
         <h2 className="section-title">
@@ -305,7 +305,7 @@ const Journey = ({ onReboot }: { onReboot: () => void }) => {
           do it for real.
         </p>
 
-        <div className="mt-8 grid gap-12 md:grid-cols-2">
+        <div className="mt-8 grid gap-12 md:mt-20 md:grid-cols-2">
           <div>
             <MobileStack active={active} />
             {LAYERS.map((layer, i) => (
@@ -316,7 +316,9 @@ const Journey = ({ onReboot }: { onReboot: () => void }) => {
             <div aria-hidden="true" className="hidden md:block md:h-[30vh]" />
           </div>
           <div className="hidden md:block">
-            <div className="sticky top-[min(20vh,16rem)]">
+            {/* Pinned top must not exceed the row's resting position (~17rem down the start
+                view), or the stack would sit lower than Bare metal there */}
+            <div className="sticky top-[min(30vh,17rem)]">
               <StackDiagram active={active} />
               <div className="mt-4 flex flex-wrap gap-3">
                 <RebootButton onReboot={onReboot} />
