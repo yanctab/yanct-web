@@ -5,6 +5,7 @@ import RebootButton from "@/components/RebootButton";
 type Layer = {
   id: string;
   name: string;
+  short: string;
   quip: string;
   body: string;
   tags: string[];
@@ -16,6 +17,7 @@ const LAYERS: Layer[] = [
   {
     id: "bare-metal",
     name: "Bare metal",
+    short: "Metal",
     quip: "while (1) { toggle_led(); }  // ah, simpler times",
     body: "You've shipped great products on microcontrollers. Now the product needs networking, updates, a UI, security… and suddenly the main loop isn't enough. We start by mapping what you have, what you need, and what Linux will actually change for your team.",
     tags: ["Assessment", "Hardware choice", "Roadmap"],
@@ -24,6 +26,7 @@ const LAYERS: Layer[] = [
   {
     id: "bootloader",
     name: "Bootloader",
+    short: "Boot",
     quip: "=> boot  # the most nerve-wracking word in embedded",
     body: "Getting a board to boot reliably is step one, and the first place projects stall. I bring up U-Boot, secure boot and A/B partitioning so your device can always find its way home.",
     tags: ["U-Boot", "Secure boot", "A/B updates"],
@@ -32,6 +35,7 @@ const LAYERS: Layer[] = [
   {
     id: "kernel",
     name: "Kernel & BSP",
+    short: "Kernel",
     quip: "dmesg | grep -i 'why'",
     body: "Vendor BSPs are a starting point, not a product. I bridge the gap between what your silicon vendor ships and something you can maintain for ten years: device trees, drivers, and kernel upgrades that don't ruin your weekend.",
     tags: ["Device tree", "Drivers", "Vendor BSPs"],
@@ -40,6 +44,7 @@ const LAYERS: Layer[] = [
   {
     id: "rootfs",
     name: "Root filesystem",
+    short: "Rootfs",
     quip: "bitbake yanct-image  # go get a coffee. maybe two.",
     body: "Yocto is powerful and famously unforgiving. I set up layers, distros and images that are reproducible, small and understandable by the people who'll live with them after I leave.",
     tags: ["Yocto", "BitBake", "Layers", "Reproducible builds"],
@@ -48,6 +53,7 @@ const LAYERS: Layer[] = [
   {
     id: "apps",
     name: "Applications",
+    short: "Apps",
     quip: "cargo build --target aarch64-unknown-linux-gnu",
     body: "Your actual product lives here. Whether it's C/C++, Rust, Python or Android on top, I help you pick a structure that fits embedded constraints and a team that may be new to Linux.",
     tags: ["C/C++", "Rust", "Python", "Android"],
@@ -56,6 +62,7 @@ const LAYERS: Layer[] = [
   {
     id: "delivery",
     name: "CI & delivery",
+    short: "CI",
     quip: "git push && echo 'works on every machine'",
     body: "The part nobody budgets for. Build servers, caches, containers, automated tests and OTA updates, so shipping a new release is a button press, not a project.",
     tags: ["Git", "CI/CD", "Docker", "OTA", "Bash"],
@@ -70,6 +77,7 @@ const ACTIVE_BAND = "-45% 0px -45% 0px";
 const ACTIVE_BAND_BOTTOM = 0.55;
 
 const STACK_ID = "product-stack";
+const MOBILE_STACK_ID = "product-stack-mobile";
 
 const centreY = (el: Element) => {
   const { top, height } = el.getBoundingClientRect();
@@ -90,9 +98,10 @@ const scrollToLayer = (id: string) => {
   if (!step) return;
   const stack = document.getElementById(STACK_ID);
   const sticky = stack?.parentElement;
-  // The stack is hidden on mobile, so just centre the step there
+  // On mobile the stack is a bar pinned to the top: centre the step in the space below it
   if (!stack || !sticky || stack.offsetHeight === 0) {
-    step.scrollIntoView({ behavior: "smooth", block: "center" });
+    const bar = document.getElementById(MOBILE_STACK_ID)?.offsetHeight ?? 0;
+    window.scrollBy({ top: centreY(step) - (bar + (window.innerHeight - bar) / 2), behavior: "smooth" });
     return;
   }
   const stuckCentre = parseFloat(getComputedStyle(sticky).top) + stack.offsetHeight / 2;
@@ -100,21 +109,60 @@ const scrollToLayer = (id: string) => {
 };
 
 // Blinking cursor marking the next layer to build; glides between rows via layoutId
-const NextCursor = () => (
+const NextCursor = ({ layoutId, className = "" }: { layoutId: string; className?: string }) => (
   <motion.span
-    layoutId="next-layer-cursor"
+    layoutId={layoutId}
     aria-hidden="true"
-    className="animate-blink text-term-green"
+    className={`animate-blink text-term-green ${className}`}
     transition={{ type: "spring", stiffness: 300, damping: 30 }}
   >
     █
   </motion.span>
 );
 
+// Once everything is built, point back at the start to go round again
+const nextLayer = (active: number) => (active === LAYERS.length - 1 ? 0 : active + 1);
+
+// Compact stack for phones, pinned to the top while scrolling through the layers
+const MobileStack = ({ active }: { active: number }) => {
+  const next = nextLayer(active);
+  return (
+    <div
+      id={MOBILE_STACK_ID}
+      className="sticky top-0 z-10 -mx-4 mb-4 border-b border-term-line bg-term-bg/95 px-4 pb-1 pt-3 backdrop-blur md:hidden"
+    >
+      <div className="flex gap-1">
+        {LAYERS.map((layer, i) => {
+          const built = i <= active;
+          return (
+            <div key={layer.id} className="flex min-w-0 flex-1 flex-col items-center">
+              <motion.button
+                type="button"
+                onClick={() => scrollToLayer(layer.id)}
+                aria-label={`Jump to layer ${i}: ${layer.name}${i === next ? " (next)" : ""}`}
+                aria-current={i === active ? "step" : undefined}
+                animate={{ opacity: built ? 1 : i === next ? 0.35 : 0.15 }}
+                transition={{ duration: 0.4 }}
+                className={`w-full truncate rounded px-1 py-1.5 text-[10px] font-semibold text-term-bg ${layer.color} ${
+                  i === active ? "ring-2 ring-white/80" : ""
+                }`}
+              >
+                {layer.short}
+              </motion.button>
+              <span className="flex h-3 items-center">
+                {i === next && <NextCursor layoutId="next-layer-cursor-mobile" className="text-[8px] leading-none" />}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
 // active is -1 until Layer 0 is reached, so nothing starts out built
 const StackDiagram = ({ active }: { active: number }) => {
-  // Once everything is built, point back at the start to go round again
-  const next = active === LAYERS.length - 1 ? 0 : active + 1;
+  const next = nextLayer(active);
   return (
     <div id={STACK_ID} className="term-window w-full">
       <div className="term-window-bar">
@@ -129,7 +177,7 @@ const StackDiagram = ({ active }: { active: number }) => {
           const built = i <= active;
           return (
             <div key={layer.id} className="flex items-center gap-2">
-              <span className="flex w-5 shrink-0 justify-center">{i === next && <NextCursor />}</span>
+              <span className="flex w-5 shrink-0 justify-center">{i === next && <NextCursor layoutId="next-layer-cursor" />}</span>
               <motion.button
                 type="button"
                 onClick={() => scrollToLayer(layer.id)}
@@ -228,16 +276,21 @@ const Step = ({
 const Journey = ({ onReboot }: { onReboot: () => void }) => {
   const [active, setActive] = useState(-1);
 
-  // Once Layer 0 drops back below the active band (scrolling up to the intro,
-  // or jumping to the top), unbuild the stack so it starts over
+  // Reaching the start view (section top at the top of the screen) builds Bare metal
+  // even when Layer 0 hasn't crossed the active band, as on short phones. Leaving it
+  // upwards, with Layer 0 back below the band, unbuilds the stack so it starts over.
   useEffect(() => {
+    const section = document.getElementById(JOURNEY_ID);
     const firstStep = document.getElementById(layerElementId(LAYERS[0].id));
-    if (!firstStep) return;
-    const resetIfAboveStack = () => {
-      if (firstStep.getBoundingClientRect().top > window.innerHeight * ACTIVE_BAND_BOTTOM) setActive(-1);
+    if (!section || !firstStep) return;
+    const syncWithStart = () => {
+      const atOrPastStart = section.getBoundingClientRect().top <= 1;
+      const layer0BelowBand = firstStep.getBoundingClientRect().top > window.innerHeight * ACTIVE_BAND_BOTTOM;
+      if (atOrPastStart) setActive((a) => (a < 0 ? 0 : a));
+      else if (layer0BelowBand) setActive(-1);
     };
-    window.addEventListener("scroll", resetIfAboveStack, { passive: true });
-    return () => window.removeEventListener("scroll", resetIfAboveStack);
+    window.addEventListener("scroll", syncWithStart, { passive: true });
+    return () => window.removeEventListener("scroll", syncWithStart);
   }, []);
 
   return (
@@ -254,6 +307,7 @@ const Journey = ({ onReboot }: { onReboot: () => void }) => {
 
         <div className="mt-8 grid gap-12 md:grid-cols-2">
           <div>
+            <MobileStack active={active} />
             {LAYERS.map((layer, i) => (
               <Step key={layer.id} layer={layer} index={i} next={LAYERS[i + 1]} onActive={setActive} />
             ))}
