@@ -6,6 +6,8 @@ help:
 DOMAIN = localhost
 EMAIL = contact@localhost
 WEBROOT = /var/www/$(DOMAIN)
+# SSH target for publish, e.g. root@yanct.com
+HOST =
 
 
 ## build              - Build web page
@@ -18,6 +20,12 @@ build:
 .PHONY: preview
 preview: build
 	npm run preview
+
+## publish            - Build locally and rsync dist/ to $(WEBROOT) on $(HOST)
+.PHONY: publish
+publish: build
+	@test -n "$(HOST)" -a "$(DOMAIN)" != localhost || { echo "Usage: make publish HOST=user@server DOMAIN=example.com"; exit 1; }
+	rsync -avz --delete dist/ $(HOST):$(WEBROOT)/
 
 ## setup              - Install npm, nginx, and certbot on Ubuntu/Debian
 .PHONY: setup

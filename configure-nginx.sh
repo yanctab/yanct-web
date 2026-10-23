@@ -39,6 +39,9 @@ server {
     location / {
         try_files \$uri \$uri/ =404;
     }
+
+    # Serve the app for unknown paths so it renders its kernel-panic page, keeping the 404 status
+    error_page 404 /index.html;
 }
 
 # Main server block for HTTPS
@@ -55,6 +58,9 @@ server {
     location / {
         try_files \$uri \$uri/ =404;
     }
+
+    # Serve the app for unknown paths so it renders its kernel-panic page, keeping the 404 status
+    error_page 404 /index.html;
 }
 EOL
 
