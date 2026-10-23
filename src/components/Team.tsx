@@ -32,7 +32,7 @@ const Team = () => (
             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-brand-blue font-display text-2xl font-bold text-white">
               MZ
             </div>
-            <p className="mt-4 font-semibold text-white">Måns Zigher</p>
+            <p className="mt-4 font-semibold text-white">Me</p>
             <p className="text-sm text-term-green">{r.role}</p>
             <p className="mt-3 text-sm text-term-dim">{r.note}</p>
           </motion.div>
