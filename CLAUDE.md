@@ -43,8 +43,10 @@ The trickiest part of the page; check these behaviours after changing it:
 
 - `LAYERS` is ordered bottom-up; the stack renders it with `flex-col-reverse`.
 - `active` is the index of the layer in the middle band of the viewport (`ACTIVE_BAND`, via `useInView`), or `-1` for "nothing built yet". It resets to `-1` whenever Layer 0 is below that band, so the stack starts over at the top of the page.
-- Clicking a stack layer or a step's `$ cd ../<next>` button calls `scrollToLayer`. That lines the step's centre up with the stack's *stuck* centre (sticky `top` + half its height), not the viewport centre. On mobile the stack is hidden and it just centres the step.
-- Each step is `min-h-screen` so neighbouring layers stay off-screen after a jump. Desktop-only spacers above Layer 0 (`60vh`) and after the last layer (`30vh`) keep the intro and the next section out of view.
+- The section opens on its "start view" (what `#journey` lands on): the heading with Layer 0 (Bare metal) top-aligned beneath it, level with the stack, so Bare metal is selected and the cursor sits on Bootloader.
+- Clicking a stack layer or a step's `$ cd ../<next>` button calls `scrollToLayer`. Bare metal scrolls back to the start view. Other layers line the step's centre up with the stack's *stuck* centre (sticky `top` + half its height), not the viewport centre; on mobile the stack is hidden and it just centres the step.
+- Each step is `min-h-screen` so neighbouring layers stay off-screen after a jump; Layer 0 is top-aligned, the rest are centred. A desktop-only `30vh` spacer after the last layer keeps the next section out of view on tall screens.
+- The stack's sticky `top` is `min(20vh, 16rem)` so it never sits below the start of the layers on very tall screens.
 - A blinking `█` cursor (`layoutId` so it glides) marks the next layer, wrapping back to Bare metal once all are built.
 
 ### Styling

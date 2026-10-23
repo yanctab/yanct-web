@@ -78,7 +78,14 @@ const centreY = (el: Element) => {
 
 // Line the step's text up with the stack rather than the viewport centre. The
 // stack may not be stuck yet, so aim for where it sits once it is.
+const JOURNEY_ID = "journey";
+
 const scrollToLayer = (id: string) => {
+  // Layer 0 lives in the section's opening view, so go back to the start
+  if (id === LAYERS[0].id) {
+    document.getElementById(JOURNEY_ID)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
   const step = document.getElementById(layerElementId(id));
   if (!step) return;
   const stack = document.getElementById(STACK_ID);
@@ -185,7 +192,12 @@ const Step = ({
   }, [inView, index, onActive]);
 
   return (
-    <div ref={ref} id={layerElementId(layer.id)} className="flex min-h-screen flex-col justify-center py-8">
+    <div
+      ref={ref}
+      id={layerElementId(layer.id)}
+      // Layer 0 sits right under the heading, level with the stack; the rest are centred
+      className={`flex min-h-screen flex-col pb-8 ${index === 0 ? "justify-start" : "justify-center pt-8"}`}
+    >
       <p className="text-xs uppercase tracking-widest text-term-dim">
         Layer {index}
         <span className={`ml-3 inline-block h-2 w-8 rounded-full align-middle md:hidden ${layer.color}`} />
@@ -229,7 +241,7 @@ const Journey = ({ onReboot }: { onReboot: () => void }) => {
   }, []);
 
   return (
-    <section id="journey" className="border-t border-term-line px-4 py-24 md:px-8">
+    <section id={JOURNEY_ID} className="border-t border-term-line px-4 py-24 md:px-8">
       <div className="mx-auto max-w-6xl">
         <p className="section-prompt">~$ cat how-it-works</p>
         <h2 className="section-title">
@@ -242,8 +254,6 @@ const Journey = ({ onReboot }: { onReboot: () => void }) => {
 
         <div className="mt-8 grid gap-12 md:grid-cols-2">
           <div>
-            {/* Keeps Layer 0 below the fold so the section opens on just the title and stack */}
-            <div aria-hidden="true" className="hidden md:block md:h-[60vh]" />
             {LAYERS.map((layer, i) => (
               <Step key={layer.id} layer={layer} index={i} next={LAYERS[i + 1]} onActive={setActive} />
             ))}
@@ -252,7 +262,7 @@ const Journey = ({ onReboot }: { onReboot: () => void }) => {
             <div aria-hidden="true" className="hidden md:block md:h-[30vh]" />
           </div>
           <div className="hidden md:block">
-            <div className="sticky top-[20vh]">
+            <div className="sticky top-[min(20vh,16rem)]">
               <StackDiagram active={active} />
               <div className="mt-4 flex flex-wrap gap-3">
                 <RebootButton onReboot={onReboot} />
