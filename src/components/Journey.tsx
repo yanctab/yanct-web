@@ -64,12 +64,31 @@ const LAYERS: Layer[] = [
 
 const layerElementId = (id: string) => `layer-${id}`;
 
-// Centre the step so its in-view band marks it active
-const scrollToLayer = (id: string) =>
-  document.getElementById(layerElementId(id))?.scrollIntoView({ behavior: "smooth", block: "center" });
+const STACK_ID = "product-stack";
+
+const centreY = (el: Element) => {
+  const { top, height } = el.getBoundingClientRect();
+  return top + height / 2;
+};
+
+// Line the step's text up with the stack rather than the viewport centre. The
+// stack may not be stuck yet, so aim for where it sits once it is.
+const scrollToLayer = (id: string) => {
+  const step = document.getElementById(layerElementId(id));
+  if (!step) return;
+  const stack = document.getElementById(STACK_ID);
+  const sticky = stack?.parentElement;
+  // The stack is hidden on mobile, so just centre the step there
+  if (!stack || !sticky || stack.offsetHeight === 0) {
+    step.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+  const stuckCentre = parseFloat(getComputedStyle(sticky).top) + stack.offsetHeight / 2;
+  window.scrollBy({ top: centreY(step) - stuckCentre, behavior: "smooth" });
+};
 
 const StackDiagram = ({ active }: { active: number }) => (
-  <div className="term-window w-full">
+  <div id={STACK_ID} className="term-window w-full">
     <div className="term-window-bar">
       <span className="h-3 w-3 rounded-full bg-term-red/70" />
       <span className="h-3 w-3 rounded-full bg-term-amber/70" />
@@ -115,13 +134,18 @@ const StackDiagram = ({ active }: { active: number }) => (
   </div>
 );
 
+const nextButtonClass =
+  "mt-8 self-start rounded-lg border border-term-line px-4 py-2 text-sm text-term-green transition hover:border-term-green";
+
 const Step = ({
   layer,
   index,
+  next,
   onActive,
 }: {
   layer: Layer;
   index: number;
+  next?: Layer;
   onActive: (i: number) => void;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -132,7 +156,7 @@ const Step = ({
   }, [inView, index, onActive]);
 
   return (
-    <div ref={ref} id={layerElementId(layer.id)} className="flex min-h-[60vh] flex-col justify-center py-8 md:min-h-[70vh]">
+    <div ref={ref} id={layerElementId(layer.id)} className="flex min-h-[60vh] flex-col justify-center py-8 md:min-h-screen">
       <p className="text-xs uppercase tracking-widest text-term-dim">
         Layer {index}
         <span className={`ml-3 inline-block h-2 w-8 rounded-full align-middle md:hidden ${layer.color}`} />
@@ -147,6 +171,15 @@ const Step = ({
           </li>
         ))}
       </ul>
+      {next ? (
+        <button type="button" onClick={() => scrollToLayer(next.id)} className={nextButtonClass}>
+          $ cd ../{next.id} ↓
+        </button>
+      ) : (
+        <a href="#how" className={nextButtonClass}>
+          $ cd ~/how-we-work ↓
+        </a>
+      )}
     </div>
   );
 };
@@ -169,7 +202,7 @@ const Journey = () => {
         <div className="mt-8 grid gap-12 md:grid-cols-2">
           <div>
             {LAYERS.map((layer, i) => (
-              <Step key={layer.id} layer={layer} index={i} onActive={setActive} />
+              <Step key={layer.id} layer={layer} index={i} next={LAYERS[i + 1]} onActive={setActive} />
             ))}
           </div>
           <div className="hidden md:block">
