@@ -67,6 +67,7 @@ const layerElementId = (id: string) => `layer-${id}`;
 
 // Whatever crosses the middle tenth of the viewport counts as being looked at
 const ACTIVE_BAND = "-45% 0px -45% 0px";
+const ACTIVE_BAND_BOTTOM = 0.55;
 
 const STACK_ID = "product-stack";
 
@@ -214,13 +215,18 @@ const Step = ({
 
 const Journey = ({ onReboot }: { onReboot: () => void }) => {
   const [active, setActive] = useState(-1);
-  const spacerRef = useRef<HTMLDivElement>(null);
-  const backAtIntro = useInView(spacerRef, { margin: ACTIVE_BAND });
 
-  // Scrolling back up to the intro unbuilds the stack so it starts over
+  // Once Layer 0 drops back below the active band (scrolling up to the intro,
+  // or jumping to the top), unbuild the stack so it starts over
   useEffect(() => {
-    if (backAtIntro) setActive(-1);
-  }, [backAtIntro]);
+    const firstStep = document.getElementById(layerElementId(LAYERS[0].id));
+    if (!firstStep) return;
+    const resetIfAboveStack = () => {
+      if (firstStep.getBoundingClientRect().top > window.innerHeight * ACTIVE_BAND_BOTTOM) setActive(-1);
+    };
+    window.addEventListener("scroll", resetIfAboveStack, { passive: true });
+    return () => window.removeEventListener("scroll", resetIfAboveStack);
+  }, []);
 
   return (
     <section id="journey" className="border-t border-term-line px-4 py-24 md:px-8">
@@ -237,10 +243,13 @@ const Journey = ({ onReboot }: { onReboot: () => void }) => {
         <div className="mt-8 grid gap-12 md:grid-cols-2">
           <div>
             {/* Keeps Layer 0 below the fold so the section opens on just the title and stack */}
-            <div ref={spacerRef} aria-hidden="true" className="hidden md:block md:h-[60vh]" />
+            <div aria-hidden="true" className="hidden md:block md:h-[60vh]" />
             {LAYERS.map((layer, i) => (
               <Step key={layer.id} layer={layer} index={i} next={LAYERS[i + 1]} onActive={setActive} />
             ))}
+            {/* The stack sits above the viewport centre, so on tall screens the next
+                section would peek in under the last layer without this */}
+            <div aria-hidden="true" className="hidden md:block md:h-[30vh]" />
           </div>
           <div className="hidden md:block">
             <div className="sticky top-[20vh]">
