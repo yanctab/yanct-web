@@ -201,6 +201,8 @@ const Journey = () => {
 
         <div className="mt-8 grid gap-12 md:grid-cols-2">
           <div>
+            {/* Keeps Layer 0 below the fold so the section opens on just the title and stack */}
+            <div aria-hidden="true" className="hidden md:block md:h-[60vh]" />
             {LAYERS.map((layer, i) => (
               <Step key={layer.id} layer={layer} index={i} next={LAYERS[i + 1]} onActive={setActive} />
             ))}
