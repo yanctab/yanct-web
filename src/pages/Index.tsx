@@ -20,7 +20,7 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-term-bg">
       <BootHero bootKey={bootKey} />
-      <Journey />
+      <Journey onReboot={reboot} />
       <HowIWork />
       <Toolbox />
       <Testimonials />
