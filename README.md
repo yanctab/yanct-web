@@ -1,74 +1,89 @@
-# Welcome to your Lovable project
+# yanct-web
 
-## Project info
+The one-page website for [Yanct](https://yanct.com), embedded Linux consulting:
+Yocto, BSPs, CI and helping teams move from bare metal to Linux.
 
-Generated using https://lovable.dev/
+The page is styled like a terminal on a booting device: a boot-log hero, a
+product stack you build layer by layer from `while(1)` to Linux, `lsmod`-style
+skills, `dmesg` testimonials and a kernel-panic 404.
 
-## How can I edit this code?
+## Development
 
-There are several ways of editing your application.
+Requires Node.js 18 or newer.
 
-**Use Lovable**
+```bash
+npm install
+npm run dev        # http://localhost:8080
+npm run build      # production build in dist/
+npm run preview    # serve the production build on http://localhost:4173
+```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9b6768fe-b7a2-4f7b-b83d-e5ebaf387dbf) and start prompting.
+All content is hardcoded in the components, so editing the site means editing
+these files:
 
-Changes made via Lovable will be committed automatically to this repo.
+| File | Section |
+|---|---|
+| `src/components/BootHero.tsx` | Boot log and hero |
+| `src/components/Journey.tsx` | "From while(1) to Linux" layers and product stack |
+| `src/components/HowIWork.tsx` | How we'd work together |
+| `src/components/Toolbox.tsx` | Loaded modules (skills) |
+| `src/components/Testimonials.tsx` | What the logs say |
+| `src/components/Team.tsx` | Meet the entire team |
+| `src/components/Contact.tsx` | Contact |
+| `src/pages/NotFound.tsx` | Kernel-panic 404 page |
 
-**Manually Edit**
+Colours and fonts live in `tailwind.config.ts` and `src/index.css`.
 
-Edit the code yourself or use chatgpt or any AI to make modification. Each section is defined in src/components and
-can easily be paset in an AI chat where you can request changed to the code. Past it and build it.
+## Deployment
 
-## Build ##
+The site is static: nginx serves the contents of `dist/` from
+`/var/www/$(DOMAIN)`. The Makefile defaults to `DOMAIN=localhost`, so pass your
+real domain to every target:
 
-The default variables are used
+```bash
+make help    # list all targets
+```
 
-DOMAIN = yanct.com
-EMAIL = contact @ yanct.com
-WEBROOT = /var/www/$(DOMAIN)
+### First-time server setup (Ubuntu)
 
-Update them before building if you want a different domain for your web-page
+On the server, from a clone of this repo:
 
-<pre>
-make all
-</pre>
+```bash
+make setup                                      # nginx, certbot, make
+make obtain-ssl DOMAIN=yanct.com EMAIL=info@yanct.com
+make build
+make configure-nginx DOMAIN=yanct.com           # copy dist/ and write the nginx config
+```
 
-Open http://localhost/ and view the page. Make all will do the following
+`make setup` installs Node.js from apt, which is too old on many Ubuntu
+releases. Install a current version with [nvm](https://github.com/nvm-sh/nvm)
+(`nvm install --lts`) if `node -v` shows anything below 18.
 
- - setup - install all tools e.g npm nginx certbot python3-certbot-nginx
- - build - install and setup everything needed to deploy the one-pager
- - configure - configure nginx and restart
+`configure-nginx` writes both the HTTP and HTTPS server blocks, so the SSL
+certificate has to exist before running it. Re-run it after changing
+`configure-nginx.sh`.
 
-This has been tested on Ubuntu 24.04. To deploy in production generate
-the cert by running
+To renew the certificate:
 
-<pre>
-make obtain-ssl
-</pre>
+```bash
+make renew-ssl DOMAIN=yanct.com
+```
 
-To renew the ssl run
+### Updating the site
 
-<pre>
-make renew-ssl
-</pre>
+Either build locally and copy `dist/` to the server over SSH:
 
-For more information even though I think I have covered it all already run
+```bash
+make publish HOST=root@yanct.com DOMAIN=yanct.com
+```
 
-<pre>
-make help
-</pre>
+or, on the server itself:
 
-## What technologies are used for this project?
+```bash
+git pull && make build && sudo rsync -a --delete dist/ /var/www/yanct.com/
+```
 
-This project is built with:
+## Tech
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-- npm
-- ngnxi
-- certbot
-- ubuntu
-
+Vite, React, TypeScript, Tailwind CSS and Framer Motion, served by nginx with
+Let's Encrypt certificates via certbot.

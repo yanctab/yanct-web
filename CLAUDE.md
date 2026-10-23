@@ -5,59 +5,62 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Build Commands
 
 ```bash
-npm install          # Install dependencies
+npm install          # Install dependencies (needs Node.js 18+)
 npm run dev          # Dev server on http://localhost:8080
 npm run build        # Production build to dist/
-npm run preview      # Preview production build
-npm run lint         # Run ESLint
+npm run preview      # Preview production build on http://localhost:4173
+npm run lint         # ESLint (currently crashes: ESLint 9.39 vs installed typescript-eslint)
 ```
 
-**Makefile targets** (for deployment):
+Type-check with `npx tsc --noEmit -p tsconfig.app.json`, since lint is broken.
+
+**Makefile targets** (deployment; always pass `DOMAIN=`, it defaults to `localhost`):
 ```bash
-make build           # npm install + npm run build
-make preview         # Build and serve preview
-make deploy          # Full deployment: setup + build + configure nginx
-make obtain-ssl      # Get SSL cert via certbot
+make build                                   # npm install + npm run build
+make publish HOST=root@yanct.com DOMAIN=yanct.com   # build locally, rsync dist/ to the server
+make configure-nginx DOMAIN=yanct.com        # on the server: copy dist/, write nginx config
+make obtain-ssl / renew-ssl DOMAIN=...       # certbot
 ```
+
+`configure-nginx.sh` serves `index.html` for unknown paths with a 404 status, so the app renders its kernel-panic page.
 
 ## Architecture Overview
 
-This is a **single-page portfolio website** built with React + Vite + shadcn/ui. Navigation is scroll-based, not route-based.
+A **single-page portfolio site** for an embedded Linux consultant, built with React + Vite + Tailwind + Framer Motion. It's themed as a terminal on a booting device. Navigation is scroll-based; the only routes are `/` and a catch-all 404.
 
 ### Key Files
 
-- `src/App.tsx` - Root component with React Query provider and minimal routing (/ and 404 only)
-- `src/pages/Index.tsx` - Main page that composes all portfolio sections
-- `src/components/` - Business components (Hero, About, Expertise, Services, Testimonials, Connect, Footer)
-- `src/components/ui/` - shadcn/ui component library (40+ components)
-- `src/hooks/use-mobile.tsx` - Responsive breakpoint hook (768px threshold)
+- `src/pages/Index.tsx` - Composes all sections; owns `bootKey` and the `reboot()` action (instant jump to top, then replay the boot)
+- `src/pages/NotFound.tsx` - Kernel-panic 404
+- `src/components/BootHero.tsx` - Boot log that types out, then the hero. Plays once per session (`sessionStorage`), skippable by any key/tap, always replays when `bootKey` changes
+- `src/components/Journey.tsx` - "From while(1) to Linux": six layer steps plus a sticky, clickable product stack (see below)
+- `src/components/HowIWork.tsx`, `Toolbox.tsx`, `Testimonials.tsx`, `Team.tsx`, `Contact.tsx`, `Footer.tsx` - The remaining sections, styled as `systemctl`, `lsmod`, `dmesg`, `ps` and a login prompt
+- `src/components/RebootButton.tsx` - `$ sudo reboot`, shared by the footer and the product stack
 
-### Navigation Pattern
+### Journey / product stack
 
-Uses scroll-based navigation with element IDs as anchors:
-```tsx
-document.getElementById('services').scrollIntoView({ behavior: 'smooth' })
-```
+The trickiest part of the page; check these behaviours after changing it:
 
-The `VerticalLine` component creates visual connectors between sections, calculating positions dynamically via `getBoundingClientRect()`.
+- `LAYERS` is ordered bottom-up; the stack renders it with `flex-col-reverse`.
+- `active` is the index of the layer in the middle band of the viewport (`ACTIVE_BAND`, via `useInView`), or `-1` for "nothing built yet". It resets to `-1` whenever Layer 0 is below that band, so the stack starts over at the top of the page.
+- Clicking a stack layer or a step's `$ cd ../<next>` button calls `scrollToLayer`. That lines the step's centre up with the stack's *stuck* centre (sticky `top` + half its height), not the viewport centre. On mobile the stack is hidden and it just centres the step.
+- Each step is `min-h-screen` so neighbouring layers stay off-screen after a jump. Desktop-only spacers above Layer 0 (`60vh`) and after the last layer (`30vh`) keep the intro and the next section out of view.
+- A blinking `█` cursor (`layoutId` so it glides) marks the next layer, wrapping back to Bare metal once all are built.
 
 ### Styling
 
-- Tailwind CSS with custom brand colors defined in `tailwind.config.ts`
-- Primary brand color: `#30586D` (brand-blue)
-- Custom fonts: `font-typewriter` (Courier New), `font-signature` (Dancing Script)
-- Dark mode support via class strategy
+- Tailwind config is minimal: `term.*` palette (`bg`, `panel`, `line`, `text`, `dim`, `green`, `amber`, `red`, `cyan`) plus `brand-blue` (`#30586D`)
+- Fonts: `font-mono` (JetBrains Mono, the default body font) and `font-display` (Space Grotesk), loaded from Google Fonts in `src/index.css`
+- Shared component classes in `src/index.css`: `term-window`, `term-window-bar`, `section-prompt`, `section-title`, `scanlines`
+- Dark-only design; `prefers-reduced-motion` disables CSS animations and the boot log
 
 ### Path Aliases
 
 `@/` maps to `src/` (configured in vite.config.ts and tsconfig.json)
 
-```tsx
-import { Button } from "@/components/ui/button"
-```
-
 ## Conventions
 
-- All content is hardcoded in components (no API calls despite React Query being available)
-- Mobile-first responsive design using Tailwind breakpoints and `useIsMobile()` hook
-- Components are self-contained with minimal prop drilling
+- All content is hardcoded in components as small arrays/constants at the top of each file
+- Mobile-first responsive design using Tailwind breakpoints (`md:` = 768px)
+- Components are self-contained; the only cross-section wiring is `onReboot` from `Index.tsx`
+- `src/hooks/use-mobile.tsx` and `src/lib/utils.ts` are currently unused leftovers
