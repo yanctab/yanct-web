@@ -62,6 +62,12 @@ const LAYERS: Layer[] = [
   },
 ];
 
+const layerElementId = (id: string) => `layer-${id}`;
+
+// Centre the step so its in-view band marks it active
+const scrollToLayer = (id: string) =>
+  document.getElementById(layerElementId(id))?.scrollIntoView({ behavior: "smooth", block: "center" });
+
 const StackDiagram = ({ active }: { active: number }) => (
   <div className="term-window w-full">
     <div className="term-window-bar">
@@ -75,18 +81,23 @@ const StackDiagram = ({ active }: { active: number }) => (
       {LAYERS.map((layer, i) => {
         const built = i <= active;
         return (
-          <motion.div
+          <motion.button
             key={layer.id}
+            type="button"
+            onClick={() => scrollToLayer(layer.id)}
+            aria-label={`Jump to layer ${i}: ${layer.name}`}
+            aria-current={i === active ? "step" : undefined}
+            whileHover={{ opacity: 1, x: -4 }}
             animate={{
               opacity: built ? 1 : 0.15,
               scale: i === active ? 1.03 : 1,
             }}
             transition={{ duration: 0.4 }}
-            className={`flex items-center justify-between rounded-md px-4 py-3 text-sm font-semibold text-term-bg ${layer.color}`}
+            className={`flex w-full cursor-pointer items-center justify-between rounded-md px-4 py-3 text-left text-sm font-semibold text-term-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${layer.color}`}
           >
             <span>{layer.name}</span>
             <span className="text-xs opacity-70">{built ? "[ OK ]" : "[ .. ]"}</span>
-          </motion.div>
+          </motion.button>
         );
       })}
     </div>
@@ -97,6 +108,7 @@ const StackDiagram = ({ active }: { active: number }) => (
         <span>
           building layer {active + 1}/{LAYERS.length}
           <span className="animate-blink">_</span>
+          <span className="ml-3 opacity-70">(click a layer to jump)</span>
         </span>
       )}
     </div>
@@ -120,7 +132,7 @@ const Step = ({
   }, [inView, index, onActive]);
 
   return (
-    <div ref={ref} className="flex min-h-[60vh] flex-col justify-center py-8 md:min-h-[70vh]">
+    <div ref={ref} id={layerElementId(layer.id)} className="flex min-h-[60vh] flex-col justify-center py-8 md:min-h-[70vh]">
       <p className="text-xs uppercase tracking-widest text-term-dim">
         Layer {index}
         <span className={`ml-3 inline-block h-2 w-8 rounded-full align-middle md:hidden ${layer.color}`} />
