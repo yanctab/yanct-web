@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Space+Grotesk:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,41 +7,56 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Keep anchored sections clear of the fixed header */
+    scroll-padding-top: 5rem;
   }
   body {
-    @apply bg-term-bg text-term-text font-mono antialiased;
+    @apply bg-white font-sans text-ink antialiased;
   }
   ::selection {
-    @apply bg-term-green text-term-bg;
+    @apply bg-brand text-white;
   }
 }
 
 @layer components {
-  /* Faint CRT scanlines layered over dark sections */
-  .scanlines {
-    background-image: repeating-linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.025) 0px,
-      rgba(255, 255, 255, 0.025) 1px,
-      transparent 1px,
-      transparent 3px
-    );
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 md:px-8;
   }
 
-  .term-window {
-    @apply rounded-xl border border-term-line bg-term-panel shadow-[0_20px_60px_rgba(0,0,0,0.5)];
+  .section {
+    @apply py-20 md:py-28;
   }
 
-  .term-window-bar {
-    @apply flex items-center gap-2 border-b border-term-line px-4 py-2 text-xs text-term-dim;
-  }
-
-  .section-prompt {
-    @apply mb-3 text-sm text-term-green;
+  .eyebrow {
+    @apply mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-brand;
   }
 
   .section-title {
-    @apply font-display text-3xl font-bold text-white md:text-5xl;
+    @apply font-display text-3xl font-bold tracking-tight text-ink md:text-[2.75rem] md:leading-[1.15];
+  }
+
+  .section-lead {
+    @apply mt-5 max-w-2xl text-lg leading-relaxed text-ink-600;
+  }
+
+  .card {
+    @apply rounded-2xl border border-surface-line bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_18px_40px_-20px_rgba(13,27,42,0.25)];
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+
+  /* Faint circuit-board grid behind the dark bands */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 48px 48px;
   }
 }
 
@@ -54,5 +69,6 @@
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

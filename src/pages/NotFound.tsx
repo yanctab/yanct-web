@@ -1,30 +1,23 @@
-import { useLocation } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+import Logo from "@/components/Logo";
 
-const NotFound = () => {
-  const location = useLocation();
-
-  return (
-    <main className="scanlines flex min-h-screen items-center px-4 py-16 md:px-8">
-      <pre className="mx-auto w-full max-w-3xl whitespace-pre-wrap break-words text-xs leading-relaxed text-term-text md:text-sm">
-        <span className="text-term-red">
-          Kernel panic - not syncing: VFS: Unable to mount page "{location.pathname}"
-        </span>
-        {`
-CPU: 0 PID: 404 Comm: browser Not tainted 6.12.0-yanct
-Call trace:
- dump_backtrace+0x0/0x1e0
- show_stack+0x18/0x24
- page_not_found+0x404/0x404
- you_took_a_wrong_turn+0x42/0x42
----[ end Kernel panic ]---
-
-`}
-        <a href="/" className="text-term-green underline underline-offset-4 hover:brightness-125">
-          $ reboot  # take me home
-        </a>
-      </pre>
-    </main>
-  );
-};
+const NotFound = () => (
+  <main className="relative flex min-h-screen items-center overflow-hidden bg-ink px-4 text-white md:px-8">
+    <div className="grid-bg absolute inset-0" aria-hidden />
+    <div className="relative mx-auto w-full max-w-xl text-center">
+      <a href="/" aria-label="Mikro.io home" className="inline-block">
+        <Logo dark />
+      </a>
+      <p className="mt-12 font-display text-7xl font-extrabold text-brand-400">404</p>
+      <h1 className="mt-4 font-display text-2xl font-bold md:text-3xl">Page not found</h1>
+      <p className="mt-3 text-ink-400">
+        The page you are looking for has moved or no longer exists.
+      </p>
+      <a href="/" className="btn-primary mt-10">
+        <ArrowLeft className="h-4 w-4" /> Back to the home page
+      </a>
+    </div>
+  </main>
+);
 
 export default NotFound;

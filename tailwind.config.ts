@@ -5,36 +5,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Terminal-at-night palette, anchored on the original brand blue
-        term: {
-          bg: "#0a0f14",
-          panel: "#111a22",
-          line: "#1f2d38",
-          text: "#d3dee5",
-          dim: "#7d8f9b",
-          green: "#6ee7a0",
-          amber: "#ffbf5e",
-          red: "#ff6b6b",
-          cyan: "#7cc7e8",
+        // Deep navy for text and dark bands, anchored on the Mikro.io teal
+        ink: {
+          DEFAULT: "#0d1b2a",
+          800: "#13263a",
+          700: "#1e3550",
+          600: "#3a4f66",
+          500: "#5b6f84",
+          400: "#8798aa",
         },
-        "brand-blue": {
-          DEFAULT: "#30586D",
-          300: "#6696ab",
-          400: "#477087",
+        surface: {
+          DEFAULT: "#f5f7fa",
+          line: "#e3e8ee",
+        },
+        brand: {
+          DEFAULT: "#0184a9",
+          600: "#016c8b",
+          400: "#2ba3c6",
+          100: "#e1f2f7",
         },
       },
       fontFamily: {
-        mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
-        display: ['"Space Grotesk"', "system-ui", "sans-serif"],
-      },
-      keyframes: {
-        blink: {
-          "0%, 49%": { opacity: "1" },
-          "50%, 100%": { opacity: "0" },
-        },
-      },
-      animation: {
-        blink: "blink 1s steps(1) infinite",
+        sans: ['"Inter"', "system-ui", "sans-serif"],
+        display: ['"Manrope"', '"Inter"', "system-ui", "sans-serif"],
       },
     },
   },

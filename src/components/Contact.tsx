@@ -1,59 +1,70 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import Reveal from "@/components/Reveal";
+import { COMPANY } from "@/company";
 
-const LINKS = [
-  { href: "mailto:info@yanct.com", label: "info@yanct.com", icon: Mail },
+const DETAILS = [
+  { icon: Phone, label: "Phone", value: COMPANY.phone, href: COMPANY.phoneHref },
+  { icon: Mail, label: "Email", value: COMPANY.email, href: `mailto:${COMPANY.email}` },
   {
-    href: "https://www.linkedin.com/in/måns-zigher-a4656954",
-    label: "LinkedIn",
-    icon: Linkedin,
+    icon: MapPin,
+    label: "Office",
+    value: `${COMPANY.street}, ${COMPANY.city}`,
+    href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      `${COMPANY.name}, ${COMPANY.street}, ${COMPANY.city}`,
+    )}`,
   },
-  { href: "https://github.com/yanctab", label: "github.com/yanctab", icon: Github },
+  { icon: Linkedin, label: "LinkedIn", value: "Follow us", href: COMPANY.linkedin },
 ];
 
 const Contact = () => (
-  <section id="contact" className="scanlines border-t border-term-line px-4 py-24 md:px-8">
-    <div className="mx-auto max-w-4xl">
-      <div className="term-window p-6 md:p-10">
-        <p className="text-sm text-term-dim">
-          yanct login: <span className="text-term-green">you</span>
-          <br />
-          Password: ********
-          <br />
-          Welcome! You have 1 new opportunity.
-        </p>
+  <section id="contact" className="relative overflow-hidden bg-ink py-20 text-white md:py-28">
+    <div className="grid-bg absolute inset-0" aria-hidden />
+    <div
+      className="absolute -bottom-48 -left-40 h-[32rem] w-[32rem] rounded-full bg-brand/20 blur-[120px]"
+      aria-hidden
+    />
 
-        <h2 className="section-title mt-8">
-          Planning the jump to Linux?
-          <br />
-          <span className="text-term-green">Let's talk before you write the first recipe.</span>
+    <div className="container-page relative grid gap-14 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+      <Reveal>
+        <p className="eyebrow text-brand-400">Contact</p>
+        <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl md:leading-[1.1]">
+          Need consulting or a project estimate?
         </h2>
-        <p className="mt-6 max-w-2xl leading-relaxed text-term-text">
-          A first chat is free and comes with no sales pitch. Tell me where you are and what
-          you're building, and I'll tell you honestly whether and how I can help.
+        <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-400">
+          Tell us about your product and where you are today. We will get back to you with how
+          we can help, whether it is one part of the design or the complete system.
         </p>
-
-        <a
-          href="mailto:info@yanct.com"
-          className="mt-10 inline-flex items-center gap-3 rounded-lg bg-term-green px-6 py-4 font-semibold text-term-bg transition hover:brightness-110"
-        >
-          <Mail className="h-5 w-5" /> Send me an email
+        <a href={`mailto:${COMPANY.email}`} className="btn-primary mt-10 px-7 py-3.5 text-base">
+          Email {COMPANY.email} <ArrowRight className="h-4 w-4" />
         </a>
+      </Reveal>
 
-        <ul className="mt-10 flex flex-col gap-4 border-t border-term-line pt-8 text-sm sm:flex-row sm:gap-8">
-          {LINKS.map(({ href, label, icon: Icon }) => (
-            <li key={href}>
+      <Reveal delay={0.1}>
+        <ul className="divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-ink-800/80">
+          {DETAILS.map(({ icon: Icon, label, value, href }) => (
+            <li key={label}>
               <a
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 text-term-text transition hover:text-term-green"
+                className="group flex items-center gap-4 p-5 transition hover:bg-white/5"
               >
-                <Icon className="h-4 w-4" /> {label}
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10 text-brand-400">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-xs uppercase tracking-wider text-ink-400">
+                    {label}
+                  </span>
+                  <span className="block truncate font-medium text-white group-hover:text-brand-400">
+                    {value}
+                  </span>
+                </span>
               </a>
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
     </div>
   </section>
 );

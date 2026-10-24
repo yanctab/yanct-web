@@ -17,45 +17,40 @@ Type-check with `npx tsc --noEmit -p tsconfig.app.json`, since lint is broken.
 **Makefile targets** (deployment; always pass `DOMAIN=`, it defaults to `localhost`):
 ```bash
 make build                                   # npm install + npm run build
-make publish HOST=root@yanct.com DOMAIN=yanct.com   # build locally, rsync dist/ to the server
-make configure-nginx DOMAIN=yanct.com        # on the server: copy dist/, write nginx config
+make publish HOST=root@mikro.io DOMAIN=mikro.io     # build locally, rsync dist/ to the server
+make configure-nginx DOMAIN=mikro.io         # on the server: copy dist/, write nginx config
 make obtain-ssl / renew-ssl DOMAIN=...       # certbot
 ```
 
-`configure-nginx.sh` serves `index.html` for unknown paths with a 404 status, so the app renders its kernel-panic page.
+`configure-nginx.sh` serves `index.html` for unknown paths with a 404 status, so the app renders its 404 page.
 
 ## Architecture Overview
 
-A **single-page portfolio site** for an embedded Linux consultant, built with React + Vite + Tailwind + Framer Motion. It's themed as a terminal on a booting device. Navigation is scroll-based; the only routes are `/` and a catch-all 404.
+This `mikro` branch holds a **single-page company site for Mikro.io AB** (embedded design since 1980, formerly Mikrodidakt AB), built with React + Vite + Tailwind + Framer Motion. Content comes from the old WordPress site at https://mikro.io/. Navigation is anchor-based (`#services`, `#expertise`, `#cases`, `#about`, `#contact`); the only routes are `/` and a catch-all 404.
 
 ### Key Files
 
-- `src/pages/Index.tsx` - Composes all sections; owns `bootKey` and the `reboot()` action (instant jump to top, then replay the boot)
-- `src/pages/NotFound.tsx` - Kernel-panic 404
-- `src/components/BootHero.tsx` - Boot log that types out, then the hero. Plays once per session (`sessionStorage`), skippable by any key/tap, always replays when `bootKey` changes
-- `src/components/Journey.tsx` - "From while(1) to Linux": six layer steps plus a sticky, clickable product stack (see below)
-- `src/components/HowIWork.tsx`, `Toolbox.tsx`, `Testimonials.tsx`, `Team.tsx`, `Contact.tsx`, `Footer.tsx` - The remaining sections, styled as `systemctl`, `lsmod`, `dmesg`, `ps` and a login prompt
-- `src/components/RebootButton.tsx` - `$ sudo reboot`, shared by the footer and the product stack
+- `src/company.ts` - Contact details (`COMPANY`) and nav links (`NAV`), shared by header, hero, contact and footer
+- `src/pages/Index.tsx` - Composes the sections in page order
+- `src/pages/NotFound.tsx` - 404 page
+- `src/components/Header.tsx` - Fixed header: transparent over the dark hero, solid white once scrolled or when the mobile menu is open
+- `src/components/Hero.tsx`, `Clients.tsx`, `Services.tsx`, `Expertise.tsx`, `Process.tsx`, `Cases.tsx`, `About.tsx`, `Contact.tsx`, `Footer.tsx` - The sections
+- `src/components/Reveal.tsx` - Fade-up-on-scroll wrapper used by most sections
+- `src/components/Logo.tsx` - Owl mark (`public/mikro-owl.png`) plus a typeset wordmark, with a `dark` variant
 
-### Journey / product stack
+### Assets
 
-The trickiest part of the page; check these behaviours after changing it:
-
-- `LAYERS` is ordered bottom-up; the stack renders it with `flex-col-reverse`.
-- `active` is the index of the layer in the middle band of the viewport (`ACTIVE_BAND`, via `useInView`), or `-1` for "nothing built yet". Reaching the start view (section top at the top of the screen) forces at least `0`, since on short phones Layer 0 is still below the band there. Above the start view, with Layer 0 below the band, it resets to `-1` so the stack starts over at the top of the page.
-- The section opens on its "start view" (what `#journey` lands on): the heading with Layer 0 (Bare metal) top-aligned beneath it, level with the stack, so Bare metal is selected and the cursor sits on Bootloader.
-- Clicking a stack layer or a step's `$ cd ../<next>` button calls `scrollToLayer`. Bare metal scrolls back to the start view. Other layers line the step's centre up with the stack's *stuck* centre (sticky `top` + half its height), not the viewport centre. On mobile it centres the step in the space below the pinned `MobileStack` bar.
-- Each step is `min-h-screen` so neighbouring layers stay off-screen after a jump; Layer 0 is top-aligned, the rest are centred. A desktop-only `30vh` spacer after the last layer keeps the next section out of view on tall screens.
-- The stack's sticky `top` is `min(30vh, 17rem)`. It must not exceed where the layer/stack row rests in the start view (~17rem down, set by the section's `md:pt-12` and the grid's `md:mt-20`), or the stack would sit lower than Bare metal there. Change those together.
-- A blinking `█` cursor (`layoutId` so it glides) marks the next layer (`nextLayer`), wrapping back to Bare metal once all are built.
-- Desktop (`md:` and up) shows `StackDiagram` in a sticky right column. Phones get `MobileStack` instead: a row of short-labelled chips (`Layer.short`) pinned to the top of the steps column. Both are always mounted, so the two cursors need different `layoutId`s, and DOM queries for `[aria-current=step]` can hit either one.
+- `public/clients/*.png` - Client logos from mikro.io, with the grey card background made transparent and cropped
+- `public/office.jpg` - Office photo used in About
+- `public/mikro-logo.png` - The original white logo (currently unused)
 
 ### Styling
 
-- Tailwind config is minimal: `term.*` palette (`bg`, `panel`, `line`, `text`, `dim`, `green`, `amber`, `red`, `cyan`) plus `brand-blue` (`#30586D`)
-- Fonts: `font-mono` (JetBrains Mono, the default body font) and `font-display` (Space Grotesk), loaded from Google Fonts in `src/index.css`
-- Shared component classes in `src/index.css`: `term-window`, `term-window-bar`, `section-prompt`, `section-title`, `scanlines`
-- Dark-only design; `prefers-reduced-motion` disables CSS animations and the boot log
+- Light, corporate theme with dark navy bands (hero, BSP panel, contact, footer)
+- Tailwind palette: `ink.*` (navy text and dark bands), `surface` / `surface-line` (light grey sections, borders), `brand.*` (Mikro.io teal `#0184a9`)
+- Fonts: `font-sans` (Inter, body) and `font-display` (Manrope, headings), loaded from Google Fonts in `src/index.css`
+- Shared component classes in `src/index.css`: `container-page`, `section`, `eyebrow`, `section-title`, `section-lead`, `card`, `btn-primary`, `btn-ghost`, `grid-bg`
+- `prefers-reduced-motion` disables CSS animations and transitions
 
 ### Path Aliases
 
@@ -65,4 +60,4 @@ The trickiest part of the page; check these behaviours after changing it:
 
 - All content is hardcoded in components as small arrays/constants at the top of each file
 - Mobile-first responsive design using Tailwind breakpoints (`md:` = 768px)
-- Components are self-contained; the only cross-section wiring is `onReboot` from `Index.tsx`
+- Components are self-contained; shared contact details live in `src/company.ts`
