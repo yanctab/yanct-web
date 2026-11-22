@@ -5,36 +5,41 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Terminal-at-night palette, anchored on the original brand blue
-        term: {
-          bg: "#0a0f14",
-          panel: "#111a22",
-          line: "#1f2d38",
-          text: "#d3dee5",
-          dim: "#7d8f9b",
-          green: "#6ee7a0",
-          amber: "#ffbf5e",
-          red: "#ff6b6b",
-          cyan: "#7cc7e8",
+        // Wine red from the BK50 club mark, plus a basketball orange accent
+        wine: {
+          50: "#fbf1f3",
+          100: "#f5dde2",
+          300: "#d98a99",
+          500: "#9b2d40",
+          600: "#862638",
+          700: "#6e1e2d",
+          800: "#4f1520",
+          900: "#2e0c13",
         },
-        "brand-blue": {
-          DEFAULT: "#30586D",
-          300: "#6696ab",
-          400: "#477087",
+        ball: {
+          DEFAULT: "#f2882b",
+          600: "#d9701a",
         },
+        cream: "#f8f3ec",
+        ink: "#1c1215",
       },
       fontFamily: {
-        mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
-        display: ['"Space Grotesk"', "system-ui", "sans-serif"],
+        sans: ['"Inter"', "system-ui", "sans-serif"],
+        display: ['"Bricolage Grotesque"', "system-ui", "sans-serif"],
       },
       keyframes: {
-        blink: {
-          "0%, 49%": { opacity: "1" },
-          "50%, 100%": { opacity: "0" },
+        bounceBall: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-14px)" },
+        },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
         },
       },
       animation: {
-        blink: "blink 1s steps(1) infinite",
+        "bounce-ball": "bounceBall 2.4s ease-in-out infinite",
+        marquee: "marquee 40s linear infinite",
       },
     },
   },

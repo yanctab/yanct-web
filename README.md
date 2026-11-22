@@ -1,11 +1,9 @@
-# yanct-web
+# BK50 web
 
-The one-page website for [Yanct](https://yanct.com), embedded Linux consulting:
-Yocto, BSPs, CI and helping teams move from bare metal to Linux.
-
-The page is styled like a terminal on a booting device: a boot-log hero, a
-product stack you build layer by layer from `while(1)` to Linux, `lsmod`-style
-skills, `dmesg` testimonials and a kernel-panic 404.
+A one-page site for [BK50, Basketklubben Lund 1950](https://www.bk50.se/), aimed at
+new players: what the club offers, how to get started, every team with a link to
+its page on the club's svenskalag.se site, a link to the sign-up form, the club's
+history and its Instagram.
 
 ## Development
 
@@ -23,14 +21,15 @@ these files:
 
 | File | Section |
 |---|---|
-| `src/components/BootHero.tsx` | Boot log and hero |
-| `src/components/Journey.tsx` | "From while(1) to Linux" layers and product stack |
-| `src/components/HowIWork.tsx` | How we'd work together |
-| `src/components/Toolbox.tsx` | Loaded modules (skills) |
-| `src/components/Testimonials.tsx` | What the logs say |
-| `src/components/Team.tsx` | Meet the entire team |
-| `src/components/Contact.tsx` | Contact |
-| `src/pages/NotFound.tsx` | Kernel-panic 404 page |
+| `src/links.ts` | Sign-up form, Instagram, Facebook, e-mail and other shared links |
+| `src/components/Hero.tsx` | Top of the page |
+| `src/components/Offer.tsx` | "Därför BK50": key numbers and what we offer |
+| `src/components/GetStarted.tsx` | "Kom igång" in three steps |
+| `src/components/Teams.tsx` | All teams, their links, and the birth-year finder |
+| `src/components/History.tsx` | Timeline since 1950 |
+| `src/components/Instagram.tsx` | Instagram grid (`PHOTOS` takes images from `public/instagram/`) |
+| `src/components/Footer.tsx` | Contact, halls and more links |
+| `src/pages/NotFound.tsx` | "Airball!" 404 page |
 
 Colours and fonts live in `tailwind.config.ts` and `src/index.css`.
 

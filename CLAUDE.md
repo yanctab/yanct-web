@@ -22,40 +22,29 @@ make configure-nginx DOMAIN=yanct.com        # on the server: copy dist/, write 
 make obtain-ssl / renew-ssl DOMAIN=...       # certbot
 ```
 
-`configure-nginx.sh` serves `index.html` for unknown paths with a 404 status, so the app renders its kernel-panic page.
+`configure-nginx.sh` serves `index.html` for unknown paths with a 404 status, so the app renders its 404 page.
 
 ## Architecture Overview
 
-A **single-page portfolio site** for an embedded Linux consultant, built with React + Vite + Tailwind + Framer Motion. It's themed as a terminal on a booting device. Navigation is scroll-based; the only routes are `/` and a catch-all 404.
+A **Swedish one-page site** for the basketball club BK50 (Basketklubben Lund 1950), built with React + Vite + Tailwind + Framer Motion. It pitches the club to new players and links out to the club's svenskalag.se pages (www.bk50.se) for teams and sign-up. Navigation is anchor-based; the only routes are `/` and a catch-all 404.
 
 ### Key Files
 
-- `src/pages/Index.tsx` - Composes all sections; owns `bootKey` and the `reboot()` action (instant jump to top, then replay the boot)
-- `src/pages/NotFound.tsx` - Kernel-panic 404
-- `src/components/BootHero.tsx` - Boot log that types out, then the hero. Plays once per session (`sessionStorage`), skippable by any key/tap, always replays when `bootKey` changes
-- `src/components/Journey.tsx` - "From while(1) to Linux": six layer steps plus a sticky, clickable product stack (see below)
-- `src/components/HowIWork.tsx`, `Toolbox.tsx`, `Testimonials.tsx`, `Team.tsx`, `Contact.tsx`, `Footer.tsx` - The remaining sections, styled as `systemctl`, `lsmod`, `dmesg`, `ps` and a login prompt
-- `src/components/RebootButton.tsx` - `$ sudo reboot`, shared by the footer and the product stack
+- `src/links.ts` - Shared external links (sign-up form, Instagram, Facebook, fees, e-mail)
+- `src/pages/Index.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `History`, `Instagram`, `Footer`
+- `src/components/Teams.tsx` - `TEAMS` (name, svenskalag URL, group, birth years) grouped by `GROUPS`; a birth-year `<select>` dims teams that don't match
+- `src/components/Instagram.tsx` - Instagram can't be scraped, so `PHOTOS` is filled by hand from `public/instagram/`; empty shows placeholder tiles
+- `src/components/Reveal.tsx` - Fade-in-on-scroll wrapper, respects reduced motion
+- `src/pages/NotFound.tsx` - "Airball!" 404
 
-### Journey / product stack
-
-The trickiest part of the page; check these behaviours after changing it:
-
-- `LAYERS` is ordered bottom-up; the stack renders it with `flex-col-reverse`.
-- `active` is the index of the layer in the middle band of the viewport (`ACTIVE_BAND`, via `useInView`), or `-1` for "nothing built yet". Reaching the start view (section top at the top of the screen) forces at least `0`, since on short phones Layer 0 is still below the band there. Above the start view, with Layer 0 below the band, it resets to `-1` so the stack starts over at the top of the page.
-- The section opens on its "start view" (what `#journey` lands on): the heading with Layer 0 (Bare metal) top-aligned beneath it, level with the stack, so Bare metal is selected and the cursor sits on Bootloader.
-- Clicking a stack layer or a step's `$ cd ../<next>` button calls `scrollToLayer`. Bare metal scrolls back to the start view. Other layers line the step's centre up with the stack's *stuck* centre (sticky `top` + half its height), not the viewport centre. On mobile it centres the step in the space below the pinned `MobileStack` bar.
-- Each step is `min-h-screen` so neighbouring layers stay off-screen after a jump; Layer 0 is top-aligned, the rest are centred. A desktop-only `30vh` spacer after the last layer keeps the next section out of view on tall screens.
-- The stack's sticky `top` is `min(30vh, 17rem)`. It must not exceed where the layer/stack row rests in the start view (~17rem down, set by the section's `md:pt-12` and the grid's `md:mt-20`), or the stack would sit lower than Bare metal there. Change those together.
-- A blinking `█` cursor (`layoutId` so it glides) marks the next layer (`nextLayer`), wrapping back to Bare metal once all are built.
-- Desktop (`md:` and up) shows `StackDiagram` in a sticky right column. Phones get `MobileStack` instead: a row of short-labelled chips (`Layer.short`) pinned to the top of the steps column. Both are always mounted, so the two cursors need different `layoutId`s, and DOM queries for `[aria-current=step]` can hit either one.
+Facts (team names, birth years, fees, halls, history) come from www.bk50.se; check there before changing them.
 
 ### Styling
 
-- Tailwind config is minimal: `term.*` palette (`bg`, `panel`, `line`, `text`, `dim`, `green`, `amber`, `red`, `cyan`) plus `brand-blue` (`#30586D`)
-- Fonts: `font-mono` (JetBrains Mono, the default body font) and `font-display` (Space Grotesk), loaded from Google Fonts in `src/index.css`
-- Shared component classes in `src/index.css`: `term-window`, `term-window-bar`, `section-prompt`, `section-title`, `scanlines`
-- Dark-only design; `prefers-reduced-motion` disables CSS animations and the boot log
+- Tailwind palette: `wine.*` (club red `#9b2d40` from the logo), `ball` (orange accent), `cream`, `ink`
+- Fonts: `font-sans` (Inter) and `font-display` (Bricolage Grotesque), loaded from Google Fonts in `src/index.css`
+- Shared component classes in `src/index.css`: `container-page`, `eyebrow`, `section-title`, `btn`, `btn-primary`, `btn-ghost`, `court-bg`
+- `prefers-reduced-motion` disables animations
 
 ### Path Aliases
 
@@ -65,4 +54,5 @@ The trickiest part of the page; check these behaviours after changing it:
 
 - All content is hardcoded in components as small arrays/constants at the top of each file
 - Mobile-first responsive design using Tailwind breakpoints (`md:` = 768px)
-- Components are self-contained; the only cross-section wiring is `onReboot` from `Index.tsx`
+- Components are self-contained; shared links live in `src/links.ts`
+- Site text is Swedish

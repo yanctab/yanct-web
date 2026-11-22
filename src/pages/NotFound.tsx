@@ -1,28 +1,24 @@
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const NotFound = () => {
   const location = useLocation();
 
-  return (
-    <main className="scanlines flex min-h-screen items-center px-4 py-16 md:px-8">
-      <pre className="mx-auto w-full max-w-3xl whitespace-pre-wrap break-words text-xs leading-relaxed text-term-text md:text-sm">
-        <span className="text-term-red">
-          Kernel panic - not syncing: VFS: Unable to mount page "{location.pathname}"
-        </span>
-        {`
-CPU: 0 PID: 404 Comm: browser Not tainted 6.12.0-yanct
-Call trace:
- dump_backtrace+0x0/0x1e0
- show_stack+0x18/0x24
- page_not_found+0x404/0x404
- you_took_a_wrong_turn+0x42/0x42
----[ end Kernel panic ]---
+  useEffect(() => {
+    document.title = "Airball! – BK50";
+  }, []);
 
-`}
-        <a href="/" className="text-term-green underline underline-offset-4 hover:brightness-125">
-          $ reboot  # take me home
-        </a>
-      </pre>
+  return (
+    <main className="court-bg flex min-h-screen flex-col items-center justify-center bg-wine-800 px-4 text-center text-white">
+      <img src="/bk50-logo.png" alt="" className="h-28 w-auto animate-bounce-ball rounded-full bg-white p-1" />
+      <p className="mt-8 font-display text-8xl font-extrabold text-ball md:text-9xl">404</p>
+      <h1 className="mt-2 font-display text-3xl font-extrabold md:text-5xl">Airball!</h1>
+      <p className="mt-4 max-w-md text-white/75">
+        Sidan <code className="rounded bg-white/10 px-1.5 py-0.5">{location.pathname}</code> missade korgen helt.
+      </p>
+      <Link to="/" className="btn-primary mt-8">
+        Tillbaka till planen
+      </Link>
     </main>
   );
 };

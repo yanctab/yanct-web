@@ -40,7 +40,7 @@ server {
         try_files \$uri \$uri/ =404;
     }
 
-    # Serve the app for unknown paths so it renders its kernel-panic page, keeping the 404 status
+    # Serve the app for unknown paths so it renders its 404 page, keeping the 404 status
     error_page 404 /index.html;
 }
 
@@ -59,7 +59,7 @@ server {
         try_files \$uri \$uri/ =404;
     }
 
-    # Serve the app for unknown paths so it renders its kernel-panic page, keeping the 404 status
+    # Serve the app for unknown paths so it renders its 404 page, keeping the 404 status
     error_page 404 /index.html;
 }
 EOL
