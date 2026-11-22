@@ -32,7 +32,7 @@ const OFFERS = [
   {
     icon: Trophy,
     title: "Seriespel och satsning",
-    text: "Ungdomslagen spelar seriematcher, och Damer utveckling är en elitsatsande grupp för dig som vill längre.",
+    text: "Ungdomslagen spelar seriematcher, och från 15–16 år kan du kvala in till våra satsningslag P11 och Damer utveckling.",
   },
   {
     icon: Tent,

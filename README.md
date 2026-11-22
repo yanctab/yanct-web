@@ -27,6 +27,7 @@ these files:
 | `src/components/GetStarted.tsx` | "Kom igång" in three steps |
 | `src/components/Teams.tsx` | All teams, their links, and the birth-year finder |
 | `src/components/History.tsx` | Timeline since 1950 |
+| `src/components/Ambition.tsx` | "Satsa på basket": the path from 15–16, the P11 and Damer utveckling teams and guidance |
 | `src/components/Engage.tsx` | "Engagera dig": volunteer roles we're recruiting for (`ROLES`) |
 | `src/components/Instagram.tsx` | Instagram grid (`PHOTOS` takes images from `public/instagram/`) |
 | `src/components/Sponsors.tsx` | Sponsor logos (`public/sponsors/`) and the "bli sponsor" pitch |

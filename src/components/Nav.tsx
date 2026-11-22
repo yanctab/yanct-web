@@ -5,6 +5,7 @@ const ITEMS = [
   { href: "#varfor", label: "Därför BK50" },
   { href: "#kom-igang", label: "Kom igång" },
   { href: "#lag", label: "Lagen" },
+  { href: "#satsa", label: "Satsa" },
   { href: "#engagera", label: "Engagera dig" },
   { href: "#instagram", label: "Instagram" },
   { href: "#sponsorer", label: "Sponsorer" },
