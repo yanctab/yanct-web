@@ -1,13 +1,9 @@
-import { useLocation } from "react-router-dom";
-
 const NotFound = () => {
-  const location = useLocation();
-
   return (
     <main className="scanlines flex min-h-screen items-center px-4 py-16 md:px-8">
       <pre className="mx-auto w-full max-w-3xl whitespace-pre-wrap break-words text-xs leading-relaxed text-term-text md:text-sm">
         <span className="text-term-red">
-          Kernel panic - not syncing: VFS: Unable to mount page "{location.pathname}"
+          Kernel panic - not syncing: VFS: Unable to mount page "{window.location.pathname}"
         </span>
         {`
 CPU: 0 PID: 404 Comm: browser Not tainted 6.12.0-yanct
