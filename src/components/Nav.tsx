@@ -5,10 +5,10 @@ const ITEMS = [
   { href: "#varfor", label: "Därför BK50" },
   { href: "#kom-igang", label: "Kom igång" },
   { href: "#lag", label: "Lagen" },
-  { href: "#historia", label: "Historia" },
   { href: "#engagera", label: "Engagera dig" },
   { href: "#instagram", label: "Instagram" },
   { href: "#sponsorer", label: "Sponsorer" },
+  { href: "#historia", label: "Historia" },
 ];
 
 const Nav = () => {

@@ -36,16 +36,16 @@ const ROLES = [
 ];
 
 const Engage = () => (
-  <section id="engagera" className="py-24 md:py-32">
+  <section id="engagera" className="bg-ink py-24 text-white md:py-32">
     <div className="container-page">
       <Reveal className="grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end">
         <div>
-          <p className="eyebrow">Engagera dig</p>
+          <p className="eyebrow text-ball">Engagera dig</p>
           <h2 className="section-title">
-            Du behöver inte kunna <span className="text-wine-500">basket</span>.
+            Du behöver inte kunna <span className="text-ball">basket</span>.
           </h2>
         </div>
-        <p className="text-lg text-ink/70">
+        <p className="text-lg text-white/70">
           BK50 drivs av människor som ger lite av sin tid. Vill du hjälpa till finns det en plats för dig, oavsett
           om du någonsin har studsat en boll.
         </p>
@@ -54,7 +54,7 @@ const Engage = () => (
       <div className="mt-14 grid gap-5 lg:grid-cols-3">
         {ROLES.map(({ icon: Icon, title, lead, text, points, cta, subject }, i) => (
           <Reveal key={title} delay={i * 0.08} className="flex">
-            <article className="flex w-full flex-col rounded-3xl bg-white p-7 shadow-sm ring-1 ring-ink/5 md:p-8">
+            <article className="flex w-full flex-col rounded-3xl bg-white p-7 text-ink md:p-8">
               <div className="flex items-start justify-between gap-4">
                 <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-wine-500 text-white">
                   <Icon className="h-7 w-7" />
@@ -83,16 +83,16 @@ const Engage = () => (
         ))}
       </div>
 
-      <Reveal className="mt-8 flex flex-col items-start justify-between gap-4 rounded-3xl bg-wine-50 p-6 md:flex-row md:items-center md:px-8">
-        <p className="text-ink/75">
-          <strong className="text-ink">Något annat i tankarna?</strong> Styrelsearbete, projekt eller en egen idé,
+      <Reveal className="mt-8 flex flex-col items-start justify-between gap-4 rounded-3xl border border-white/10 bg-white/[0.05] p-6 md:flex-row md:items-center md:px-8">
+        <p className="text-white/75">
+          <strong className="text-white">Något annat i tankarna?</strong> Styrelsearbete, projekt eller en egen idé,
           hör av dig till{" "}
-          <a href={mail("Jag vill engagera mig i BK50")} className="font-semibold text-wine-500 underline underline-offset-4">
+          <a href={mail("Jag vill engagera mig i BK50")} className="font-semibold text-ball underline underline-offset-4">
             {LINKS.email}
           </a>
           .
         </p>
-        <a href={LINKS.engage} target="_blank" rel="noopener" className="shrink-0 font-semibold text-wine-500 hover:underline">
+        <a href={LINKS.engage} target="_blank" rel="noopener" className="shrink-0 font-semibold text-ball hover:underline">
           Mer om att engagera dig →
         </a>
       </Reveal>

@@ -31,7 +31,7 @@ A **Swedish one-page site** for the basketball club BK50 (Basketklubben Lund 195
 ### Key Files
 
 - `src/links.ts` - Shared external links (sign-up form, Instagram, Facebook, fees, e-mail)
-- `src/pages/Index.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `History`, `Engage`, `Instagram`, `Sponsors`, `Footer`
+- `src/pages/Index.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `Engage`, `Instagram`, `Sponsors`, `History`, `Footer`
 - `src/components/Teams.tsx` - `TEAMS` (name, svenskalag URL, group, birth years) grouped by `GROUPS`; a birth-year `<select>` dims teams that don't match
 - `src/components/Instagram.tsx` - Instagram can't be scraped, so `PHOTOS` is filled by hand from `public/instagram/`; empty shows placeholder tiles
 - `src/components/Engage.tsx` - `ROLES` the club is recruiting volunteers for (ledare, foto & film, open court-värd); each CTA mails info@ with a role-specific subject

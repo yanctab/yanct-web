@@ -17,10 +17,10 @@ const Index = () => (
       <Offer />
       <GetStarted />
       <Teams />
-      <History />
       <Engage />
       <Instagram />
       <Sponsors />
+      <History />
     </main>
     <Footer />
   </>
