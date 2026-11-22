@@ -9,10 +9,10 @@ npm install          # Install dependencies (needs Node.js 18+)
 npm run dev          # Dev server on http://localhost:8080
 npm run build        # Production build to dist/
 npm run preview      # Preview production build on http://localhost:4173
-npm run lint         # ESLint (currently crashes: ESLint 9.39 vs installed typescript-eslint)
+npm run lint         # ESLint
 ```
 
-Type-check with `npx tsc --noEmit -p tsconfig.app.json`, since lint is broken.
+Type-check with `npx tsc --noEmit -p tsconfig.app.json`.
 
 **Makefile targets** (deployment; always pass `DOMAIN=`, it defaults to `localhost`):
 ```bash
@@ -26,7 +26,7 @@ make obtain-ssl / renew-ssl DOMAIN=...       # certbot
 
 ## Architecture Overview
 
-A **Swedish one-page site** for the basketball club BK50 (Basketklubben Lund 1950), built with React + Vite + Tailwind + Framer Motion. It pitches the club to new players and links out to the club's svenskalag.se pages (www.bk50.se) for teams and sign-up. Navigation is anchor-based; the only routes are `/` and a catch-all 404.
+A **Swedish one-page site** for the basketball club BK50 (Basketklubben Lund 1950), built with React + Vite + Tailwind + Framer Motion. It pitches the club to new players and links out to the club's svenskalag.se pages (www.bk50.se) for teams and sign-up. Navigation is anchor-based. There is no router: `App.tsx` renders the page on `/` and the 404 page on any other path.
 
 ### Key Files
 

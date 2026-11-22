@@ -1,9 +1,6 @@
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
 
 const NotFound = () => {
-  const location = useLocation();
-
   useEffect(() => {
     document.title = "Airball! – BK50";
   }, []);
@@ -14,11 +11,11 @@ const NotFound = () => {
       <p className="mt-8 font-display text-8xl font-extrabold text-ball md:text-9xl">404</p>
       <h1 className="mt-2 font-display text-3xl font-extrabold md:text-5xl">Airball!</h1>
       <p className="mt-4 max-w-md text-white/75">
-        Sidan <code className="rounded bg-white/10 px-1.5 py-0.5">{location.pathname}</code> missade korgen helt.
+        Sidan <code className="rounded bg-white/10 px-1.5 py-0.5">{window.location.pathname}</code> missade korgen helt.
       </p>
-      <Link to="/" className="btn-primary mt-8">
+      <a href="/" className="btn-primary mt-8">
         Tillbaka till planen
-      </Link>
+      </a>
     </main>
   );
 };
