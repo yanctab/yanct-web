@@ -1,14 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
-const App = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  </BrowserRouter>
-);
+// The site is a single page. nginx serves index.html for unknown paths (with a 404
+// status), so anything other than the root renders the 404 page.
+const isHome = ["/", "/index.html"].includes(window.location.pathname);
+
+const App = () => (isHome ? <Index /> : <NotFound />);
 
 export default App;
