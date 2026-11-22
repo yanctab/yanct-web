@@ -7,6 +7,7 @@ const MORE = [
   { href: LINKS.calendar, label: "Kalender" },
   { href: LINKS.fees, label: "Avgifter" },
   { href: LINKS.values, label: "Värdegrund" },
+  { href: "#engagera", label: "Engagera dig" },
   { href: "#sponsorer", label: "Bli sponsor" },
   { href: LINKS.supporter, label: "Bli stödmedlem" },
   { href: LINKS.shop, label: "Klubbshop" },

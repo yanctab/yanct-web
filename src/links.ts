@@ -2,6 +2,7 @@
 export const LINKS = {
   signup: "https://www.svenskalag.se/lugibbk/formular/borja-spela-basket/19804",
   support: "https://www.bk50.se/sida/109411/stotta-foreningen",
+  engage: "https://www.bk50.se/sida/114809/engagera-dig",
   supporter: "https://www.bk50.se/bk50/formular/bli-stodmedlem/23360",
   clubSite: "https://www.bk50.se/",
   teams: "https://www.bk50.se/lag",

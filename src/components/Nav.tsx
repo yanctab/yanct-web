@@ -6,6 +6,7 @@ const ITEMS = [
   { href: "#kom-igang", label: "Kom igång" },
   { href: "#lag", label: "Lagen" },
   { href: "#historia", label: "Historia" },
+  { href: "#engagera", label: "Engagera dig" },
   { href: "#instagram", label: "Instagram" },
   { href: "#sponsorer", label: "Sponsorer" },
 ];
