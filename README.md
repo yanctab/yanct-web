@@ -28,6 +28,7 @@ these files:
 | `src/components/Teams.tsx` | All teams, their links, and the birth-year finder |
 | `src/components/History.tsx` | Timeline since 1950 |
 | `src/components/Instagram.tsx` | Instagram grid (`PHOTOS` takes images from `public/instagram/`) |
+| `src/components/Sponsors.tsx` | Sponsor logos (`public/sponsors/`) and the "bli sponsor" pitch |
 | `src/components/Footer.tsx` | Contact, halls and more links |
 | `src/pages/NotFound.tsx` | "Airball!" 404 page |
 

@@ -5,6 +5,7 @@ import GetStarted from "@/components/GetStarted";
 import Teams from "@/components/Teams";
 import History from "@/components/History";
 import Instagram from "@/components/Instagram";
+import Sponsors from "@/components/Sponsors";
 import Footer from "@/components/Footer";
 
 const Index = () => (
@@ -17,6 +18,7 @@ const Index = () => (
       <Teams />
       <History />
       <Instagram />
+      <Sponsors />
     </main>
     <Footer />
   </>

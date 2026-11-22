@@ -7,6 +7,7 @@ const MORE = [
   { href: LINKS.calendar, label: "Kalender" },
   { href: LINKS.fees, label: "Avgifter" },
   { href: LINKS.values, label: "Värdegrund" },
+  { href: "#sponsorer", label: "Bli sponsor" },
   { href: LINKS.supporter, label: "Bli stödmedlem" },
   { href: LINKS.shop, label: "Klubbshop" },
   { href: LINKS.contact, label: "Kontakt & styrelse" },
@@ -66,7 +67,11 @@ const Footer = () => (
         <ul className="space-y-2 text-white/85">
           {MORE.map((link) => (
             <li key={link.label}>
-              <a href={link.href} target="_blank" rel="noopener" className="hover:text-white hover:underline">
+              <a
+                href={link.href}
+                {...(link.href.startsWith("#") ? {} : { target: "_blank", rel: "noopener" })}
+                className="hover:text-white hover:underline"
+              >
                 {link.label}
               </a>
             </li>

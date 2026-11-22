@@ -7,6 +7,7 @@ const ITEMS = [
   { href: "#lag", label: "Lagen" },
   { href: "#historia", label: "Historia" },
   { href: "#instagram", label: "Instagram" },
+  { href: "#sponsorer", label: "Sponsorer" },
 ];
 
 const Nav = () => {

@@ -1,6 +1,7 @@
 // External links shared by several sections. Team pages live in Teams.tsx.
 export const LINKS = {
   signup: "https://www.svenskalag.se/lugibbk/formular/borja-spela-basket/19804",
+  support: "https://www.bk50.se/sida/109411/stotta-foreningen",
   supporter: "https://www.bk50.se/bk50/formular/bli-stodmedlem/23360",
   clubSite: "https://www.bk50.se/",
   teams: "https://www.bk50.se/lag",
