@@ -19,8 +19,11 @@ Type-check with `npx tsc --noEmit -p tsconfig.app.json`.
 make build                                   # npm install + npm run build
 make publish HOST=root@mikro.io DOMAIN=mikro.io     # build locally, rsync dist/ to the server
 make configure-nginx DOMAIN=mikro.io         # on the server: copy dist/, write nginx config
-make obtain-ssl / renew-ssl DOMAIN=...       # certbot
+make obtain-ssl DOMAIN=mikro.io EMAIL=...   # certbot certonly, then re-runs configure-nginx to turn on HTTPS
+make renew-ssl                               # certbot renew (the certbot timer normally does this)
 ```
+
+`configure-nginx.sh` writes the HTTPS server blocks (and redirects HTTP and www there) only when `/etc/letsencrypt/live/$DOMAIN/` has a certificate, so it works on a new domain and can be re-run safely. certbot never edits the nginx config.
 
 `configure-nginx.sh` serves `index.html` for unknown paths with a 404 status, so the app renders its 404 page.
 
