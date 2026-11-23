@@ -15,6 +15,9 @@ export const club = (path = "") => `${CLUB_SITE}${path}`;
 /** A team or group page on Svenskalag, e.g. team("bk50-flickor2013"). */
 export const team = (slug: string) => `https://www.svenskalag.se/${slug}`;
 
+/** A document uploaded to the club's Svenskalag site, e.g. doc("<id>/bakning.pdf"). */
+export const doc = (path: string) => club(`/dokument/${path}`);
+
 // External links shared by several sections. Team pages live in Teams.tsx.
 export const LINKS = {
   signup: club("/formular/borja-spela-basket/19804"),

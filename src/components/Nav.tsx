@@ -15,6 +15,7 @@ const ITEMS: Item[] = [
 
 // Everything else, under "Klubben"
 const CLUB_ITEMS: Item[] = [
+  { href: "#foraldrar", label: "För föräldrar" },
   { href: "#klubbshop", label: "Klubbshop" },
   { href: "#engagera", label: "Engagera dig" },
   { href: "#nyheter", label: "Nyheter" },
