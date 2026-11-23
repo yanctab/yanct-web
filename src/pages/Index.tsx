@@ -8,6 +8,7 @@ import Ambition from "@/components/Ambition";
 import Svenskalag from "@/components/Svenskalag";
 import Shop from "@/components/Shop";
 import Engage from "@/components/Engage";
+import Leaders from "@/components/Leaders";
 import News from "@/components/News";
 import Instagram from "@/components/Instagram";
 import Sponsors from "@/components/Sponsors";
@@ -29,6 +30,7 @@ const Index = () => (
       <Instagram />
       <Sponsors />
       <History />
+      <Leaders />
     </main>
     <Footer />
   </>

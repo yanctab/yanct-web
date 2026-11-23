@@ -21,6 +21,7 @@ const CLUB_ITEMS: Item[] = [
   { href: "#instagram", label: "Instagram" },
   { href: "#sponsorer", label: "Sponsorer" },
   { href: "#historia", label: "Historia" },
+  { href: "#ledare", label: "Ledare" },
 ];
 
 /** Desktop dropdown for CLUB_ITEMS. Opens on click; closes on a pick, Escape or a click outside. */

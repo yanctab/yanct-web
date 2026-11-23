@@ -23,6 +23,9 @@ export const LINKS = {
   values: club("/sida/114557/vardegrund-bk50"),
   history: club("/sida/109410/historia"),
   news: club("/nyheter"),
+  /** The leaders' group on Svenskalag. Internal: only leaders who are logged in can see it. */
+  leaders: club("/bk50-ledare"),
+  education: club("/sida/104586/utbildning"),
   calendar: club("/kalender"),
   contact: club("/kontakt"),
   svenskalagApp: "https://www.svenskalag.se/appen",
