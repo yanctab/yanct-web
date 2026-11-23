@@ -1,5 +1,5 @@
 import { ArrowRight, Facebook, Instagram, Mail, MapPin } from "lucide-react";
-import { CLUB_HOST, LINKS } from "@/links";
+import { LINKS } from "@/links";
 
 const HALLS = ["Fäladshallen", "Vikingahallen", "ISLK-hallen"];
 
@@ -64,7 +64,7 @@ const Footer = () => (
       </div>
 
       <div>
-        <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-white/50">Mer på {CLUB_HOST}</h3>
+        <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-white/50">Mer på BK50 Svenskalag</h3>
         <ul className="space-y-2 text-white/85">
           {MORE.map((link) => (
             <li key={link.label}>

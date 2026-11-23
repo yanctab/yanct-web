@@ -1,30 +1,34 @@
 /**
- * The club's site on Svenskalag. Svenskalag holds everything about the club (teams, calendar, news,
- * fees), so most links on this page point there. Change the domain here when it moves; every link
- * to the club site is built with club().
+ * Everything about the club (teams, calendar, news, fees, forms) lives on Svenskalag. Links go to
+ * svenskalag.se rather than the club's own domain: Svenskalag forwards them to whatever domain the
+ * club has set up there (www.bk50.se today), so they keep working when that domain changes.
+ *
+ * Club pages live under the club's slug (svenskalag.se/bk50/...). "lugibbk" is the old slug and
+ * only forwards to "bk50". Team and group pages live at the top level (svenskalag.se/bk50-flickor2013)
+ * and give 404 under the club's slug, so they have their own helper.
  */
-export const CLUB_SITE = "https://www.bk50.se";
+export const CLUB_SITE = "https://www.svenskalag.se/bk50";
 
-/** The club site's host for display, e.g. "bk50.se". */
-export const CLUB_HOST = new URL(CLUB_SITE).hostname.replace(/^www\./, "");
+/** A club page on Svenskalag, e.g. club("/lag"). */
+export const club = (path = "") => `${CLUB_SITE}${path}`;
 
-/** A page on the club's Svenskalag site, e.g. club("/lag"). */
-export const club = (path = "/") => `${CLUB_SITE}${path}`;
+/** A team or group page on Svenskalag, e.g. team("bk50-flickor2013"). */
+export const team = (slug: string) => `https://www.svenskalag.se/${slug}`;
 
 // External links shared by several sections. Team pages live in Teams.tsx.
 export const LINKS = {
-  signup: "https://www.svenskalag.se/lugibbk/formular/borja-spela-basket/19804",
+  signup: club("/formular/borja-spela-basket/19804"),
   support: club("/sida/109411/stotta-foreningen"),
   engage: club("/sida/114809/engagera-dig"),
-  supporter: club("/bk50/formular/bli-stodmedlem/23360"),
-  clubSite: club("/"),
+  supporter: club("/formular/bli-stodmedlem/23360"),
+  clubSite: club(),
   teams: club("/lag"),
   fees: club("/sida/104590/avgifter"),
   values: club("/sida/114557/vardegrund-bk50"),
   history: club("/sida/109410/historia"),
   news: club("/nyheter"),
   /** The leaders' group on Svenskalag. Internal: only leaders who are logged in can see it. */
-  leaders: club("/bk50-ledare"),
+  leaders: team("bk50-ledare"),
   education: club("/sida/104586/utbildning"),
   calendar: club("/kalender"),
   contact: club("/kontakt"),

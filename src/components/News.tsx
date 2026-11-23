@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Newspaper } from "lucide-react";
-import { CLUB_HOST, LINKS, club } from "@/links";
+import { LINKS } from "@/links";
 import Reveal from "./Reveal";
 
 /**
@@ -15,13 +15,11 @@ type Item = { title: string; link: string; date: Date | null; excerpt: string; i
 
 const ATOM = "http://www.w3.org/2005/Atom";
 
-/** Feed links point at svenskalag.se/bk50/... with utm tags; send readers straight to the club site instead. */
+/** Feed links point at svenskalag.se/bk50/... with utm tags; keep the Svenskalag link, drop the tags. */
 const clubLink = (raw: string) => {
   try {
     const url = new URL(raw);
-    if (url.hostname.endsWith("svenskalag.se") && url.pathname.startsWith("/bk50/")) {
-      return club(url.pathname.slice("/bk50".length));
-    }
+    if (url.hostname.endsWith("svenskalag.se")) return `${url.origin}${url.pathname}`;
     return raw;
   } catch {
     return LINKS.news;
@@ -134,7 +132,7 @@ const News = () => {
             <p className="eyebrow">Nyheter</p>
             <h2 className="section-title">Senaste från klubben.</h2>
             <p className="mt-6 text-lg text-ink/70">
-              Läger, open court, årsmöte och annat som är på gång. Alla nyheter finns på {CLUB_HOST}.
+              Läger, open court, årsmöte och annat som är på gång. Alla nyheter finns på BK50 Svenskalag.
             </p>
           </div>
           <a href={LINKS.news} target="_blank" rel="noopener" className="btn shrink-0 bg-wine-500 text-white hover:-translate-y-0.5 hover:bg-wine-600 focus-visible:outline-wine-500">
