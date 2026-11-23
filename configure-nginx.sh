@@ -58,6 +58,9 @@ SITE=$(cat <<EOL
 EOL
 )
 
+# Parent of the news feed cache; nginx creates only the last level and Ubuntu's package has no /var/cache/nginx
+sudo mkdir -p /var/cache/nginx
+
 # Create the Nginx configuration file
 CONFIG_FILE="/etc/nginx/sites-available/$DOMAIN"
 if [ -n "$HAS_CERT" ]; then
