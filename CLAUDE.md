@@ -19,8 +19,11 @@ Type-check with `npx tsc --noEmit -p tsconfig.app.json`.
 make build                                   # npm install + npm run build
 make publish HOST=root@yanct.com DOMAIN=yanct.com   # build locally, rsync dist/ to the server
 make configure-nginx DOMAIN=yanct.com        # on the server: copy dist/, write nginx config
-make obtain-ssl / renew-ssl DOMAIN=...       # certbot
+make obtain-ssl DOMAIN=yanct.com EMAIL=...  # certbot certonly, then re-runs configure-nginx to turn on HTTPS
+make renew-ssl                               # certbot renew (the certbot timer normally does this)
 ```
+
+`configure-nginx.sh` writes the HTTPS server blocks (and redirects HTTP and www there) only when `/etc/letsencrypt/live/$DOMAIN/` has a certificate, so it works on a new domain and can be re-run safely. certbot never edits the nginx config.
 
 `configure-nginx.sh` proxies the news feed at `/nyheter.xml` (re-run `make configure-nginx` after changing it) and serves `index.html` for unknown paths with a 404 status, so the app renders its 404 page.
 

@@ -39,11 +39,15 @@ configure-nginx:
 	# Call the script to configure Nginx
 	./configure-nginx.sh $(DOMAIN) $(WEBROOT)
 
-## obtain-ssl         - Obtain an SSL certificate for $(DOMAIN) using Let's Encrypt
+## obtain-ssl         - Get a Let's Encrypt certificate for $(DOMAIN) and www, then turn on HTTPS (needs EMAIL=)
+# certonly leaves the nginx config alone; configure-nginx.sh writes the HTTPS blocks once the
+# certificate exists, so configure-nginx can be re-run without losing anything.
 .PHONY: obtain-ssl
 obtain-ssl:
-	sudo certbot --nginx -d $(DOMAIN) -d www.$(DOMAIN) --agree-tos --no-eff-email --email $(EMAIL)
-	sudo systemctl reload nginx
+	@test "$(DOMAIN)" != localhost -a "$(EMAIL)" != contact@localhost || { echo "Usage: make obtain-ssl DOMAIN=example.com EMAIL=you@example.com"; exit 1; }
+	sudo certbot certonly --nginx -d $(DOMAIN) -d www.$(DOMAIN) --agree-tos --no-eff-email --email $(EMAIL) \
+		--deploy-hook "systemctl reload nginx"
+	./configure-nginx.sh $(DOMAIN) $(WEBROOT)
 
 ## renew-ssl          - Renew the SSL certificate for $(DOMAIN)
 .PHONY: renew-ssl
