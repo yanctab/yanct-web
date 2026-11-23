@@ -1,5 +1,5 @@
 import { ArrowUpRight, Compass, Flag, Smile, Target } from "lucide-react";
-import { LINKS } from "@/links";
+import { LINKS, club } from "@/links";
 import Reveal from "./Reveal";
 
 const mail = (subject: string) => `mailto:${LINKS.email}?subject=${encodeURIComponent(subject)}`;
@@ -22,8 +22,8 @@ const PATH = [
 
 // Teams for players who want to commit. Pages on the club's svenskalag.se site.
 const TEAMS = [
-  { code: "P11", name: "Pojkar födda 2011", url: "https://www.bk50.se/bk50-pojkar2011vit" },
-  { code: "Damer utveckling", name: "Flickor födda 2008–2011", url: "https://www.bk50.se/bk50-damerutveckling" },
+  { code: "P11", name: "Pojkar födda 2011", url: club("/bk50-pojkar2011vit") },
+  { code: "Damer utveckling", name: "Flickor födda 2008–2011", url: club("/bk50-damerutveckling") },
 ];
 
 const Ambition = () => (

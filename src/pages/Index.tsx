@@ -5,6 +5,7 @@ import GetStarted from "@/components/GetStarted";
 import Teams from "@/components/Teams";
 import History from "@/components/History";
 import Ambition from "@/components/Ambition";
+import Svenskalag from "@/components/Svenskalag";
 import Engage from "@/components/Engage";
 import News from "@/components/News";
 import Instagram from "@/components/Instagram";
@@ -20,6 +21,7 @@ const Index = () => (
       <GetStarted />
       <Teams />
       <Ambition />
+      <Svenskalag />
       <Engage />
       <News />
       <Instagram />

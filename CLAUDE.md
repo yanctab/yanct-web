@@ -33,10 +33,12 @@ A **Swedish one-page site** for the basketball club BK50 (Basketklubben Lund 195
 
 ### Key Files
 
-- `src/links.ts` - Shared external links (sign-up form, Instagram, Facebook, fees, e-mail)
-- `src/pages/Index.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `Ambition`, `Engage`, `News`, `Instagram`, `Sponsors`, `History`, `Footer`
+- `src/links.ts` - `CLUB_SITE` (the club's Svenskalag site, currently www.bk50.se, moving to svenskalag.bk50.se; change it only here), `club(path)` for links into it, `CLUB_HOST` for display, and `LINKS` (sign-up form, Svenskalag app/store links, Instagram, fees, e-mail)
+- `src/pages/Index.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `Ambition`, `Svenskalag`, `Engage`, `News`, `Instagram`, `Sponsors`, `History`, `Footer`
+- `src/components/Nav.tsx` - `ITEMS` in the bar, `CLUB_ITEMS` under the "Klubben" dropdown (a section under "Klubben" on mobile)
+- `src/components/Svenskalag.tsx` - All club info lives on Svenskalag: register in the club first, then the app (official App Store/Google Play badges in `public/badges/`, linked via svenskalag.se/app/ios|android)
 - `src/components/Teams.tsx` - `TEAMS` (name, svenskalag URL, group, birth years) grouped by `GROUPS`; a birth-year `<select>` dims teams that don't match
-- `src/components/News.tsx` - The 3 latest posts from the bk50.se RSS feed, fetched client-side from `/nyheter.xml`. The feed has no CORS header, so nginx proxies and caches it (`configure-nginx.sh`) and `vite.config.ts` proxies it in dev/preview; if it fails, only the "Alla nyheter" link shows
+- `src/components/News.tsx` - The 3 latest posts from the bk50.se RSS feed, fetched client-side from `/nyheter.xml`. The feed (www.svenskalag.se/rss/82814, independent of the club's domain) has no CORS header, so nginx proxies and caches it (`configure-nginx.sh`) and `vite.config.ts` proxies it in dev/preview; if it fails, only the "Alla nyheter" link shows
 - `src/components/Instagram.tsx` - Instagram can't be scraped, so `PHOTOS` is filled by hand from `public/instagram/`; empty shows placeholder tiles
 - `src/components/Ambition.tsx` - "Satsa på basket": commit from 15–16, before that own pace with friends; the qualifying teams P11 (Pojkar 2011 vit) and Damer utveckling where anyone may try out
 - `src/components/Engage.tsx` - `ROLES` the club is recruiting volunteers for (ledare, foto & film, open court-värd); each CTA mails info@ with a role-specific subject

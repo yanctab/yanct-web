@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Newspaper } from "lucide-react";
-import { LINKS } from "@/links";
+import { CLUB_HOST, LINKS, club } from "@/links";
 import Reveal from "./Reveal";
 
 /**
- * The latest news from the club's svenskalag site (www.bk50.se/nyheter).
+ * The latest news from the club's Svenskalag site (LINKS.news).
  * The RSS feed has no CORS header, so nginx proxies it to /nyheter.xml (see configure-nginx.sh;
- * vite.config.ts does the same in dev). If the feed can't be read the section just links to bk50.se.
+ * vite.config.ts does the same in dev). If the feed can't be read the section just links to the club site.
  */
 const FEED_URL = "/nyheter.xml";
 const SHOWN = 3;
@@ -15,12 +15,12 @@ type Item = { title: string; link: string; date: Date | null; excerpt: string; i
 
 const ATOM = "http://www.w3.org/2005/Atom";
 
-/** svenskalag links point at svenskalag.se/bk50/... with utm tags; send readers to bk50.se instead. */
+/** Feed links point at svenskalag.se/bk50/... with utm tags; send readers straight to the club site instead. */
 const clubLink = (raw: string) => {
   try {
     const url = new URL(raw);
     if (url.hostname.endsWith("svenskalag.se") && url.pathname.startsWith("/bk50/")) {
-      return `https://www.bk50.se${url.pathname.slice("/bk50".length)}`;
+      return club(url.pathname.slice("/bk50".length));
     }
     return raw;
   } catch {
@@ -134,7 +134,7 @@ const News = () => {
             <p className="eyebrow">Nyheter</p>
             <h2 className="section-title">Senaste från klubben.</h2>
             <p className="mt-6 text-lg text-ink/70">
-              Läger, open court, årsmöte och annat som är på gång. Alla nyheter finns på bk50.se.
+              Läger, open court, årsmöte och annat som är på gång. Alla nyheter finns på {CLUB_HOST}.
             </p>
           </div>
           <a href={LINKS.news} target="_blank" rel="noopener" className="btn shrink-0 bg-wine-500 text-white hover:-translate-y-0.5 hover:bg-wine-600 focus-visible:outline-wine-500">

@@ -37,12 +37,12 @@ SITE=$(cat <<EOL
         try_files \$uri \$uri/ =404;
     }
 
-    # The club's news feed from svenskalag (bk50.se), proxied so the page can read it
+    # The club's news feed from Svenskalag (the same feed as on the club site), proxied so the page can read it
     # (the feed has no CORS header) and cached so a burst of visitors makes one request
     location = /nyheter.xml {
-        proxy_pass https://www.bk50.se/rss/82814;
+        proxy_pass https://www.svenskalag.se/rss/82814;
         proxy_ssl_server_name on;
-        proxy_set_header Host www.bk50.se;
+        proxy_set_header Host www.svenskalag.se;
         proxy_set_header Cookie "";
         proxy_ignore_headers Cache-Control Expires Set-Cookie Vary;
         proxy_hide_header Set-Cookie;

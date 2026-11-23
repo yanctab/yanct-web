@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { ArrowUpRight, Search } from "lucide-react";
-import { LINKS } from "@/links";
+import { CLUB_HOST, LINKS, club } from "@/links";
 import Reveal from "./Reveal";
 
 type Group = "ungdom" | "start" | "vuxen" | "lager";
@@ -15,27 +15,27 @@ type Team = {
   tag: string;
 };
 
-// Team pages on the club's svenskalag.se site (https://www.bk50.se/lag)
+// Team pages on the club's Svenskalag site (club("/lag"))
 const TEAMS: Team[] = [
-  { name: "Basketskola", url: "https://www.bk50.se/bk50-basketskola", group: "start", born: [2019, 2020], tag: "Flickor och pojkar, första steget" },
-  { name: "Flickor 2017/2018", url: "https://www.bk50.se/bk50-flickor2017-2018", group: "ungdom", born: [2017, 2018], tag: "Flickor" },
-  { name: "Pojkar 2017/2018", url: "https://www.bk50.se/bk50-pojkar2017-2018", group: "ungdom", born: [2017, 2018], tag: "Pojkar" },
-  { name: "Flickor 2016", url: "https://www.bk50.se/bk50-flickor2016", group: "ungdom", born: [2016, 2016], tag: "Flickor" },
-  { name: "Pojkar 2015/2016", url: "https://www.bk50.se/bk50-pojkar2015-2016", group: "ungdom", born: [2015, 2016], tag: "Pojkar" },
-  { name: "Flickor 2014/15", url: "https://www.bk50.se/bk50-flickor2014-15", group: "ungdom", born: [2014, 2015], tag: "Flickor" },
-  { name: "Pojkar 2014", url: "https://www.bk50.se/bk50-pojkar2014", group: "ungdom", born: [2014, 2014], tag: "Pojkar" },
-  { name: "Flickor 2013", url: "https://www.bk50.se/bk50-flickor2013", group: "ungdom", born: [2013, 2013], tag: "Flickor" },
-  { name: "Pojkar 2013", url: "https://www.bk50.se/bk50-pojkar2013", group: "ungdom", born: [2013, 2013], tag: "Pojkar" },
-  { name: "Flickor 2011/2012 vit", url: "https://www.bk50.se/bk50-flickor2011-2012vit", group: "ungdom", born: [2011, 2012], tag: "Flickor" },
-  { name: "Pojkar 2011 vit", url: "https://www.bk50.se/bk50-pojkar2011vit", group: "ungdom", born: [2011, 2011], tag: "Pojkar, satsningslag P11" },
-  { name: "Flickor 2012–2010 vinröd", url: "https://www.bk50.se/bk50-flickor2012-2010vinrod", group: "ungdom", born: [2010, 2012], tag: "Flickor" },
-  { name: "Damer utveckling", url: "https://www.bk50.se/bk50-damerutveckling", group: "ungdom", born: [2008, 2011], tag: "Flickor, satsningslag" },
-  { name: "Basketfitness", url: "https://www.bk50.se/bk50-basketfitness", group: "vuxen", tag: "Vuxna, nybörjare och spelfokus" },
-  { name: "Damer", url: "https://www.bk50.se/bk50-damer", group: "vuxen", tag: "Vilande 26/27, intresseanmälan" },
-  { name: "Senior 65+", url: "https://www.bk50.se/bk50-senior65", group: "vuxen", tag: "Startar när vi är några stycken" },
-  { name: "Sommarläger prova på", url: "https://www.bk50.se/bk50-sommarlagerprovapa", group: "lager", born: [2011, 2020], tag: "Helt gratis, för nya spelare" },
-  { name: "Sommarläger 2026, födda 2018–2015", url: "https://www.bk50.se/bk50-sommarlager2026medlemmar2018-2015", group: "lager", born: [2015, 2018], tag: "För medlemmar" },
-  { name: "Sommarläger 2026, födda 2014–2009", url: "https://www.bk50.se/bk50-sommarlager2026medlemmar2014-2009", group: "lager", born: [2009, 2014], tag: "För medlemmar" },
+  { name: "Basketskola", url: club("/bk50-basketskola"), group: "start", born: [2019, 2020], tag: "Flickor och pojkar, första steget" },
+  { name: "Flickor 2017/2018", url: club("/bk50-flickor2017-2018"), group: "ungdom", born: [2017, 2018], tag: "Flickor" },
+  { name: "Pojkar 2017/2018", url: club("/bk50-pojkar2017-2018"), group: "ungdom", born: [2017, 2018], tag: "Pojkar" },
+  { name: "Flickor 2016", url: club("/bk50-flickor2016"), group: "ungdom", born: [2016, 2016], tag: "Flickor" },
+  { name: "Pojkar 2015/2016", url: club("/bk50-pojkar2015-2016"), group: "ungdom", born: [2015, 2016], tag: "Pojkar" },
+  { name: "Flickor 2014/15", url: club("/bk50-flickor2014-15"), group: "ungdom", born: [2014, 2015], tag: "Flickor" },
+  { name: "Pojkar 2014", url: club("/bk50-pojkar2014"), group: "ungdom", born: [2014, 2014], tag: "Pojkar" },
+  { name: "Flickor 2013", url: club("/bk50-flickor2013"), group: "ungdom", born: [2013, 2013], tag: "Flickor" },
+  { name: "Pojkar 2013", url: club("/bk50-pojkar2013"), group: "ungdom", born: [2013, 2013], tag: "Pojkar" },
+  { name: "Flickor 2011/2012 vit", url: club("/bk50-flickor2011-2012vit"), group: "ungdom", born: [2011, 2012], tag: "Flickor" },
+  { name: "Pojkar 2011 vit", url: club("/bk50-pojkar2011vit"), group: "ungdom", born: [2011, 2011], tag: "Pojkar, satsningslag P11" },
+  { name: "Flickor 2012–2010 vinröd", url: club("/bk50-flickor2012-2010vinrod"), group: "ungdom", born: [2010, 2012], tag: "Flickor" },
+  { name: "Damer utveckling", url: club("/bk50-damerutveckling"), group: "ungdom", born: [2008, 2011], tag: "Flickor, satsningslag" },
+  { name: "Basketfitness", url: club("/bk50-basketfitness"), group: "vuxen", tag: "Vuxna, nybörjare och spelfokus" },
+  { name: "Damer", url: club("/bk50-damer"), group: "vuxen", tag: "Vilande 26/27, intresseanmälan" },
+  { name: "Senior 65+", url: club("/bk50-senior65"), group: "vuxen", tag: "Startar när vi är några stycken" },
+  { name: "Sommarläger prova på", url: club("/bk50-sommarlagerprovapa"), group: "lager", born: [2011, 2020], tag: "Helt gratis, för nya spelare" },
+  { name: "Sommarläger 2026, födda 2018–2015", url: club("/bk50-sommarlager2026medlemmar2018-2015"), group: "lager", born: [2015, 2018], tag: "För medlemmar" },
+  { name: "Sommarläger 2026, födda 2014–2009", url: club("/bk50-sommarlager2026medlemmar2014-2009"), group: "lager", born: [2009, 2014], tag: "För medlemmar" },
 ];
 
 const GROUPS: { id: Group; title: string; lead: string }[] = [
@@ -145,7 +145,7 @@ const Teams = () => {
         <p className="mt-10 text-center text-ink/60">
           Alla lag finns också på{" "}
           <a href={LINKS.teams} target="_blank" rel="noopener" className="font-semibold text-wine-500 underline underline-offset-4">
-            bk50.se/lag
+            {CLUB_HOST}/lag
           </a>
           .
         </p>
