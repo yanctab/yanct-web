@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Offer from "@/components/Offer";
 import GetStarted from "@/components/GetStarted";
 import Teams from "@/components/Teams";
+import SignUp from "@/components/SignUp";
 import History from "@/components/History";
 import Ambition from "@/components/Ambition";
 import Svenskalag from "@/components/Svenskalag";
@@ -23,6 +24,7 @@ const Index = () => (
       <Offer />
       <GetStarted />
       <Teams />
+      <SignUp />
       <Svenskalag />
       <Parents />
       <Ambition />

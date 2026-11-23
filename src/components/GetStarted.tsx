@@ -1,10 +1,9 @@
-import { ArrowDown, ArrowRight, ArrowUpRight, KeyRound, MessageCircle, Search, UserPlus } from "lucide-react";
-import { LINKS } from "@/links";
+import { ArrowDown, KeyRound, MessageCircle, Search, UserPlus } from "lucide-react";
 import Reveal from "./Reveal";
 
 /**
  * The whole way in, from finding a team to the team's WhatsApp group. Each step links to where it's
- * explained: the teams list (step 1), the sign-up form (step 2) and the Svenskalag section (steps 3–4).
+ * explained: the teams list (step 1), the sign-up banner (step 2) and the Svenskalag section (steps 3–4).
  */
 const STEPS = [
   {
@@ -18,9 +17,8 @@ const STEPS = [
     icon: UserPlus,
     title: "Anmäl dig",
     text: "Fyll i formuläret ”Börja spela basket”. Anmälan är inte bindande och som ny spelare provar du på utan kostnad.",
-    href: LINKS.signup,
+    href: "#anmalan",
     cta: "Till anmälan",
-    external: true,
   },
   {
     icon: KeyRound,
@@ -50,7 +48,7 @@ const GetStarted = () => (
       </Reveal>
 
       <ol className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {STEPS.map(({ icon: Icon, title, text, href, cta, external }, i) => (
+        {STEPS.map(({ icon: Icon, title, text, href, cta }, i) => (
           <li key={title} className="h-full">
             <Reveal delay={i * 0.08} className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-7">
               <div className="flex items-center justify-between">
@@ -63,36 +61,15 @@ const GetStarted = () => (
               <p className="mt-2 text-white/70">{text}</p>
               <a
                 href={href}
-                {...(external && { target: "_blank", rel: "noopener" })}
                 className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-ball hover:text-white"
               >
                 {cta}
-                {external ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
+                <ArrowDown className="h-4 w-4" />
               </a>
             </Reveal>
           </li>
         ))}
       </ol>
-
-      <Reveal className="mt-12 flex flex-col items-start gap-5 rounded-3xl bg-wine-500 p-8 md:flex-row md:items-center md:justify-between md:p-10">
-        <div>
-          <p className="font-display text-2xl font-extrabold md:text-3xl">Redo att testa?</p>
-          <p className="mt-1 text-white/80">
-            Avgifterna för säsongen hittar du{" "}
-            <a href={LINKS.fees} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-white">
-              här
-            </a>
-            . Frågor? Mejla{" "}
-            <a href={`mailto:${LINKS.email}`} className="underline underline-offset-4 hover:text-white">
-              {LINKS.email}
-            </a>
-            .
-          </p>
-        </div>
-        <a href={LINKS.signup} target="_blank" rel="noopener" className="btn-primary shrink-0 text-lg">
-          Till anmälan <ArrowRight className="h-5 w-5" />
-        </a>
-      </Reveal>
     </div>
   </section>
 );
