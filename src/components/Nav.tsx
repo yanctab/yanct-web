@@ -8,6 +8,7 @@ const ITEMS = [
   { href: "#lag", label: "Lagen" },
   { href: "#satsa", label: "Satsa" },
   { href: "#engagera", label: "Engagera dig" },
+  { href: "#nyheter", label: "Nyheter" },
   { href: "#instagram", label: "Instagram" },
   { href: "#sponsorer", label: "Sponsorer" },
   { href: "#historia", label: "Historia" },
@@ -48,7 +49,7 @@ const Nav = () => {
           <img src="/bk50-logo.png" alt="" className="h-9 w-auto" />
           <span className="font-display text-xl font-extrabold tracking-tight">BK50</span>
         </a>
-        <ul className="hidden items-center gap-7 text-sm font-medium text-white/80 lg:flex">
+        <ul className="hidden items-center gap-5 text-sm font-medium text-white/80 lg:flex xl:gap-7">
           {ITEMS.map((item) => (
             <li key={item.href}>
               <a href={item.href} className="transition hover:text-white">

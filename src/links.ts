@@ -9,6 +9,7 @@ export const LINKS = {
   fees: "https://www.bk50.se/sida/104590/avgifter",
   values: "https://www.bk50.se/sida/114557/vardegrund-bk50",
   history: "https://www.bk50.se/sida/109410/historia",
+  news: "https://www.bk50.se/nyheter",
   calendar: "https://www.bk50.se/kalender",
   contact: "https://www.bk50.se/kontakt",
   shop: "https://www.2win.se/klubbshop/bk50",

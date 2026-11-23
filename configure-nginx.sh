@@ -21,6 +21,9 @@ sudo cp -r dist/* "$WEBROOT"
 # Create the Nginx configuration file
 CONFIG_FILE="/etc/nginx/sites-available/$DOMAIN"
 sudo tee "$CONFIG_FILE" > /dev/null <<EOL
+# Cache for the proxied news feed (see /nyheter.xml below)
+proxy_cache_path /var/cache/nginx/bk50_news levels=1:2 keys_zone=bk50_news:1m max_size=10m inactive=7d use_temp_path=off;
+
 # Redirect www to non-www
 server {
     listen 80;
@@ -40,6 +43,22 @@ server {
         try_files \$uri \$uri/ =404;
     }
 
+    # The club's news feed from svenskalag (bk50.se), proxied so the page can read it
+    # (the feed has no CORS header) and cached so a burst of visitors makes one request
+    location = /nyheter.xml {
+        proxy_pass https://www.bk50.se/rss/82814;
+        proxy_ssl_server_name on;
+        proxy_set_header Host www.bk50.se;
+        proxy_set_header Cookie "";
+        proxy_ignore_headers Cache-Control Expires Set-Cookie Vary;
+        proxy_hide_header Set-Cookie;
+        proxy_hide_header Vary;
+        proxy_cache bk50_news;
+        proxy_cache_valid 200 10m;
+        proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+        proxy_cache_lock on;
+    }
+
     # Serve the app for unknown paths so it renders its 404 page, keeping the 404 status
     error_page 404 /index.html;
 }
@@ -57,6 +76,22 @@ server {
 
     location / {
         try_files \$uri \$uri/ =404;
+    }
+
+    # The club's news feed from svenskalag (bk50.se), proxied so the page can read it
+    # (the feed has no CORS header) and cached so a burst of visitors makes one request
+    location = /nyheter.xml {
+        proxy_pass https://www.bk50.se/rss/82814;
+        proxy_ssl_server_name on;
+        proxy_set_header Host www.bk50.se;
+        proxy_set_header Cookie "";
+        proxy_ignore_headers Cache-Control Expires Set-Cookie Vary;
+        proxy_hide_header Set-Cookie;
+        proxy_hide_header Vary;
+        proxy_cache bk50_news;
+        proxy_cache_valid 200 10m;
+        proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+        proxy_cache_lock on;
     }
 
     # Serve the app for unknown paths so it renders its 404 page, keeping the 404 status

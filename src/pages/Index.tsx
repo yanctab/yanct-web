@@ -6,6 +6,7 @@ import Teams from "@/components/Teams";
 import History from "@/components/History";
 import Ambition from "@/components/Ambition";
 import Engage from "@/components/Engage";
+import News from "@/components/News";
 import Instagram from "@/components/Instagram";
 import Sponsors from "@/components/Sponsors";
 import Footer from "@/components/Footer";
@@ -20,6 +21,7 @@ const Index = () => (
       <Teams />
       <Ambition />
       <Engage />
+      <News />
       <Instagram />
       <Sponsors />
       <History />
