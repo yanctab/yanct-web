@@ -34,9 +34,10 @@ A **Swedish one-page site** for the basketball club BK50 (Basketklubben Lund 195
 ### Key Files
 
 - `src/links.ts` - `CLUB_SITE` (the club's Svenskalag site, currently www.bk50.se, moving to svenskalag.bk50.se; change it only here), `club(path)` for links into it, `CLUB_HOST` for display, and `LINKS` (sign-up form, Svenskalag app/store links, Instagram, fees, e-mail)
-- `src/pages/Index.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `Ambition`, `Svenskalag`, `Engage`, `News`, `Instagram`, `Sponsors`, `History`, `Footer`
+- `src/pages/Index.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `Ambition`, `Svenskalag`, `Shop`, `Engage`, `News`, `Instagram`, `Sponsors`, `History`, `Footer`
 - `src/components/Nav.tsx` - `ITEMS` in the bar, `CLUB_ITEMS` under the "Klubben" dropdown (a section under "Klubben" on mobile)
 - `src/components/Svenskalag.tsx` - All club info lives on Svenskalag: register in the club first, then the app (official App Store/Google Play badges in `public/badges/`, linked via svenskalag.se/app/ios|android)
+- `src/components/Shop.tsx` - Mid-page banner for the club shop at 2win.se (`LINKS.shop`); `PRODUCTS` photos copied by hand into `public/shop/`, no prices so they can't go stale
 - `src/components/Teams.tsx` - `TEAMS` (name, svenskalag URL, group, birth years) grouped by `GROUPS`; a birth-year `<select>` dims teams that don't match
 - `src/components/News.tsx` - The 3 latest posts from the bk50.se RSS feed, fetched client-side from `/nyheter.xml`. The feed (www.svenskalag.se/rss/82814, independent of the club's domain) has no CORS header, so nginx proxies and caches it (`configure-nginx.sh`) and `vite.config.ts` proxies it in dev/preview; if it fails, only the "Alla nyheter" link shows
 - `src/components/Instagram.tsx` - Instagram can't be scraped, so `PHOTOS` is filled by hand from `public/instagram/`; empty shows placeholder tiles

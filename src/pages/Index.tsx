@@ -6,6 +6,7 @@ import Teams from "@/components/Teams";
 import History from "@/components/History";
 import Ambition from "@/components/Ambition";
 import Svenskalag from "@/components/Svenskalag";
+import Shop from "@/components/Shop";
 import Engage from "@/components/Engage";
 import News from "@/components/News";
 import Instagram from "@/components/Instagram";
@@ -22,6 +23,7 @@ const Index = () => (
       <Teams />
       <Ambition />
       <Svenskalag />
+      <Shop />
       <Engage />
       <News />
       <Instagram />
