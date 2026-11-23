@@ -22,8 +22,8 @@ const Index = () => (
       <Offer />
       <GetStarted />
       <Teams />
-      <Ambition />
       <Svenskalag />
+      <Ambition />
       <Shop />
       <Engage />
       <News />

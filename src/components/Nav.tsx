@@ -9,8 +9,8 @@ const ITEMS: Item[] = [
   { href: "#varfor", label: "Därför BK50" },
   { href: "#kom-igang", label: "Kom igång" },
   { href: "#lag", label: "Lagen" },
-  { href: "#satsa", label: "Satsa" },
   { href: "#svenskalag", label: "Svenskalag" },
+  { href: "#satsa", label: "Satsa" },
 ];
 
 // Everything else, under "Klubben"

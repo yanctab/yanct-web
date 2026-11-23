@@ -83,7 +83,7 @@ const Teams = () => {
       <div className="container-page">
         <Reveal className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <p className="eyebrow">Våra lag</p>
+            <p className="eyebrow">Steg 1 · Våra lag</p>
             <h2 className="section-title">Hitta ditt lag.</h2>
             <p className="mt-6 text-lg text-ink/70">
               Varje lag har en egen sida med träningstider, kalender och nyheter. Välj ditt födelseår så visar vi
