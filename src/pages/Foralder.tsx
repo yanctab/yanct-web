@@ -16,7 +16,7 @@ import Instagram from "@/components/Instagram";
 import Sponsors from "@/components/Sponsors";
 import Footer from "@/components/Footer";
 
-const Index = () => (
+const Foralder = () => (
   <>
     <Nav />
     <main>
@@ -40,4 +40,4 @@ const Index = () => (
   </>
 );
 
-export default Index;
+export default Foralder;

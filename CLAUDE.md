@@ -29,12 +29,19 @@ make renew-ssl                               # certbot renew (the certbot timer 
 
 ## Architecture Overview
 
-A **Swedish one-page site** for the basketball club BK50 (Basketklubben Lund 1950), built with React + Vite + Tailwind + Framer Motion. It pitches the club to new players and links out to the club's svenskalag.se pages (www.bk50.se) for teams and sign-up. Navigation is anchor-based. There is no router: `App.tsx` renders the page on `/` and the 404 page on any other path.
+A **Swedish one-page site** for the basketball club BK50 (Basketklubben Lund 1950), built with React + Vite + Tailwind + Framer Motion. It pitches the club to new players and links out to the club's svenskalag.se pages (www.bk50.se) for teams and sign-up. Navigation within a page is anchor-based. There is no router: `App.tsx` picks the page from the path in `PAGES` and renders the 404 page for any other path:
+
+- `/` - `src/pages/Welcome.tsx`, a neutral pitch for the club and a choice: Förälder, Spelare (12 år och uppåt), Ledare
+- `/foralder` - `src/pages/Foralder.tsx`, the full page for parents (the sections below, in `src/components/`)
+- `/spelare` - `src/pages/Spelare.tsx`, a dark, plain-spoken page for players, components in `src/spelare/` (from the `bk50-alt2` branch). It uses its own prefixed classes (`s-eyebrow`, `s-title`, `s-btn*`, `font-poster` = Anton, `night` colours) so it never clashes with the parent page's styles
+- `/ledare` - `src/pages/Ledare.tsx`, "under uppbyggnad" with links to the leaders' group, education and values
+
+New paths must be added both to `PAGES` and to the `location ~ ^/(foralder|spelare|ledare)/?$` block in `configure-nginx.sh`, or nginx serves them with a 404 status.
 
 ### Key Files
 
 - `src/links.ts` - Links to the club's Svenskalag site go via svenskalag.se, which forwards to whatever domain the club has set there (www.bk50.se today), so they survive a domain change: `club(path)` for club pages (`svenskalag.se/bk50/...`; `lugibbk` is the old slug), `team(slug)` for team/group pages (top level, e.g. `svenskalag.se/bk50-flickor2013`), `doc(path)` for uploaded documents (`svenskalag.se/bk50/dokument/<id>/<file>.pdf`). Link texts say "BK50 Svenskalag" / "BK50 lag", never a domain. `LINKS` holds the shared ones (sign-up form, Svenskalag app/store links, Instagram, fees, e-mail)
-- `src/pages/Index.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `SignUp`, `Svenskalag`, `Parents`, `Ambition`, `Shop`, `Engage`, `News`, `Instagram`, `Sponsors`, `History`, `Leaders`, `Footer`
+- `src/pages/Foralder.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `SignUp`, `Svenskalag`, `Parents`, `Ambition`, `Shop`, `Engage`, `News`, `Instagram`, `Sponsors`, `History`, `Leaders`, `Footer`
 - `src/components/Nav.tsx` - `ITEMS` in the bar, `CLUB_ITEMS` under the "Klubben" dropdown (a section under "Klubben" on mobile)
 - `src/components/GetStarted.tsx` - "Kom igång": the joining process in four steps (find a team → sign up → welcome e-mail and Svenskalag login → the team's WhatsApp group), each linking to where it's explained; `Teams`, `SignUp` ("Redo att testa?", `#anmalan`) and `Svenskalag` follow it and are labelled "Steg 1", "Steg 2" and "Steg 3"
 - `src/components/Svenskalag.tsx` - All club info lives on Svenskalag; getting started (welcome e-mail, change password, app with official badges in `public/badges/`), then step 4, the team's WhatsApp group (`#whatsapp`). Invite links are never published on the site: teams share them with registered members only

@@ -37,6 +37,11 @@ SITE=$(cat <<EOL
         try_files \$uri \$uri/ =404;
     }
 
+    # The app's pages (see src/App.tsx), served with a 200 status
+    location ~ ^/(foralder|spelare|ledare)/?\$ {
+        try_files /index.html =404;
+    }
+
     # The club's news feed from Svenskalag (the same feed as on the club site), proxied so the page can read it
     # (the feed has no CORS header) and cached so a burst of visitors makes one request
     location = /nyheter.xml {

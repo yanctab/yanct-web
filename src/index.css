@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -40,6 +40,49 @@
 
   .btn-ghost {
     @apply btn border border-white/30 text-white hover:border-white hover:bg-white/10 focus-visible:outline-white;
+  }
+
+  /* The player page (/spelare): dark, condensed caps, hard shadows. Prefixed s- so they don't clash with the above. */
+  .s-eyebrow {
+    @apply mb-4 inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.25em] text-ball;
+  }
+
+  .s-title {
+    @apply font-poster text-5xl uppercase leading-[0.9] tracking-tight sm:text-6xl md:text-8xl;
+  }
+
+  .s-btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-extrabold uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4;
+  }
+
+  .s-btn-primary {
+    @apply s-btn bg-ball text-night shadow-[5px_5px_0_0_#fff] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[2px_2px_0_0_#fff] focus-visible:outline-ball;
+  }
+
+  .s-btn-ghost {
+    @apply s-btn border-2 border-white text-white hover:bg-white hover:text-night focus-visible:outline-white;
+  }
+
+  /* Hollow letters for one word in a headline */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px #fff;
+  }
+  .text-outline-dark {
+    color: transparent;
+    -webkit-text-stroke: 2px #0d0a0b;
+  }
+
+  /* A tilted label stuck on top of things */
+  .sticker {
+    @apply inline-block bg-white px-3 py-1.5 font-poster text-lg uppercase leading-none text-night shadow-[3px_3px_0_0_#9b2d40];
+  }
+
+  /* Film grain over a section; put it on a pointer-events-none overlay */
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+    opacity: 0.25;
   }
 
   /* Faint court lines drawn behind dark sections */

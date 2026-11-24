@@ -126,7 +126,7 @@ const Nav = () => {
       }`}
     >
       <nav className="container-page flex h-16 items-center justify-between gap-4" aria-label="Huvudmeny">
-        <a href="#top" className="flex items-center gap-2.5 text-white">
+        <a href="/" aria-label="BK50 startsida" className="flex items-center gap-2.5 text-white">
           <img src="/bk50-logo.png" alt="" className="h-9 w-auto" />
           <span className="font-display text-xl font-extrabold tracking-tight">BK50</span>
         </a>
