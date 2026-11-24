@@ -41,8 +41,16 @@ const Parents = () => (
         <p className="eyebrow">För föräldrar</p>
         <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">Bra att ha som förälder</h2>
         <p className="mt-5 text-lg text-ink/70">
-          Börja med guiden för vårdnadshavare. När ditt lag har sekretariat eller kiosk på en hemmamatch hittar du
-          instruktionerna här.
+          Som förälder förväntas du som minimum hjälpa till att sitta i sekretariatet på lagets hemmamatcher och köra till och
+          från matcher. Mer information finns i dokumenten nedan: börja med guiden för vårdnadshavare. När ditt lag har
+          sekretariat eller kiosk på en hemmamatch hittar du instruktionerna här.
+        </p>
+        <p className="mt-4 text-lg text-ink/70">
+          Vill du engagera dig mer i klubben är du varmt välkommen.{" "}
+          <a href="#engagera" className="font-semibold text-wine-600 underline underline-offset-4 hover:text-wine-500">
+            Se hur du kan hjälpa till
+          </a>
+          .
         </p>
       </Reveal>
 

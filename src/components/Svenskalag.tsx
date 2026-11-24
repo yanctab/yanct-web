@@ -69,6 +69,10 @@ const Svenskalag = () => (
           BK50 använder Svenskalag för allt som rör klubben. Där hittar du lagen, kalendern och nyheterna, och som medlem
           får du kallelser och har koll på dina avgifter.
         </p>
+        <p className="mt-4 text-lg text-ink/70">
+          Du väljer själv om du använder klubbens webbsida på Svenskalag eller Svenskalag-appen i mobilen. Det är samma
+          inloggning och samma information på båda ställena.
+        </p>
 
         <ul className="mt-8 grid gap-3 sm:grid-cols-2">
           {FEATURES.map(({ icon: Icon, label }) => (
