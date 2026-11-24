@@ -1,84 +1,66 @@
-import { BookOpen, CakeSlice, ClipboardList, Coffee, FileText } from "lucide-react";
-import { doc } from "@/links";
+import { ArrowUpRight, FileText } from "lucide-react";
+import { CLUB_SITE, LINKS, doc } from "@/links";
 import Reveal from "./Reveal";
 
 /**
- * Documents for parents, stored on the club's Svenskalag site. Some are per term (instruktion-kiosk-vt26),
- * so a new upload gets a new link: update it here when the club replaces a document.
+ * A compact corner for parents: this version of the site talks to players. Documents are stored on
+ * the club's Svenskalag site; some are per term (instruktion-kiosk-vt26), so check the links each term.
  */
 const DOCS = [
-  {
-    icon: BookOpen,
-    title: "En guide för vårdnadshavare",
-    text: "Allt du behöver veta som förälder i BK50: hur föreningen fungerar, värdegrund och hur du kan engagera dig.",
-    href: doc("03a8dba7-f2ca-4225-a90f-f29d6a9a48e6/bk50-en-guide-for-vardnadshavare.pdf"),
-    primary: true,
-  },
-  {
-    icon: ClipboardList,
-    title: "Sekretariatet",
-    text: "Matchprotokoll i Profixio, tidtagning och resultattavlan. Läs innan ni sitter i sekretariatet första gången.",
-    href: doc("76859501-6e0c-482d-b192-33a4a1b60ccf/instruktion-sekretariatet.pdf"),
-  },
-  {
-    icon: Coffee,
-    title: "Kiosken",
-    text: "Var allt finns, hur ni ställer i ordning och tar betalt med Swish när ni har kioskpass.",
-    href: doc("28160b63-6287-45a3-b2b2-8e19685a47f4/instruktion-kiosk-vt26.pdf"),
-  },
-  {
-    icon: CakeSlice,
-    title: "Bakning till kiosken",
-    text: "Bakverk som klarar rumstemperatur och är helt nötfria, och hur intäkterna delas mellan klubb och lag.",
-    href: doc("efa06668-4e32-486f-a1ef-97691f62f83f/bakning.pdf"),
-  },
+  { title: "Guide för vårdnadshavare", href: doc("03a8dba7-f2ca-4225-a90f-f29d6a9a48e6/bk50-en-guide-for-vardnadshavare.pdf") },
+  { title: "Sekretariatet", href: doc("76859501-6e0c-482d-b192-33a4a1b60ccf/instruktion-sekretariatet.pdf") },
+  { title: "Kiosken", href: doc("28160b63-6287-45a3-b2b2-8e19685a47f4/instruktion-kiosk-vt26.pdf") },
+  { title: "Bakning till kiosken", href: doc("efa06668-4e32-486f-a1ef-97691f62f83f/bakning.pdf") },
+];
+
+const LINKS_FOR_PARENTS = [
+  { title: "Avgifter", href: LINKS.fees },
+  { title: "Värdegrund", href: LINKS.values },
+  { title: "BK50 Svenskalag", href: CLUB_SITE },
 ];
 
 const Parents = () => (
-  <section id="foraldrar" className="py-20 md:py-24">
-    <div className="container-page">
-      <Reveal className="max-w-2xl">
-        <p className="eyebrow">För föräldrar</p>
-        <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">Bra att ha som förälder</h2>
+  <section id="foraldrar" className="bg-cream py-20 text-ink md:py-24">
+    <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.2fr]">
+      <Reveal>
+        <p className="eyebrow text-wine-500">Visa för en förälder</p>
+        <h2 className="font-display text-4xl uppercase leading-[0.95] md:text-6xl">För föräldrar</h2>
         <p className="mt-5 text-lg text-ink/70">
-          Som förälder förväntas du som minimum hjälpa till att sitta i sekretariatet på lagets hemmamatcher och köra till och
-          från matcher. Mer information finns i dokumenten nedan: börja med guiden för vårdnadshavare. När ditt lag har
-          sekretariat eller kiosk på en hemmamatch hittar du instruktionerna här.
-        </p>
-        <p className="mt-4 text-lg text-ink/70">
-          Vill du engagera dig mer i klubben är du varmt välkommen.{" "}
-          <a href="#engagera" className="font-semibold text-wine-600 underline underline-offset-4 hover:text-wine-500">
-            Se hur du kan hjälpa till
+          Som förälder förväntas du som minimum hjälpa till att sitta i sekretariatet på lagets hemmamatcher och köra till och från
+          matcher. Börja med guiden för vårdnadshavare. Frågor? Mejla{" "}
+          <a href={`mailto:${LINKS.email}`} className="font-semibold text-wine-600 underline underline-offset-4">
+            {LINKS.email}
           </a>
           .
         </p>
       </Reveal>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {DOCS.map(({ icon: Icon, title, text, href, primary }, i) => (
-          <Reveal key={title} delay={i * 0.06} className="h-full">
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener"
-              className={`group flex h-full flex-col rounded-3xl p-6 transition hover:-translate-y-1 hover:shadow-xl md:p-7 ${
-                primary ? "bg-wine-500 text-white" : "bg-white ring-1 ring-ink/5"
-              }`}
-            >
-              <span
-                className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${primary ? "bg-ball text-ink" : "bg-wine-50 text-wine-500"}`}
-              >
-                <Icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-5 font-display text-xl font-bold">{title}</h3>
-              <p className={`mt-2 ${primary ? "text-white/80" : "text-ink/70"}`}>{text}</p>
-              <span className={`mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold ${primary ? "text-ball" : "text-wine-600"}`}>
-                <FileText className="h-4 w-4" /> Öppna PDF
-              </span>
-            </a>
-          </Reveal>
+      <Reveal delay={0.1} className="grid content-start gap-2 sm:grid-cols-2">
+        {DOCS.map((d, i) => (
+          <a
+            key={d.title}
+            href={d.href}
+            target="_blank"
+            rel="noopener"
+            className={`flex items-center justify-between gap-3 p-4 font-semibold transition hover:-translate-y-0.5 ${
+              i === 0 ? "bg-wine-500 text-white" : "bg-white ring-1 ring-ink/10 hover:ring-wine-300"
+            }`}
+          >
+            {d.title} <FileText className="h-5 w-5 shrink-0 opacity-70" />
+          </a>
         ))}
-      </div>
+        {LINKS_FOR_PARENTS.map((l) => (
+          <a
+            key={l.title}
+            href={l.href}
+            target="_blank"
+            rel="noopener"
+            className="flex items-center justify-between gap-3 p-4 font-semibold ring-1 ring-ink/10 transition hover:bg-white"
+          >
+            {l.title} <ArrowUpRight className="h-5 w-5 shrink-0 opacity-70" />
+          </a>
+        ))}
+      </Reveal>
     </div>
   </section>
 );

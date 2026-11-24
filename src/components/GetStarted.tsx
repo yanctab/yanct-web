@@ -1,75 +1,81 @@
-import { ArrowDown, KeyRound, MessageCircle, Search, UserPlus } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
+import { CLUB_SITE, LINKS } from "@/links";
 import Reveal from "./Reveal";
 
 /**
- * The whole way in, from finding a team to the team's WhatsApp group. Each step links to where it's
- * explained: the teams list (step 1), the sign-up banner (step 2) and the Svenskalag section (steps 3–4).
+ * The whole way in, short. Same four steps as the parent-facing site: team → sign-up → Svenskalag → WhatsApp.
+ * WhatsApp invite links are never published here; teams share them with registered members only.
  */
 const STEPS = [
   {
-    icon: Search,
-    title: "Hitta ditt lag",
-    text: "Välj födelseår i listan över våra lag så ser du vilka grupper som passar. Osäker? Anmäl dig ändå, så hjälper vi dig.",
-    href: "#lag",
-    cta: "Se lagen",
+    title: "Välj lag",
+    text: "Se vilket lag som passar ditt födelseår. Osäker? Anmäl dig ändå, så hjälper vi dig.",
   },
   {
-    icon: UserPlus,
     title: "Anmäl dig",
-    text: "Fyll i formuläret ”Börja spela basket”. Anmälan är inte bindande och som ny spelare provar du på utan kostnad.",
-    href: "#anmalan",
-    cta: "Till anmälan",
+    text: "Fyll i formuläret ”Börja spela basket”, gärna tillsammans med en förälder. Gratis att prova, inte bindande.",
   },
   {
-    icon: KeyRound,
     title: "Logga in i Svenskalag",
-    text: "Du får ett välkomstmejl med inloggning till Svenskalag. Logga in, byt lösenord och ladda ner appen.",
-    href: "#svenskalag",
-    cta: "Så funkar Svenskalag",
+    text: "Du får ett välkomstmejl med inloggning till Svenskalag. Ladda ner appen, där kommer kallelser till träningar och matcher.",
   },
   {
-    icon: MessageCircle,
     title: "Gå med i lagets WhatsApp",
-    text: "Där har du direktkontakt med ledarna och de andra föräldrarna. Inte fått tillgång? Kontakta ledaren för ditt lag.",
-    href: "#whatsapp",
-    cta: "Mer om WhatsApp",
+    text: "När du är registrerad får du tillgång till ditt lags grupp. Har du inte fått det? Fråga din ledare.",
   },
 ];
 
 const GetStarted = () => (
-  <section id="kom-igang" className="bg-ink py-24 text-white md:py-32">
+  <section id="kom-igang" className="py-24 md:py-32">
     <div className="container-page">
-      <Reveal className="max-w-3xl">
-        <p className="eyebrow text-ball">Kom igång</p>
-        <h2 className="section-title">Från soffan till planen i fyra steg.</h2>
-        <p className="mt-6 text-lg text-white/70">
-          Så här går det till att börja i BK50, för dig som spelare eller förälder.
-        </p>
+      <Reveal className="max-w-4xl">
+        <p className="eyebrow">Kom igång</p>
+        <h2 className="section-title">
+          Fyra <span className="text-outline">steg.</span>
+        </h2>
       </Reveal>
 
-      <ol className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {STEPS.map(({ icon: Icon, title, text, href, cta }, i) => (
-          <li key={title} className="h-full">
-            <Reveal delay={i * 0.08} className="flex h-full flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-7">
-              <div className="flex items-center justify-between">
-                <span className="font-display text-6xl font-extrabold text-ball/90">{i + 1}</span>
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-ball">
-                  <Icon className="h-5 w-5" />
-                </span>
-              </div>
-              <h3 className="mt-4 font-display text-2xl font-extrabold">{title}</h3>
-              <p className="mt-2 text-white/70">{text}</p>
-              <a
-                href={href}
-                className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-ball hover:text-white"
-              >
-                {cta}
-                <ArrowDown className="h-4 w-4" />
-              </a>
+      <ol className="mt-14 border-t border-white/15">
+        {STEPS.map(({ title, text }, i) => (
+          <li key={title}>
+            <Reveal delay={i * 0.05} className="grid gap-2 border-b border-white/15 py-7 md:grid-cols-[7rem_1fr_1.4fr] md:items-baseline md:gap-8">
+              <span className="font-display text-6xl leading-none text-ball md:text-7xl">{i + 1}</span>
+              <h3 className="font-display text-3xl uppercase leading-none md:text-4xl">{title}</h3>
+              <p className="text-white/70">{text}</p>
             </Reveal>
           </li>
         ))}
       </ol>
+
+      <Reveal className="mt-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+        <a href={LINKS.signup} target="_blank" rel="noopener" className="btn-primary self-start text-lg">
+          Till anmälan <ArrowRight className="h-5 w-5" />
+        </a>
+        <div className="flex flex-wrap items-center gap-3">
+          <a href={LINKS.appStore} target="_blank" rel="noopener" className="transition hover:-translate-y-0.5">
+            <img src="/badges/app-store-sv.svg" alt="Hämta Svenskalag i App Store" className="h-11 w-auto" />
+          </a>
+          <a href={LINKS.googlePlay} target="_blank" rel="noopener" className="transition hover:-translate-y-0.5">
+            <img src="/badges/google-play-sv.png" alt="Ladda ned Svenskalag på Google Play" className="h-11 w-auto" />
+          </a>
+        </div>
+      </Reveal>
+
+      <p className="mt-8 flex max-w-3xl items-start gap-2 text-sm text-white/55">
+        <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-ball" />
+        <span>
+          Allt om klubben, kalendern och lagen finns på{" "}
+          <a href={CLUB_SITE} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-white">
+            BK50 Svenskalag
+          </a>
+          . Länkarna till lagens WhatsApp-grupper delas bara med registrerade medlemmar. Inget välkomstmejl? Kolla skräpposten eller
+          mejla{" "}
+          <a href={`mailto:${LINKS.email}`} className="underline underline-offset-4 hover:text-white">
+            {LINKS.email}
+          </a>
+          .
+        </span>
+      </p>
     </div>
   </section>
 );

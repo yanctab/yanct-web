@@ -1,81 +1,74 @@
-import { Eye, HeartHandshake, Sprout, Tent, Trophy, Users } from "lucide-react";
+import { Eye, Sprout, Swords, Tent, Trophy, Users } from "lucide-react";
 import Reveal from "./Reveal";
 
 const STATS = [
-  { value: "1950", label: "grundad, två år före Svenska Basketbollförbundet" },
-  { value: "12", label: "flick- och pojklag i barn och ungdom" },
-  { value: "6 år+", label: "från basketskola till basketfitness för vuxna" },
-  { value: "3", label: "hallar i Lund" },
+  { value: "1950", label: "Äldre än Svenska Basketbollförbundet" },
+  { value: "12", label: "Flick- och pojklag" },
+  { value: "3", label: "Hallar i Lund" },
 ];
 
-const OFFERS = [
+// Why play here
+const REASONS = [
   {
     icon: Eye,
-    title: "Mindre grupper",
-    text: "Vi håller grupperna små så att alla blir sedda av sina tränare och får bollen i händerna.",
+    title: "Små grupper",
+    text: "Du får mycket tid med bollen, och tränarna ser vad du gör.",
+  },
+  {
+    icon: Swords,
+    title: "Seriematcher",
+    text: "Ungdomslagen spelar seriematcher mot andra klubbar.",
+  },
+  {
+    icon: Users,
+    title: "Gemenskap",
+    text: "Ett lag du träffar varje vecka, på och utanför planen.",
   },
   {
     icon: Sprout,
     title: "Utveckling före resultat",
-    text: "För våra barn och ungdomar är utveckling viktigare än resultat. Du blir bättre i din egen takt.",
-  },
-  {
-    icon: HeartHandshake,
-    title: "En trygg miljö",
-    text: "Respekt och ansvar på och utanför planen. Hos oss finns ingen press på att prestera.",
-  },
-  {
-    icon: Users,
-    title: "Basket för alla åldrar",
-    text: "Basketskola för de yngsta, ungdomslag för flickor och pojkar, och basketfitness för vuxna.",
-  },
-  {
-    icon: Trophy,
-    title: "Seriespel och satsning",
-    text: "Ungdomslagen spelar seriematcher, och från 15–16 år kan du kvala in till våra satsningslag P11 och Damer utveckling.",
+    text: "Du blir bättre i din egen takt. Ingen förväntar sig att du ska vara bäst från början.",
   },
   {
     icon: Tent,
-    title: "Läger och lovaktiviteter",
-    text: "Sommarläger för medlemmar och ett prova på-läger som är helt gratis. Perfekt sätt att börja.",
+    title: "Läger",
+    text: "Sommarläger för medlemmar och ett prova på-läger som är helt gratis.",
+  },
+  {
+    icon: Trophy,
+    title: "Möjlighet att satsa",
+    text: "Från 15–16 år kan du kvala in till våra satsningslag. Vi hjälper dig att sätta mål och nå dem.",
   },
 ];
 
 const Offer = () => (
-  <section id="varfor" className="py-24 md:py-32">
+  <section id="varfor" className="relative py-24 md:py-32">
     <div className="container-page">
-      <Reveal className="max-w-3xl">
-        <p className="eyebrow">Därför BK50</p>
+      <Reveal className="max-w-4xl">
+        <p className="eyebrow">Varför BK50</p>
         <h2 className="section-title">
-          Glädje. Utveckling. <span className="text-wine-500">Gemenskap.</span>
+          Mer än bara <span className="text-outline">träning.</span>
         </h2>
-        <p className="mt-6 text-lg text-ink/70">
-          Värdeorden finns med i allt vi gör. Vårt mål är att alla ska få vara med och utvecklas, både som
-          basketspelare och som människor.
-        </p>
       </Reveal>
 
-      <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">
-        {STATS.map((stat, i) => (
-          <Reveal key={stat.value} delay={i * 0.06} className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-ink/5">
-            <p className="font-display text-4xl font-extrabold text-wine-500 md:text-5xl">{stat.value}</p>
-            <p className="mt-2 text-sm text-ink/65">{stat.label}</p>
+      <div className="mt-14 grid gap-px overflow-hidden border border-white/15 bg-white/15 sm:grid-cols-2 lg:grid-cols-3">
+        {REASONS.map(({ icon: Icon, title, text }, i) => (
+          <Reveal key={title} delay={(i % 3) * 0.06} className="group relative h-full bg-night p-7 transition hover:bg-wine-700 md:p-9">
+            <span className="absolute right-6 top-5 font-display text-6xl text-white/10 transition group-hover:text-ball/40">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <Icon className="h-8 w-8 text-ball" />
+            <h3 className="mt-6 font-display text-3xl uppercase leading-none">{title}</h3>
+            <p className="mt-3 text-white/70 group-hover:text-white/85">{text}</p>
           </Reveal>
         ))}
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {OFFERS.map(({ icon: Icon, title, text }, i) => (
-          <Reveal
-            key={title}
-            delay={(i % 3) * 0.06}
-            className="group rounded-3xl bg-white p-7 shadow-sm ring-1 ring-ink/5 transition hover:-translate-y-1 hover:shadow-xl"
-          >
-            <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-wine-50 text-wine-500 transition group-hover:bg-ball group-hover:text-ink">
-              <Icon className="h-6 w-6" />
-            </div>
-            <h3 className="font-display text-2xl font-extrabold">{title}</h3>
-            <p className="mt-2 text-ink/70">{text}</p>
+      <div className="mt-6 grid gap-6 sm:grid-cols-3">
+        {STATS.map((stat, i) => (
+          <Reveal key={stat.value} delay={i * 0.06} className="border-l-4 border-ball pl-5">
+            <p className="font-display text-6xl leading-none md:text-7xl">{stat.value}</p>
+            <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-white/60">{stat.label}</p>
           </Reveal>
         ))}
       </div>
