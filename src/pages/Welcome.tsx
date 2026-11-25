@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Instagram } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Instagram } from "lucide-react";
 import { CLUB_SITE, LINKS } from "@/links";
 
 /**
@@ -63,7 +63,7 @@ const Welcome = () => {
             >
               <span className="font-poster text-5xl uppercase leading-none">Spelare</span>
               <span className="mt-2 text-sm font-extrabold uppercase tracking-[0.2em] text-ball">12 år och uppåt</span>
-              <span className="mt-4 text-white/70">Lagen, matcherna och vägen till våra satsningslag.</span>
+              <span className="mt-4 text-white/70">Din utveckling som spelare: bli bättre i din egen takt och spela så länge du vill.</span>
               <span className="mt-auto inline-flex items-center gap-2 pt-6 font-extrabold uppercase tracking-wide text-ball">
                 Till spelarsidan <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" />
               </span>
@@ -83,6 +83,22 @@ const Welcome = () => {
             </a>
           </li>
         </motion.ul>
+
+        <motion.a
+          {...fadeUp(0.34)}
+          href={CLUB_SITE}
+          target="_blank"
+          rel="noopener"
+          className="group mt-4 flex flex-col gap-3 rounded-3xl border border-white/20 p-6 transition hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:flex-row sm:items-center sm:justify-between md:px-7"
+        >
+          <span>
+            <span className="block font-display text-xl font-extrabold md:text-2xl">Redan med i klubben?</span>
+            <span className="mt-1 block text-white/70">Lagsidor, kalender, nyheter och avgifter finns på vår Svenskalag-sida.</span>
+          </span>
+          <span className="inline-flex shrink-0 items-center gap-2 font-semibold text-ball">
+            Till BK50 Svenskalag <ArrowUpRight className="h-5 w-5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </span>
+        </motion.a>
       </div>
 
       <footer className="container-page relative flex flex-col gap-3 border-t border-white/10 py-6 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">

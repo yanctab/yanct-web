@@ -29,7 +29,7 @@ const CHAT: { q: string; a: ReactNode }[] = [
   },
   {
     q: "Måste jag satsa på basketen?",
-    a: "Nej. Upp till 15 år är det glädjen och utvecklingen som gäller. Från 15–16 år kan du välja att satsa och kvala in till ett satsningslag.",
+    a: "Nej. Upp till 15 år är det glädjen och utvecklingen som gäller. Från 15–16 år kan du välja att satsa och kvala in till ett satsningslag, men du behöver inte. Vi vill att du ska fortsätta spela basket så länge som möjligt, oavsett nivå.",
   },
   {
     q: "Var tränar ni?",

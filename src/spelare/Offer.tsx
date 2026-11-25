@@ -37,7 +37,7 @@ const REASONS = [
   {
     icon: Trophy,
     title: "Möjlighet att satsa",
-    text: "Från 15–16 år kan du kvala in till våra satsningslag. Vi hjälper dig att sätta mål och nå dem.",
+    text: "Vill du satsa kan du från 15–16 år kvala in till våra satsningslag. Annars spelar du vidare på din nivå.",
   },
 ];
 

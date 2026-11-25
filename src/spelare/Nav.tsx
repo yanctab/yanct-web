@@ -8,7 +8,7 @@ const ITEMS: Item[] = [
   { href: "#varfor", label: "Varför" },
   { href: "#fragor", label: "Frågor" },
   { href: "#lag", label: "Lagen" },
-  { href: "#satsa", label: "Satsa" },
+  { href: "#utveckling", label: "Utveckling" },
   { href: "#kom-igang", label: "Kom igång" },
   { href: "#klubbshop", label: "Klubbshop" },
   { href: "#foraldrar", label: "Föräldrar" },

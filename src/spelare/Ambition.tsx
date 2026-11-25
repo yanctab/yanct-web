@@ -4,7 +4,8 @@ import Reveal from "@/components/Reveal";
 
 const mail = (subject: string) => `mailto:${LINKS.email}?subject=${encodeURIComponent(subject)}`;
 
-// A player's path, as levels: try it, play with your team, then commit from 15–16
+// A player's path, as levels: try it, play with your team, keep playing at your own level.
+// Committing to a qualifying team is an option on the side, not the goal of the path.
 const LEVELS = [
   {
     lvl: "01",
@@ -20,9 +21,9 @@ const LEVELS = [
   },
   {
     lvl: "03",
-    title: "Satsa",
-    when: "Från 15–16 år",
-    text: "Kvala in till ett satsningslag. Vi hjälper dig att sätta mål och visar vägen.",
+    title: "Spela vidare",
+    when: "15 år och uppåt",
+    text: "Fortsätt spela basket så länge du vill, på den nivå som passar dig.",
   },
 ];
 
@@ -33,16 +34,16 @@ const ELITE = [
 ];
 
 const Ambition = () => (
-  <section id="satsa" className="relative overflow-hidden bg-ball py-24 text-night md:py-32">
+  <section id="utveckling" className="relative overflow-hidden bg-ball py-24 text-night md:py-32">
     <div className="grain pointer-events-none absolute inset-0" />
     <div className="container-page relative">
       <Reveal className="max-w-4xl">
-        <p className="s-eyebrow text-night">Satsa på basket</p>
+        <p className="s-eyebrow text-night">Din utveckling</p>
         <h2 className="s-title">
           Level <span className="text-outline-dark">up.</span>
         </h2>
         <p className="mt-6 max-w-xl text-lg font-medium text-night/80">
-          Först ska basketen vara kul. Sen bestämmer du själv hur långt du vill ta den.
+          Först ska basketen vara kul. Sen bestämmer du själv hur långt du vill ta den, och oavsett nivå finns det en plats för dig.
         </p>
       </Reveal>
 
@@ -65,16 +66,28 @@ const Ambition = () => (
         ))}
       </ol>
 
-      <Reveal className="mt-4 grid gap-6 bg-night p-7 text-white md:p-10 lg:grid-cols-[1fr_1.3fr] lg:items-center">
+      <Reveal className="mt-4 bg-night p-7 text-white md:p-10">
+        <h3 className="font-poster text-4xl uppercase leading-none md:text-5xl">
+          Spelaren i <span className="text-ball">fokus.</span>
+        </h3>
+        <p className="mt-4 max-w-3xl text-lg text-white/80">
+          Platsar du inte i ett satsningslag, eller inte vill satsa, är du lika viktig för oss. Vårt mål är att du ska fortsätta
+          spela basket så länge som möjligt, oavsett nivå.
+        </p>
+      </Reveal>
+
+      <Reveal className="mt-4 grid gap-6 border-2 border-night p-7 md:p-10 lg:grid-cols-[1fr_1.3fr] lg:items-center">
         <div>
-          <h3 className="font-poster text-4xl uppercase leading-none md:text-5xl">Våra satsningslag</h3>
-          <p className="mt-3 text-white/75">
-            <strong className="text-white">Alla får provträna.</strong> För att spela i laget behöver du kvala in.
+          <p className="text-xs font-extrabold uppercase tracking-[0.25em] text-night/70">Från 15–16 år · Om du vill</p>
+          <h3 className="mt-2 font-poster text-4xl uppercase leading-none md:text-5xl">Vill du satsa?</h3>
+          <p className="mt-3 text-night/80">
+            Då kan du kvala in till ett av våra satsningslag. Vi hjälper dig att sätta mål och visar vägen.{" "}
+            <strong className="text-night">Alla får provträna.</strong>
           </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
           {ELITE.map((t) => (
-            <div key={t.code} className="flex flex-col border border-white/15 p-5">
+            <div key={t.code} className="flex flex-col bg-night p-5 text-white">
               <p className="font-poster text-4xl uppercase leading-none text-ball">{t.code}</p>
               <p className="mt-1 text-white/70">{t.name}</p>
               <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-bold uppercase tracking-wide">
