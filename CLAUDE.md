@@ -33,7 +33,7 @@ A **Swedish one-page site** for the basketball club BK50 (Basketklubben Lund 195
 
 - `/` - `src/pages/Welcome.tsx`, a neutral pitch for the club and a choice: Förälder, Spelare (12 år och uppåt), Ledare
 - `/foralder` - `src/pages/Foralder.tsx`, the full page for parents (the sections below, in `src/components/`)
-- `/spelare` - `src/pages/Spelare.tsx`, a dark, plain-spoken page for players, components in `src/spelare/` (from the `bk50-alt2` branch). It uses its own prefixed classes (`s-eyebrow`, `s-title`, `s-btn*`, `font-poster` = Anton, `night` colours) so it never clashes with the parent page's styles
+- `/spelare` - `src/pages/Spelare.tsx`, a dark, plain-spoken page for players, components in `src/spelare/` (from the `bk50-alt2` branch). It uses its own prefixed classes (`s-eyebrow`, `s-title`, `s-btn*`, `font-poster` = Anton, `night` colours) so it never clashes with the parent page's styles. `src/spelare/Engage.tsx` recruits players as assistant leaders and referees; questions go to mikael@bk50.se
 - `/ledare` - `src/pages/Ledare.tsx`, "under uppbyggnad" with links to the leaders' group, education and values
 
 New paths must be added both to `PAGES` and to the `location ~ ^/(foralder|spelare|ledare)/?$` block in `configure-nginx.sh`, or nginx serves them with a 404 status.
