@@ -41,8 +41,8 @@ New paths must be added both to `PAGES` and to the `location ~ ^/(foralder|spela
 ### Key Files
 
 - `src/links.ts` - Links to the club's Svenskalag site go via svenskalag.se, which forwards to whatever domain the club has set there (www.bk50.se today), so they survive a domain change: `club(path)` for club pages (`svenskalag.se/bk50/...`; `lugibbk` is the old slug), `team(slug)` for team/group pages (top level, e.g. `svenskalag.se/bk50-flickor2013`), `doc(path)` for uploaded documents (`svenskalag.se/bk50/dokument/<id>/<file>.pdf`). Link texts say "BK50 Svenskalag" / "BK50 lag", never a domain. `LINKS` holds the shared ones (sign-up form, Svenskalag app/store links, Instagram, fees, e-mail)
-- `src/pages/Foralder.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `SignUp`, `Svenskalag`, `Parents`, `Ambition`, `Shop`, `Engage`, `News`, `Instagram`, `Sponsors`, `History`, `Leaders`, `Footer`
-- `src/components/Nav.tsx` - `ITEMS` in the bar, `CLUB_ITEMS` under the "Klubben" dropdown (a section under "Klubben" on mobile)
+- `src/pages/Foralder.tsx` - Composes the sections: `Nav`, `Hero`, `Offer`, `GetStarted`, `Teams`, `SignUp`, `Svenskalag`, `Parents`, `Ambition`, `Shop`, `Engage`, `News`, `Instagram`, `Sponsors`, `History`, `Footer` (leaders have their own page, `/ledare`)
+- `src/components/Nav.tsx` - `ITEMS` in the bar, `CLUB_ITEMS` under the "Klubben" dropdown (a section under "Klubben" on mobile); "Ledare" goes to `/ledare`
 - `src/components/GetStarted.tsx` - "Kom igång": the joining process in four steps (find a team → sign up → welcome e-mail and Svenskalag login → the team's WhatsApp group), each linking to where it's explained; `Teams`, `SignUp` ("Redo att testa?", `#anmalan`) and `Svenskalag` follow it and are labelled "Steg 1", "Steg 2" and "Steg 3"
 - `src/components/Svenskalag.tsx` - All club info lives on Svenskalag; getting started (welcome e-mail, change password, app with official badges in `public/badges/`), then step 4, the team's WhatsApp group (`#whatsapp`). Invite links are never published on the site: teams share them with registered members only
 - `src/components/Parents.tsx` - "För föräldrar": `DOCS`, PDFs on Svenskalag (guide for parents, sekretariat, kiosk, baking for the kiosk). Term-specific files like the kiosk instruction get new names, so check the links each term
@@ -52,7 +52,6 @@ New paths must be added both to `PAGES` and to the `location ~ ^/(foralder|spela
 - `src/components/Instagram.tsx` - Instagram can't be scraped, so `PHOTOS` is filled by hand from `public/instagram/`; empty shows placeholder tiles
 - `src/components/Ambition.tsx` - "Satsa på basket": commit from 15–16, before that own pace with friends; the qualifying teams P11 (Pojkar 2011 vit) and Damer utveckling where anyone may try out
 - `src/components/Engage.tsx` - `ROLES` the club is recruiting volunteers for (ledare, foto & film, open court-värd); each CTA mails info@ with a role-specific subject
-- `src/components/Leaders.tsx` - Short section for current leaders: the internal leaders' group on Svenskalag (`LINKS.leaders`, login required, so no public news feed), education and values links
 - `src/components/Sponsors.tsx` - `SPONSORS` logos from `public/sponsors/` (`url` optional), a pitch for new sponsors (mails info@ with a subject), plus stödmedlem/Pantamera links
 - `src/components/Reveal.tsx` - Fade-in-on-scroll wrapper, respects reduced motion
 - `src/pages/NotFound.tsx` - "Airball!" 404
