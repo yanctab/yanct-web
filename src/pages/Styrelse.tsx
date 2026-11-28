@@ -1,5 +1,17 @@
 import { useEffect } from "react";
-import { ArrowLeft, ArrowRight, CalendarDays, CheckCircle2, Mail, MessageCircle, ShieldCheck, Users } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Briefcase,
+  CalendarDays,
+  CheckCircle2,
+  ClipboardList,
+  Lightbulb,
+  Mail,
+  MessageCircle,
+  ShieldCheck,
+  Users,
+} from "lucide-react";
 import Reveal from "@/components/Reveal";
 import PageNav from "@/components/PageNav";
 import YearTimeline, { type Meeting, type MeetingKind } from "@/components/YearTimeline";
@@ -63,11 +75,26 @@ const MEETING_KINDS: Record<string, MeetingKind> = {
   end: { label: "Terminsavslut online", tag: "Online", dot: "bg-ink ring-ink/20", chip: "bg-ink text-white" },
 };
 
+// What goes into a planning meeting and what comes out of it
+const PLAN_INPUTS = [
+  {
+    icon: Briefcase,
+    title: "Kansliets punkter",
+    text: "Kansliet tar med det som hen ser att klubben behöver jobba med.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Förslag från workshops",
+    text: "Förslagen som medlemmarna har kommit fram till i sina workshops.",
+    href: "#workshop",
+  },
+];
+
 const MEETINGS: Meeting[] = [
-  { col: 1, when: "Januari", kind: "plan", title: "Planeringsmöte", text: "Vi sätter några få mål för våren, vem som ansvarar för vad och hur det följs upp." },
+  { col: 1, when: "Januari", kind: "plan", title: "Planeringsmöte", text: "Utifrån kansliets punkter och workshopförslag väljer vi vad vi jobbar med i vår, och presenterar det för kansliet." },
   { col: 4, when: "Mars–april", kind: "check", title: "Avstämning", text: "Hur går det med planen? Vi justerar det som har kört fast." },
   { col: 6, when: "Juni", kind: "end", title: "Terminsavslut", text: "Vi följer upp våren och tar med lärdomarna till hösten." },
-  { col: 8, when: "Augusti", kind: "plan", title: "Planeringsmöte", text: "Vi sätter några få mål för hösten, vem som ansvarar för vad och hur det följs upp." },
+  { col: 8, when: "Augusti", kind: "plan", title: "Planeringsmöte", text: "Utifrån kansliets punkter och workshopförslag väljer vi vad vi jobbar med i höst, och presenterar det för kansliet." },
   { col: 10, when: "Oktober", kind: "check", title: "Avstämning", text: "Hur går det med planen? Vi justerar det som har kört fast." },
   { col: 12, when: "December", kind: "end", title: "Terminsavslut", text: "Vi följer upp hösten och tar med lärdomarna till nästa år." },
 ];
@@ -336,10 +363,55 @@ const Styrelse = () => {
               <h3 className="font-display text-2xl font-extrabold md:text-3xl">Styrelsens år: en halvårsplan per termin</h3>
               <p className="mt-3 max-w-3xl text-ink/75">
                 I stället för att bara hantera ärenden som kommer in jobbar styrelsen mot några få gemensamma mål. Varje termin
-                börjar med ett planeringsmöte där vi gör en plan för halvåret. Mitt i terminen stämmer vi av planen online, och i
+                börjar med ett planeringsmöte där vi gör en plan för halvåret. Underlaget är punkter från kansliet och förslag från
+                medlemmarnas workshops, och mötet avslutas med att vi presenterar planen för kansliet. Mitt i terminen stämmer vi av planen online, och i
                 slutet av terminen följer vi upp den. Det blir sex möten om året: två planeringsmöten och fyra online.
               </p>
-              <div className="mt-8">
+              <div className="mt-8 grid items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1fr]">
+                <div className="grid gap-4">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-ink/50">In till planeringen</p>
+                  {PLAN_INPUTS.map(({ icon: Icon, title, text, href }) => (
+                    <div key={title} className="flex gap-3 rounded-2xl bg-white p-4 shadow-sm">
+                      <Icon className="mt-0.5 h-5 w-5 shrink-0 text-wine-600" />
+                      <div>
+                        <p className="font-semibold">
+                          {href ? (
+                            <a href={href} className="underline underline-offset-4 hover:text-wine-700">
+                              {title}
+                            </a>
+                          ) : (
+                            title
+                          )}
+                        </p>
+                        <p className="mt-1 text-sm text-ink/70">{text}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <ArrowRight className="mx-auto h-6 w-6 rotate-90 self-center text-ink/30 lg:rotate-0" aria-hidden />
+                <div className="flex flex-col justify-center rounded-2xl bg-wine-600 p-5 text-white">
+                  <CalendarDays className="h-6 w-6 text-ball" />
+                  <p className="mt-3 font-display text-xl font-extrabold">Planeringsmötet</p>
+                  <p className="mt-1 text-sm text-white/80">
+                    Styrelsen går igenom punkterna och väljer några få att jobba med under halvåret, med vem som ansvarar för
+                    vad.
+                  </p>
+                </div>
+                <ArrowRight className="mx-auto h-6 w-6 rotate-90 self-center text-ink/30 lg:rotate-0" aria-hidden />
+                <div className="flex flex-col justify-center gap-2">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-ink/50">Ut från planeringen</p>
+                  <div className="flex gap-3 rounded-2xl bg-ball/20 p-4">
+                    <ClipboardList className="mt-0.5 h-5 w-5 shrink-0 text-wine-600" />
+                    <div>
+                      <p className="font-semibold">Halvårsplanen till kansliet</p>
+                      <p className="mt-1 text-sm text-ink/70">
+                        Mötet avslutas med att styrelsen presenterar punkterna vi ska jobba med för kansliet.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-12">
                 <YearTimeline meetings={MEETINGS} kinds={MEETING_KINDS} />
               </div>
               <p className="mt-8 max-w-3xl text-ink/75">
