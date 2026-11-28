@@ -28,6 +28,7 @@ export const LINKS = {
   teams: club("/lag"),
   fees: club("/sida/104590/avgifter"),
   values: club("/sida/114557/vardegrund-bk50"),
+  statutes: club("/sida/109409/stadgar"),
   history: club("/sida/109410/historia"),
   news: club("/nyheter"),
   /** The leaders' group on Svenskalag. Internal: only leaders who are logged in can see it. */
@@ -42,4 +43,18 @@ export const LINKS = {
   instagram: "https://www.instagram.com/bk50_official/",
   facebook: "https://www.facebook.com/LugiBasket",
   email: "info@bk50.se",
+  /** The board's address. The secretary reads it and sorts mail on the first word of the subject (Förslag:, Fråga:, Workshop:). */
+  board: "styrelse@bk50.se",
+  /** The workshop concept on the board's page */
+  workshop: "/styrelse#workshop",
 };
+
+/** A mail to the board with a subject (and optionally a body), e.g. boardMail("Fråga: ..."). */
+export const boardMail = (subject: string, body = "") =>
+  `mailto:${LINKS.board}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ""}`;
+
+/**
+ * Asking the secretary to join the club's WhatsApp community. The invite link is never published on the site; the
+ * mail goes to the board's address, which the secretary reads, rather than to anyone's personal address.
+ */
+export const COMMUNITY_MAIL = boardMail("Fråga: Jag vill gå med i BK50-communityn");

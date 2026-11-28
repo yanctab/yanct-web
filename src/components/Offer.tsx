@@ -32,7 +32,7 @@ const OFFERS = [
   {
     icon: Trophy,
     title: "Seriespel och satsning",
-    text: "Ungdomslagen spelar seriematcher, och från 15–16 år kan du kvala in till våra satsningslag P11 och Damer utveckling.",
+    text: "Ungdomslagen spelar seriematcher, och från 15–16 år kan du kvala in till våra satsningslag Män utveckling och Damer utveckling.",
   },
   {
     icon: Tent,

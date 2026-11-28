@@ -1,5 +1,6 @@
 import { ArrowRight, Facebook, Instagram, Mail, MapPin } from "lucide-react";
 import { LINKS } from "@/links";
+import { SPONSORS } from "@/sponsors";
 import Tape from "./Tape";
 
 const HALLS = ["Fäladshallen", "Vikingahallen", "ISLK-hallen"];
@@ -11,17 +12,9 @@ const MORE = [
   { href: LINKS.history, label: "Historia" },
   { href: LINKS.engage, label: "Engagera dig" },
   { href: LINKS.support, label: "Stötta föreningen" },
+  { href: LINKS.shop, label: "Klubbshop" },
   { href: LINKS.leaders, label: "För ledare" },
   { href: LINKS.contact, label: "Kontakt & styrelse" },
-];
-
-// Current sponsors, as listed on www.bk50.se. Logos live in public/sponsors/.
-const SPONSORS = [
-  { name: "Sparbanken Skåne", logo: "/sponsors/sparbanken-skane.png" },
-  { name: "LKF – Lunds Kommuns Fastighets AB", logo: "/sponsors/lkf.png" },
-  { name: "Kraftringen", logo: "/sponsors/kraftringen.png" },
-  { name: "Aprotech Engineering", logo: "/sponsors/aprotech.png" },
-  { name: "Tricon", logo: "/sponsors/tricon.png" },
 ];
 
 const Footer = () => (

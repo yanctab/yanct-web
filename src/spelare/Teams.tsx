@@ -24,8 +24,9 @@ const TEAMS: Team[] = [
   { name: "Pojkar 2013", url: team("bk50-pojkar2013"), born: [2013, 2013], tag: "Pojkar" },
   { name: "Flickor 2011/12 vit", url: team("bk50-flickor2011-2012vit"), born: [2011, 2012], tag: "Flickor" },
   { name: "Flickor 2010–12 vinröd", url: team("bk50-flickor2012-2010vinrod"), born: [2010, 2012], tag: "Flickor" },
-  { name: "Pojkar 2011 vit", url: team("bk50-pojkar2011vit"), born: [2011, 2011], tag: "Pojkar · Satsningslag P11", elite: true },
-  { name: "Damer utveckling", url: team("bk50-damerutveckling"), born: [2008, 2011], tag: "Flickor · Satsningslag", elite: true },
+  // Män utveckling is the P11 team (Pojkar 2011 vit) on Svenskalag
+  { name: "Män utveckling", url: team("bk50-pojkar2011vit"), born: [2008, 2011], tag: "P11–P08 · Satsningslag", elite: true },
+  { name: "Damer utveckling", url: team("bk50-damerutveckling"), born: [2008, 2011], tag: "F11–F08 · Satsningslag", elite: true },
 ];
 
 const YEARS = [2014, 2013, 2012, 2011, 2010, 2009, 2008];

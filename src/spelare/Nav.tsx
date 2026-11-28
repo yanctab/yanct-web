@@ -11,7 +11,6 @@ const ITEMS: Item[] = [
   { href: "#utveckling", label: "Utveckling" },
   { href: "#kom-igang", label: "Kom igång" },
   { href: "#engagera", label: "Engagera dig" },
-  { href: "#klubbshop", label: "Klubbshop" },
   { href: "#foraldrar", label: "Föräldrar" },
 ];
 

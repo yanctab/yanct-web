@@ -29,8 +29,9 @@ const LEVELS = [
 
 // Teams you qualify for. Anyone may try out.
 const ELITE = [
-  { code: "P11", name: "Pojkar födda 2011", url: team("bk50-pojkar2011vit") },
-  { code: "Damer utv.", name: "Flickor födda 2008–2011", url: team("bk50-damerutveckling") },
+  // Män utv. (Män utveckling) is the P11 team (Pojkar 2011 vit) on Svenskalag
+  { code: "Män utv.", name: "P11–P08", url: team("bk50-pojkar2011vit") },
+  { code: "Damer utv.", name: "F11–F08", url: team("bk50-damerutveckling") },
 ];
 
 const Ambition = () => (

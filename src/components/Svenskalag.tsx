@@ -53,7 +53,7 @@ const WhatsApp = () => (
         </p>
       </div>
       <a href="#lag" className="btn shrink-0 justify-self-start bg-ink text-white hover:-translate-y-0.5 hover:bg-ink/85 focus-visible:outline-ink">
-        Hitta ditt lag <ArrowUp className="h-5 w-5" />
+        Hitta ert lag <ArrowUp className="h-5 w-5" />
       </a>
     </div>
   </Reveal>

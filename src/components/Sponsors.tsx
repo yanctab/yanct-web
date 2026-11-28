@@ -1,18 +1,7 @@
 import { ArrowRight, Eye, HandCoins, Heart, Recycle, Sprout, UserPlus } from "lucide-react";
 import { LINKS } from "@/links";
+import { SPONSORS } from "@/sponsors";
 import Reveal from "./Reveal";
-
-/**
- * Current sponsors, as listed on www.bk50.se. Logos live in public/sponsors/.
- * Leave `url` out when we don't have a confirmed link for the sponsor.
- */
-const SPONSORS: { name: string; logo: string; url?: string }[] = [
-  { name: "Sparbanken Skåne", logo: "/sponsors/sparbanken-skane.png", url: "https://www.sparbankenskane.se/" },
-  { name: "LKF – Lunds Kommuns Fastighets AB", logo: "/sponsors/lkf.png", url: "https://www.lkf.se/" },
-  { name: "Kraftringen", logo: "/sponsors/kraftringen.png", url: "https://www.kraftringen.se/" },
-  { name: "Aprotech Engineering", logo: "/sponsors/aprotech.png" },
-  { name: "Tricon", logo: "/sponsors/tricon.png" },
-];
 
 const WHY = [
   { icon: Sprout, title: "Stötta ungdomsidrotten i Lund", text: "Ert stöd går till träning, läger och tränare för barn och ungdomar i alla åldrar." },

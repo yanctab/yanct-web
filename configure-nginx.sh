@@ -38,7 +38,7 @@ SITE=$(cat <<EOL
     }
 
     # The app's pages (see src/App.tsx), served with a 200 status
-    location ~ ^/(foralder|spelare|ledare)/?\$ {
+    location ~ ^/(foralder|spelare|ledare|styrelse)/?\$ {
         try_files /index.html =404;
     }
 

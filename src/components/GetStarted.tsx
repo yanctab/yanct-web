@@ -8,7 +8,7 @@ import Reveal from "./Reveal";
 const STEPS = [
   {
     icon: Search,
-    title: "Hitta ditt lag",
+    title: "Hitta ert lag",
     text: "Välj födelseår i listan över våra lag så ser du vilka grupper som passar. Osäker? Anmäl dig ändå, så hjälper vi dig.",
     href: "#lag",
     cta: "Se lagen",
@@ -41,7 +41,7 @@ const GetStarted = () => (
     <div className="container-page">
       <Reveal className="max-w-3xl">
         <p className="eyebrow text-ball">Kom igång</p>
-        <h2 className="section-title">Från soffan till planen i fyra steg.</h2>
+        <h2 className="section-title">Från skärmen till planen i fyra steg.</h2>
         <p className="mt-6 text-lg text-white/70">
           Så här går det till att börja i BK50, för dig som spelare eller förälder.
         </p>

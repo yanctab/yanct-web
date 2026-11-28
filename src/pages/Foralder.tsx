@@ -8,11 +8,7 @@ import History from "@/components/History";
 import Ambition from "@/components/Ambition";
 import Svenskalag from "@/components/Svenskalag";
 import Parents from "@/components/Parents";
-import Shop from "@/components/Shop";
 import Engage from "@/components/Engage";
-import News from "@/components/News";
-import Instagram from "@/components/Instagram";
-import Sponsors from "@/components/Sponsors";
 import Footer from "@/components/Footer";
 
 const Foralder = () => (
@@ -27,11 +23,7 @@ const Foralder = () => (
       <Svenskalag />
       <Parents />
       <Ambition />
-      <Shop />
       <Engage />
-      <News />
-      <Instagram />
-      <Sponsors />
       <History />
     </main>
     <Footer />

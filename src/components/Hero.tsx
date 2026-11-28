@@ -33,7 +33,7 @@ const Hero = () => {
               Börja spela – anmäl dig <ArrowRight className="h-5 w-5" />
             </a>
             <a href="#lag" className="btn-ghost text-lg">
-              Hitta ditt lag
+              Hitta ert lag
             </a>
           </motion.div>
           <motion.ul {...fadeUp(0.32)} className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/75">

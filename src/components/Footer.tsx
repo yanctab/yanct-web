@@ -1,5 +1,6 @@
 import { ArrowRight, Facebook, Instagram, Mail, MapPin } from "lucide-react";
 import { LINKS } from "@/links";
+import { SPONSORS } from "@/sponsors";
 
 const HALLS = ["Fäladshallen", "Vikingahallen", "ISLK-hallen"];
 
@@ -8,7 +9,8 @@ const MORE = [
   { href: LINKS.fees, label: "Avgifter" },
   { href: LINKS.values, label: "Värdegrund" },
   { href: "#engagera", label: "Engagera dig" },
-  { href: "#sponsorer", label: "Bli sponsor" },
+  { href: LINKS.news, label: "Nyheter" },
+  { href: "/#sponsorer", label: "Bli sponsor" },
   { href: LINKS.supporter, label: "Bli stödmedlem" },
   { href: LINKS.shop, label: "Klubbshop" },
   { href: LINKS.contact, label: "Kontakt & styrelse" },
@@ -70,7 +72,7 @@ const Footer = () => (
             <li key={link.label}>
               <a
                 href={link.href}
-                {...(link.href.startsWith("#") ? {} : { target: "_blank", rel: "noopener" })}
+                {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
                 className="hover:text-white hover:underline"
               >
                 {link.label}
@@ -79,6 +81,26 @@ const Footer = () => (
           ))}
         </ul>
       </div>
+    </div>
+
+    {/* Sponsor logos; the full sponsor section is on the welcome page */}
+    <div className="container-page border-t border-white/10 py-10">
+      <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-white/50">Våra sponsorer</h3>
+      <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        {SPONSORS.map((s) => (
+          <li key={s.name}>
+            {s.url ? (
+              <a href={s.url} target="_blank" rel="noopener" className="flex h-16 items-center justify-center rounded-xl bg-white p-3 transition hover:-translate-y-0.5">
+                <img src={s.logo} alt={s.name} loading="lazy" className="max-h-full w-auto object-contain" />
+              </a>
+            ) : (
+              <div className="flex h-16 items-center justify-center rounded-xl bg-white p-3">
+                <img src={s.logo} alt={s.name} loading="lazy" className="max-h-full w-auto object-contain" />
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
 
     <div className="container-page border-t border-white/10 py-6 text-sm text-white/50">

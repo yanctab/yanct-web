@@ -6,8 +6,6 @@ import Teams from "@/spelare/Teams";
 import Ambition from "@/spelare/Ambition";
 import GetStarted from "@/spelare/GetStarted";
 import Engage from "@/spelare/Engage";
-import Shop from "@/spelare/Shop";
-import Instagram from "@/spelare/Instagram";
 import Parents from "@/spelare/Parents";
 import Footer from "@/spelare/Footer";
 
@@ -26,8 +24,6 @@ const Spelare = () => (
       <Ambition />
       <GetStarted />
       <Engage />
-      <Shop />
-      <Instagram />
       <Parents />
     </main>
     <Footer />

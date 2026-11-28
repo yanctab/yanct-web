@@ -27,9 +27,10 @@ const TEAMS: Team[] = [
   { name: "Flickor 2013", url: team("bk50-flickor2013"), group: "ungdom", born: [2013, 2013], tag: "Flickor" },
   { name: "Pojkar 2013", url: team("bk50-pojkar2013"), group: "ungdom", born: [2013, 2013], tag: "Pojkar" },
   { name: "Flickor 2011/2012 vit", url: team("bk50-flickor2011-2012vit"), group: "ungdom", born: [2011, 2012], tag: "Flickor" },
-  { name: "Pojkar 2011 vit", url: team("bk50-pojkar2011vit"), group: "ungdom", born: [2011, 2011], tag: "Pojkar, satsningslag P11" },
+  // Män utveckling is the P11 team (Pojkar 2011 vit) on Svenskalag
+  { name: "Män utveckling", url: team("bk50-pojkar2011vit"), group: "ungdom", born: [2008, 2011], tag: "P11–P08, satsningslag" },
   { name: "Flickor 2012–2010 vinröd", url: team("bk50-flickor2012-2010vinrod"), group: "ungdom", born: [2010, 2012], tag: "Flickor" },
-  { name: "Damer utveckling", url: team("bk50-damerutveckling"), group: "ungdom", born: [2008, 2011], tag: "Flickor, satsningslag" },
+  { name: "Damer utveckling", url: team("bk50-damerutveckling"), group: "ungdom", born: [2008, 2011], tag: "F11–F08, satsningslag" },
   { name: "Basketfitness", url: team("bk50-basketfitness"), group: "vuxen", tag: "Vuxna, nybörjare och spelfokus" },
   { name: "Damer", url: team("bk50-damer"), group: "vuxen", tag: "Vilande 26/27, intresseanmälan" },
   { name: "Senior 65+", url: team("bk50-senior65"), group: "vuxen", tag: "Startar när vi är några stycken" },
@@ -84,10 +85,10 @@ const Teams = () => {
         <Reveal className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <p className="eyebrow">Steg 1 · Våra lag</p>
-            <h2 className="section-title">Hitta ditt lag.</h2>
+            <h2 className="section-title">Hitta ert lag.</h2>
             <p className="mt-6 text-lg text-ink/70">
-              Varje lag har en egen sida med träningstider, kalender och nyheter. Välj ditt födelseår så visar vi
-              vilka grupper som passar dig.
+              Varje lag har en egen sida med träningstider, kalender och nyheter. Välj barnets födelseår så visar vi
+              vilka grupper som passar.
             </p>
           </div>
 
